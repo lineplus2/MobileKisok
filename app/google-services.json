@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "35020875194",
+    "project_id": "kwmk-140d2",
+    "storage_bucket": "kwmk-140d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35020875194:android:4bd134257efad24913a983",
+        "android_client_info": {
+          "package_name": "com.example.kw_mk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35020875194-fg9v96l5gho2thlbqdtcsu1j884ftdd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM22qcHjtSU-0CgoFRuISUIUMpbkP6nzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35020875194-fg9v96l5gho2thlbqdtcsu1j884ftdd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

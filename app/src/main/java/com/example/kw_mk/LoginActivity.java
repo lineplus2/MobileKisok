@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     Intent intent;
 
     @Override
@@ -26,7 +25,7 @@ public class Login extends AppCompatActivity {
                     break;
 
                 case R.id.btn_signup:
-                    intent = new Intent(Login.this, Signup.class);
+                    intent = new Intent(LoginActivity.this, SignupActivity.class);
                     startActivity(intent);
                     break;
             }

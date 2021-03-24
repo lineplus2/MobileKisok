@@ -15,6 +15,7 @@ import org.w3c.dom.Text;
 public class Login extends AppCompatActivity {
 
     private Button btn_signup;
+    private Button btn_login;
 
 
     @Override
@@ -27,6 +28,15 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, Signup.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, Select_Page.class);
                 startActivity(intent);
             }
         });

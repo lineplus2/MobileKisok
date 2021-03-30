@@ -35,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     String phone;
 
     DatabaseReference mDBReference = null;
-    HashMap<String, Object> childUpdates = null;
     Map<String, Object> userValue = null;
     UserInfo userInfo = null;
 
@@ -45,7 +44,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         this.mDBReference = FirebaseDatabase.getInstance().getReference();
-        this.childUpdates = new HashMap<>();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -64,21 +62,23 @@ public class SignUpActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.signUpButton:
                     signUp();
-                    userInfo = new UserInfo(email, password, name, phone);
-                    userValue = userInfo.toMap();
+                    userInfo = new UserInfo(email, password, name, phone); // 유저정보셋팅
+                    userValue = userInfo.toMap(); // 유저정보대입준비
 
-                    //FireStore 값 삽입
+                    //FireStore 값(유저정보) 삽입
                     db.collection("User_Info").document(email).set(userValue).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onSuccess(Void aVoid) {
+                        public void onSuccess(Void aVoid) { // 성공시
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onFailure(@NonNull Exception e) {
+                        public void onFailure(@NonNull Exception e) { // 실패시
 
                         }
                     });
+
+                    activity:finish(); // 회원가입창 종료
                     break;
             }
         }

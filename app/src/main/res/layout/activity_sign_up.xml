@@ -44,6 +44,7 @@
         android:orientation="horizontal"
         android:layout_marginBottom="5px">
 
+
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="0dp"
@@ -52,13 +53,13 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="#EDEDED"
-            android:hint="email@google.com" />
+            android:hint="Email@google.com" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
-            android:text="이메일 확인" />
+            android:text="이메일확인" />
     </LinearLayout>
 
     <EditText
@@ -103,8 +104,6 @@
         android:layout_weight="0.5"
         android:background="#EDEDED"
         android:hint="이름" />
-
-
 
     <TextView
         android:layout_width="wrap_content"

@@ -102,9 +102,24 @@
                     android:gravity="center"/>
             </LinearLayout>
 
-            <Button
-                android:layout_marginTop="30dp"
-                android:text="추가하기" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="삭제하기" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="수정하기" />
+            </LinearLayout>
+
+
         </TableLayout>
     </ScrollView>
 </LinearLayout>

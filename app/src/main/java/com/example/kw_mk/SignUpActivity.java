@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.emailEditText).setOnClickListener(onClickListener);
+        findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
     }
 
     @Override
@@ -65,5 +65,4 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

@@ -1,33 +1,42 @@
 {
   "project_info": {
-    "project_number": "35020875194",
-    "project_id": "kwmk-140d2",
-    "storage_bucket": "kwmk-140d2.appspot.com"
+    "project_number": "530290085558",
+    "firebase_url": "https://mobilekiosk-e4458-default-rtdb.firebaseio.com",
+    "project_id": "mobilekiosk-e4458",
+    "storage_bucket": "mobilekiosk-e4458.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:35020875194:android:4bd134257efad24913a983",
+        "mobilesdk_app_id": "1:530290085558:android:dcb23943aa095920f32017",
         "android_client_info": {
           "package_name": "com.example.kw_mk"
         }
       },
       "oauth_client": [
         {
-          "client_id": "35020875194-fg9v96l5gho2thlbqdtcsu1j884ftdd0.apps.googleusercontent.com",
+          "client_id": "530290085558-l0t85d4nshn2p0dg9m5pqt1u4f5t0fpm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kw_mk",
+            "certificate_hash": "aa5d58b6733acf11632d09d359095f59a2cb8ff2"
+          }
+        },
+        {
+          "client_id": "530290085558-uqno10a3lrnvg415cvknmtjdqvtg2cr9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBM22qcHjtSU-0CgoFRuISUIUMpbkP6nzM"
+          "current_key": "AIzaSyB2y8tbouyicy20NN2L9Oc8NHilCb9oAQg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "35020875194-fg9v96l5gho2thlbqdtcsu1j884ftdd0.apps.googleusercontent.com",
+              "client_id": "530290085558-uqno10a3lrnvg415cvknmtjdqvtg2cr9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

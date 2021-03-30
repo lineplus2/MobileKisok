@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +27,8 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     String email;
     String password;
     String name;
@@ -41,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
         this.mDBReference = FirebaseDatabase.getInstance().getReference();
         this.childUpdates = new HashMap<>();
 
-
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
@@ -58,21 +63,20 @@ public class SignUpActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signUpButton:
-                    String ID = "dddd"; // key값으로 Email 중에 " . " 가 사용이 불가. ==> 대처 생각    1) ID + @ + 주소.com 분리
                     signUp();
-                    userInfo = new UserInfo(ID, password, name, phone);
+                    userInfo = new UserInfo(email, password, name, phone);
                     userValue = userInfo.toMap();
-                    childUpdates.put("/User_info/" + ID, userValue);
-                    mDBReference.updateChildren(childUpdates); // 데이터베이스 값 삽입
 
-                    mDBReference.child("User_info").child(ID).child("pw").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() { // 데이터베이스 값 조회
+                    //FireStore 값 삽입
+                    db.collection("User_Info").document(email).set(userValue).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (!task.isSuccessful()) { // 실패시
-                                Log.e(TAG, "Error", task.getException());
-                            } else { // 성공시
-                                Log.d(TAG, String.valueOf(task.getResult().getValue()));
-                            }
+                        public void onSuccess(Void aVoid) {
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
                         }
                     });
                     break;
@@ -103,14 +107,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 }
 
-class UserInfo {
+class UserInfo {                // UserDataSet
     public String email;
     public String pw;
     public String name;
     public String phone;
-
-    public UserInfo() {
-    }
 
     public UserInfo(String id, String pw, String name, String phone) {
         this.email = id;
@@ -125,7 +126,6 @@ class UserInfo {
         result.put("pw", pw);
         result.put("name", name);
         result.put("phone", phone);
-
         return result;
     }
 }

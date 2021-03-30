@@ -6,13 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-
-import org.w3c.dom.Text;
-
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Button btn_signup;
     private Button btn_login;
@@ -21,13 +16,13 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
 
         btn_signup = (Button) findViewById(R.id.btn_signup);
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Login.this, SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -36,7 +31,7 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Select_Page.class);
+                Intent intent = new Intent(LoginActivity.this, Select_Page.class);
                 startActivity(intent);
             }
         });

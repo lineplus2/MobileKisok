@@ -75,14 +75,15 @@
         android:inputType="textPassword" />
 
     <EditText
+        android:id="@+id/passwordCheckEditText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="start"
         android:layout_marginLeft="10dp"
         android:layout_weight="0.5"
         android:background="#EDEDED"
-        android:inputType="textPassword"
-        android:hint="비밀번호 확인" />
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword" />
 
     <TextView
         android:layout_width="wrap_content"

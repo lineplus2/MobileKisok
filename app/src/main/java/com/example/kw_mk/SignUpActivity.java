@@ -58,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signUpButton:
-                    String ID = "dddd";
+                    String ID = "dddd"; // key값으로 Email 중에 " . " 가 사용이 불가. ==> 대처 생각    1) ID + @ + 주소.com 분리
                     signUp();
                     userInfo = new UserInfo(ID, password, name, phone);
                     userValue = userInfo.toMap();

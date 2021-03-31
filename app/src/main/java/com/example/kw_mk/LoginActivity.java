@@ -3,8 +3,6 @@ package com.example.kw_mk;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -47,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -59,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                     startActivity(intent);
                     finish();
-
             }
         }
     };
@@ -70,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
         Password = ((EditText) findViewById(R.id.et_pw)).getText().toString();
 
         if (TextUtils.isEmpty(Email)) {
-
             return;
         } else if (TextUtils.isEmpty(Password)) {
             return;
@@ -99,10 +94,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        App.LoginUserEmail = (String)document.get("email");
-                        App.LoginUserPw = (String)document.get("pw");
-                        App.LoginUserName = (String)document.get("name");
-                        App.LoginUserPhone = (String)document.get("phone");
+                        App.LoginUserEmail = (String) document.get("email");
+                        App.LoginUserPw = (String) document.get("pw");
+                        App.LoginUserName = (String) document.get("name");
+                        App.LoginUserPhone = (String) document.get("phone");
                     } else {
                         Log.d(TAG, "No such document");
                     }

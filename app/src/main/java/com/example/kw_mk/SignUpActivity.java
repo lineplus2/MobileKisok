@@ -1,5 +1,6 @@
 package com.example.kw_mk;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,14 +91,12 @@ public class SignUpActivity extends AppCompatActivity {
                                     db.collection("User_Info").document(email).set(userValue).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) { // 성공시
-
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) { // 실패시
                                         }
                                     });
-
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startLoginActivity();
 

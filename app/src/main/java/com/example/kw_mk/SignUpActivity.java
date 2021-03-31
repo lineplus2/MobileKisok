@@ -95,11 +95,12 @@ public class SignUpActivity extends AppCompatActivity {
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) { // 실패시
-
                                         }
                                     });
+
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    startLoginActivity();
+                                    activity:finish();
+
                                 } else {
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());

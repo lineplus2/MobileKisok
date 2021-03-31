@@ -99,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     });
 
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    activity:finish();
+                                    startLoginActivity();
 
                                 } else {
                                     if (task.getException() != null) {
@@ -123,5 +123,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void startLoginActivity(){
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }

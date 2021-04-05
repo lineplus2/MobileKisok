@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     };
 
 
-    private void Login() {
+    private void Login() {  //로그인
         Email = ((EditText) findViewById(R.id.et_id)).getText().toString();
         Password = ((EditText) findViewById(R.id.et_pw)).getText().toString();
 

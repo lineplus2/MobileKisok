@@ -3,7 +3,10 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-
+    <color name="materialBlue700">#1976D2</color>
+    <color name="materialBlue300">#64B5F6</color>
     <color name="textColorPrimary">#ffffff</color>
-    <color name="textColorSecondary">#e0e0e0</color>
+    <color name="textColorSecondary">#E0E0E0</color>
+    <color name="materialLightBlue700">#0288D1</color>
+    <color name="htmlLightSkyBlue">#87CEFA</color>
 </resources>

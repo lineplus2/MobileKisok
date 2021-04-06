@@ -30,7 +30,8 @@ public class Select_Page extends AppCompatActivity {
         btn_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(Select_Page.this, ConsumerMainActivity.class);
+                startActivity(intent);
             }
         });
 

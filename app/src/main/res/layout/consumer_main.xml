@@ -24,6 +24,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
+        app:itemTextColor="@color/materialBlue700"
+        app:itemIconTint="@color/materialBlue700"
         app:menu="@menu/consumer_main_navbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

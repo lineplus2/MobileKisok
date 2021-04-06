@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/order_store"
+        android:enabled="true"
+        android:icon="@drawable/order_home"
+        android:title="가게관리"/>
+    <item
+        android:id="@+id/order_menu"
+        android:enabled="true"
+        android:icon="@drawable/order_menu"
+        android:title="메뉴관리"/>
+    <item
+        android:id="@+id/order_order"
+        android:enabled="true"
+        android:icon="@drawable/order_order"
+        android:title="주문관리"/>
+    <item
+        android:id="@+id/order_review"
+        android:enabled="true"
+        android:icon="@drawable/order_review"
+        android:title="리뷰관리"/>
+
+</menu>

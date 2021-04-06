@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_background_blue"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -26,6 +29,7 @@
         android:layout_margin="10dp"
         android:layout_weight="0.5"
         android:hint="ID"
+        android:theme="@style/TextInputLayoutTheme"
         android:textStyle="bold" />
 
     <EditText
@@ -37,6 +41,7 @@
         android:layout_weight="0.5"
         android:hint="PW"
         android:inputType="textPassword"
+        android:theme="@style/TextInputLayoutTheme"
         android:textStyle="bold" />
 
 
@@ -46,18 +51,20 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="0.5"
-        android:backgroundTint="#72BCE1"
         android:text="Login"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@drawable/rounded_button_background"
+        android:textColor="@color/materialLightBlue700"
+        />
 
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
         android:layout_weight="0.5"
         android:background="@android:color/transparent"
+        android:textColor="@color/textColorPrimary"
         android:text="SingUp" />
 
     <LinearLayout

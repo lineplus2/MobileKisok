@@ -13,6 +13,7 @@
     <color name="textColorPrimary">#ffffff</color>
     <color name="textColorSecondary">#E0E0E0</color>
     <color name="materialLightBlue700">#0288D1</color>
+    <color name="htmlLightSkyBlue">#87CEFA</color>
 
     <style name="TextInputLayoutTheme" parent="TextAppearance.AppCompat">
         <item name="android:textColorPrimary">#ffffff</item>

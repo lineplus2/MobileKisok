@@ -14,8 +14,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class ConsumerMainActivity extends AppCompatActivity {
 
     private FragmentManager fm = getSupportFragmentManager();
-    private FragmentConsumerHome FragmentConsumerHome;
-    private FragmnetConsumerOderlist FragmentConsumerOderlist;
+    private FragmentConsumerHome fragmentConsumerHome;
+    private FragmnetConsumerOderlist fragmentConsumerOderlist;
+    private FragmentConsumerMypage fragmentConsumerMypage;
     private FragmentTransaction trans;
 
     @Override
@@ -23,11 +24,12 @@ public class ConsumerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consumer_main);
 
-        FragmentConsumerHome = new FragmentConsumerHome();
-        FragmentConsumerOderlist = new FragmnetConsumerOderlist();
+        fragmentConsumerHome = new FragmentConsumerHome();
+        fragmentConsumerOderlist = new FragmnetConsumerOderlist();
+        fragmentConsumerMypage = new FragmentConsumerMypage();
 
         trans = fm.beginTransaction();
-        trans.replace(R.id.frameLayout, FragmentConsumerHome).commitAllowingStateLoss();
+        trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
 
         BottomNavigationView navView = findViewById(R.id.navigationView);
         navView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
@@ -39,13 +41,13 @@ public class ConsumerMainActivity extends AppCompatActivity {
             trans = fm.beginTransaction();
             switch (menuItem.getItemId()) {
                 case R.id.page_home:  // 홈
-                    trans.replace(R.id.frameLayout, FragmentConsumerHome).commitAllowingStateLoss();
+                    trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
                     break;
                 case R.id.page_tv:  // 주문내역
-                    trans.replace(R.id.frameLayout, FragmentConsumerOderlist).commitAllowingStateLoss();
+                    trans.replace(R.id.frameLayout, fragmentConsumerOderlist).commitAllowingStateLoss();
                     break;
                 case R.id.page_calendar:  // 내정보
-                    //
+                    trans.replace(R.id.frameLayout, fragmentConsumerMypage).commitAllowingStateLoss();  // FragmentConsumerMyPage.class 수정필요
                     break;
             }
             return true;

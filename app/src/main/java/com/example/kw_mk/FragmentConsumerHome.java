@@ -13,6 +13,7 @@ public class FragmentConsumerHome extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.consumer_main_home, container, false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.consumer_main_home, container, false);
+        return rootView;
     }
 }

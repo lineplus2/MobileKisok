@@ -24,5 +24,6 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".Select_Page" />
         <activity android:name=".Order_Main" />
+        <activity android:name=".ConsumerMainActivity" />
     </application>
 </manifest>

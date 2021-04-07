@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_blue"
     android:orientation="vertical"
+    android:fontFamily="@font/malgunbd"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -27,7 +28,7 @@
         android:layout_margin="10dp"
         android:layout_weight="0.5"
         android:hint="ID"
-        android:textStyle="bold"
+        android:fontFamily="@font/malgunbd"
         android:theme="@style/TextInputLayoutTheme" />
 
     <EditText

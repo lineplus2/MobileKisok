@@ -24,10 +24,16 @@ public class FragmentConsumerHome extends Fragment {
         GridView grid = rootView.findViewById(R.id.mainGrid);
         GridItemList gridAdapter = new GridItemList();
 
-        gridAdapter.addItem(new GridItem("첫번째", "111-111", "fastfood"));
-        gridAdapter.addItem(new GridItem("두번째", "111-222", "koreanfood"));
-        gridAdapter.addItem(new GridItem("세번째", "111-333", "dessert"));
-        gridAdapter.addItem(new GridItem("네번째", "111-444", "coffee"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+
         grid.setAdapter(gridAdapter);
         return rootView;
     }

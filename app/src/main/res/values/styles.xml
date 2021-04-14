@@ -8,8 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="TextInputLayoutTheme" parent="TextAppearance.AppCompat">
-        <item name="android:textColorPrimary">#ffffff</item>
+    <style name="TextInputLayoutTheme" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorHint">@color/textColorPrimary</item>
         <item name="colorAccent">@color/textColorPrimary</item>
         <item name="colorControlNormal">@color/textColorPrimary</item>

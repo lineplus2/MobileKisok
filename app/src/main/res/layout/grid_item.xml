@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <TextView
         android:id="@+id/name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="aaaa"
+        android:text="Item"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="aaaa"
+        android:text="Tag"
         android:textColor="@color/black"
         android:textSize="20dp" />
 

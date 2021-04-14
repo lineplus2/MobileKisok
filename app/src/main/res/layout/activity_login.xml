@@ -28,6 +28,7 @@
         android:layout_margin="10dp"
         android:layout_weight="0.5"
         android:hint="ID"
+        android:text="testest@google.com"
         android:fontFamily="@font/malgunbd"
         android:theme="@style/TextInputLayoutTheme" />
 
@@ -39,6 +40,7 @@
         android:layout_margin="10dp"
         android:layout_weight="0.5"
         android:hint="PW"
+        android:text="12341234"
         android:inputType="textPassword"
         android:textStyle="bold"
         android:theme="@style/TextInputLayoutTheme" />

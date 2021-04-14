@@ -24,17 +24,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btn_signup;
     private Button btn_login;
-    private FirebaseAuth mAuth;
     String Email, Password;
     String TAG = "LoginActivity";
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth = App.mAuth;
+    FirebaseFirestore db = App.db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mAuth = FirebaseAuth.getInstance();
 
         btn_signup = findViewById(R.id.btn_signup);
         btn_login = findViewById(R.id.btn_login);
@@ -55,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.btn_signup:
                     Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                     startActivity(intent);
-                    finish();
             }
         }
     };

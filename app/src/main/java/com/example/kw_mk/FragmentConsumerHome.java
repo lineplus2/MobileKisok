@@ -1,7 +1,10 @@
 package com.example.kw_mk;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class FragmentConsumerHome extends Fragment {
     GridItemList gridAdapter;
     private Context context;
+    double a, b;
 
     @Nullable
     @Override
@@ -60,7 +67,7 @@ public class FragmentConsumerHome extends Fragment {
                         Toast.makeText(context, "버튼 2", Toast.LENGTH_LONG).show();
                         break;
                     case "3":
-
+                        break;
 
                 }
             }

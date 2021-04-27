@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,37 +18,66 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 public class FragmentConsumerHome extends Fragment {
+    GridItemList gridAdapter;
+    private Context context;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.consumer_main_home, container, false);
 
         GridView grid = rootView.findViewById(R.id.mainGrid);
-        GridItemList gridAdapter = new GridItemList();
+        gridAdapter = new GridItemList();
 
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
-        gridAdapter.addItem(new GridItem("Item", "Tag", "test"));
+        context = container.getContext();
+
+        App.gpsTracker = new GpsTracker(context);
+
+        gridAdapter.addItem(new GridItem("Item1", "1", "test"));
+        gridAdapter.addItem(new GridItem("Item2", "2", "test"));
+        gridAdapter.addItem(new GridItem("Item3", "3", "test"));
+        gridAdapter.addItem(new GridItem("Item4", "4", "test"));
+        gridAdapter.addItem(new GridItem("Item5", "5", "test"));
+        gridAdapter.addItem(new GridItem("item6", "6", "test"));
+        gridAdapter.addItem(new GridItem("Item7", "7", "test"));
+        gridAdapter.addItem(new GridItem("Item8", "8", "test"));
+        gridAdapter.addItem(new GridItem("Item9", "9", "test"));
 
         grid.setAdapter(gridAdapter);
+
+
+        // 그리드뷰 버튼
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GridItem item = (GridItem) gridAdapter.getItem(position);
+
+                switch (item.getPosition()) {
+                    case "1":
+                        Toast.makeText(context, "버튼 1", Toast.LENGTH_LONG).show();
+                        break;
+                    case "2":
+                        Toast.makeText(context, "버튼 2", Toast.LENGTH_LONG).show();
+                        break;
+                    case "3":
+
+
+                }
+            }
+        });
+
         return rootView;
     }
 }
 
 class GridItem {
     String name;
-    String phone;
+    String position;
     String category;
 
     public GridItem(String name, String phone, String category) {
         this.name = name;
-        this.phone = phone;
+        this.position = phone;
         this.category = category;
     }
 
@@ -58,12 +89,12 @@ class GridItem {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPosition(String phone) {
+        this.position = position;
     }
 
     public String getCategory() {
@@ -74,7 +105,6 @@ class GridItem {
         this.category = category;
     }
 }
-
 
 
 class GridItemList extends BaseAdapter {
@@ -114,7 +144,7 @@ class GridItemList extends BaseAdapter {
         TextView phoneText = convertView.findViewById(R.id.phone_text);
 
         nameText.setText(gridItem.getName());
-        phoneText.setText(gridItem.getPhone());
+        phoneText.setText(gridItem.getPosition());
 
         return convertView;
     }

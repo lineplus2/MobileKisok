@@ -19,8 +19,8 @@ public class GpsTracker extends Service implements LocationListener {
 
     private final Context mContext;
     Location location;
-    public  double latitude;
-    public  double longitude;
+    double latitude;
+    double longitude;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
     private static final long MIN_TIME_BW_UPDATES = 3000;
@@ -99,12 +99,10 @@ public class GpsTracker extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if (location != null) {
-            this.latitude = location.getLatitude();
-            this.longitude = location.getLongitude();
-
-            Log.d("테스트", latitude + " |||| " + longitude);
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            Log.d("값 ::::: ", latitude + "|||" + longitude);
         } else {
-            Log.d("테스트 널", "error");
         }
     }
 

@@ -26,7 +26,6 @@ import java.util.Locale;
 public class FragmentConsumerHome extends Fragment {
     GridItemList gridAdapter;
     private Context context;
-    double a, b;
 
     @Nullable
     @Override
@@ -37,8 +36,6 @@ public class FragmentConsumerHome extends Fragment {
         gridAdapter = new GridItemList();
 
         context = container.getContext();
-
-        App.gpsTracker = new GpsTracker(context);
 
         gridAdapter.addItem(new GridItem("Item1", "1", "test"));
         gridAdapter.addItem(new GridItem("Item2", "2", "test"));

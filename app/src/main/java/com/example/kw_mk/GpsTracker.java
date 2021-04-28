@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import static com.example.kw_mk.App.testLo;
+
 public class GpsTracker extends Service implements LocationListener {
 
     private final Context mContext;
@@ -33,6 +35,21 @@ public class GpsTracker extends Service implements LocationListener {
         getLocation();
     }
 
+
+    // 거리 측정
+    void distacne(Location start, Location End) {
+        String meter;
+        int dis;
+        double distance;
+
+        distance = start.distanceTo(End);
+        dis = (int)distance;
+        if(dis < 500) {
+            meter = Double.toString(distance);
+            Log.d("디스탠스 ::: ", "다와감");
+        }
+        Log.d("디스탠스 ::: ", ""+dis);
+    }
 
     public Location getLocation() {
         try {
@@ -102,7 +119,8 @@ public class GpsTracker extends Service implements LocationListener {
         if (location != null) {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
-            Toast.makeText(mContext, "경도 : " + latitude + "\n위도 : " + longitude, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "경도 : " + latitude + "\n위도 : " + longitude, Toast.LENGTH_SHORT).show();
+            distacne(testLo, location);
             Log.d("값 ::::: ", latitude + "|||" + longitude);
         } else {
         }

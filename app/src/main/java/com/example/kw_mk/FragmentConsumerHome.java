@@ -1,10 +1,8 @@
 package com.example.kw_mk;
 
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+
+import static com.example.kw_mk.App.testLo;
 
 public class FragmentConsumerHome extends Fragment {
     GridItemList gridAdapter;
     private Context context;
+
 
     @Nullable
     @Override
@@ -36,6 +34,11 @@ public class FragmentConsumerHome extends Fragment {
         gridAdapter = new GridItemList();
 
         context = container.getContext();
+
+        testLo = new Location("Point A");
+
+        testLo.setLatitude(35.839323);
+        testLo.setLongitude(128.565597);
 
         gridAdapter.addItem(new GridItem("Item1", "1", "test"));
         gridAdapter.addItem(new GridItem("Item2", "2", "test"));

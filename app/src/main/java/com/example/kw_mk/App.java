@@ -3,6 +3,7 @@ package com.example.kw_mk;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,6 +19,8 @@ public class App extends Application {
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static GpsTracker gpsTracker;
+
+    public static Location testLo;
 
 
 }

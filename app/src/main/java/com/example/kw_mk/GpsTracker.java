@@ -14,6 +14,7 @@ import android.os.IBinder;
 import androidx.core.content.ContextCompat;
 
 import android.util.Log;
+import android.widget.Toast;
 
 public class GpsTracker extends Service implements LocationListener {
 
@@ -23,11 +24,11 @@ public class GpsTracker extends Service implements LocationListener {
     double longitude;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
-    private static final long MIN_TIME_BW_UPDATES = 3000;
+    private static final long MIN_TIME_BW_UPDATES = 5000;
     protected LocationManager locationManager;
 
 
-        public GpsTracker(Context context) {
+    public GpsTracker(Context context) {
         this.mContext = context;
         getLocation();
     }
@@ -101,6 +102,7 @@ public class GpsTracker extends Service implements LocationListener {
         if (location != null) {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
+            Toast.makeText(mContext, "경도 : " + latitude + "\n위도 : " + longitude, Toast.LENGTH_SHORT).show();
             Log.d("값 ::::: ", latitude + "|||" + longitude);
         } else {
         }
@@ -123,12 +125,9 @@ public class GpsTracker extends Service implements LocationListener {
         return null;
     }
 
-
     public void stopUsingGPS() {
         if (locationManager != null) {
             locationManager.removeUpdates(GpsTracker.this);
         }
     }
-
-
 }

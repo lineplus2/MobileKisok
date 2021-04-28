@@ -1,11 +1,14 @@
 package com.example.kw_mk;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import static com.example.kw_mk.LoginActivity.pref;
 
 public class Select_Page extends AppCompatActivity {
 
@@ -23,6 +26,7 @@ public class Select_Page extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Select_Page.this, Order_Main.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -32,9 +36,9 @@ public class Select_Page extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Select_Page.this, ConsumerMainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
     }
-
 }

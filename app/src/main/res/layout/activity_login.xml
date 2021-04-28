@@ -40,7 +40,7 @@
         android:layout_margin="10dp"
         android:layout_weight="0.5"
         android:hint="PW"
-        android:text="12341234"
+
         android:inputType="textPassword"
         android:textStyle="bold"
         android:theme="@style/TextInputLayoutTheme" />
@@ -56,6 +56,13 @@
         android:text="Login"
         android:textColor="@color/materialLightBlue700"
         android:textStyle="bold" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="자동로그인"
+        android:layout_gravity="center"
+        android:textColor="@color/textColorPrimary"/>
 
     <Button
         android:id="@+id/btn_signup"

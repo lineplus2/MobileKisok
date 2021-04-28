@@ -10,4 +10,6 @@
     <color name="materialLightBlue700">#0288D1</color>
     <color name="htmlLightSkyBlue">#87CEFA</color>
     <color name="black">#000000</color>
+    <color name="skyblue">#99CCFF</color>
+
 </resources>

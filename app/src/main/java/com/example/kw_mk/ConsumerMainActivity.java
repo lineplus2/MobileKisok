@@ -28,6 +28,9 @@ public class ConsumerMainActivity extends AppCompatActivity {
         fragmentConsumerOderlist = new FragmnetConsumerOderlist();
         fragmentConsumerMypage = new FragmentConsumerMypage();
 
+
+        App.gpsTracker = new GpsTracker(ConsumerMainActivity.this);
+
         trans = fm.beginTransaction();
         trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
 

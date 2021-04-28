@@ -1,6 +1,5 @@
 package com.example.kw_mk;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,21 +19,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
-    private FirebaseAuth mAuth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     String email;
     String password;
     String passwordCheck;
     String name;
     String phone;
+    FirebaseAuth mAuth = App.mAuth;
 
     DatabaseReference mDBReference = null;
     Map<String, Object> userValue = null;
@@ -43,10 +39,10 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "Cheak");
         setContentView(R.layout.activity_sign_up);
 
         this.mDBReference = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
     }
@@ -75,8 +71,8 @@ public class SignUpActivity extends AppCompatActivity {
         this.name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
         this.phone = ((EditText) findViewById(R.id.phoneEditText)).getText().toString();
 
-        if(email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0 && phone.length() > 0 && name.length() > 0){
-            if(password.equals(passwordCheck)) { // 회원가입시 비밀번호 체크
+        if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0 && phone.length() > 0 && name.length() > 0) {
+            if (password.equals(passwordCheck)) { // 회원가입시 비밀번호 체크
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -88,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     userValue = userInfo.toMap(); // 유저정보대입준비
 
                                     //FireStore 값(유저정보) 삽입
-                                    db.collection("User_Info").document(email).set(userValue).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    App.db.collection("User_Info").document(email).set(userValue).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) { // 성공시
                                         }
@@ -107,20 +103,20 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }else{
+            } else {
                 startToast("비밀번호가 일치하지 않습니다.");
             }
-        }else{
+        } else {
             startToast("모든 항목을 채워주세요.");
         }
     }
 
-    private void startToast(String msg){
+    private void startToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void startLoginActivity(){
-        Intent intent = new Intent(this,LoginActivity.class);
+    private void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

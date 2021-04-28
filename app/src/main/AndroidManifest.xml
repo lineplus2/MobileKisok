@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -14,16 +16,29 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".Select_Page" />
-        <activity android:name=".Order_Main" />
-        <activity android:name=".ConsumerMainActivity" />
+
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Select_Page"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Order_Main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ConsumerMainActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 </manifest>

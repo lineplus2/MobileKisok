@@ -28,29 +28,33 @@
         android:textColor="@color/black"/>
 
     <EditText
+        android:id="@+id/exPassword"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:hint="기존 비밀번호"
         />
     <EditText
+        android:id="@+id/changePassword"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:hint="변경할 비밀번호"
         />
     <EditText
+        android:id="@+id/changePasswordCheck"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:hint="비밀번호 확인"
         />
 
-    <TextView
+    <Button
+        android:id="@+id/modify"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="email"
+        android:text="변경하기"
         android:textSize="20dp"
         android:textColor="@color/black"/>
 

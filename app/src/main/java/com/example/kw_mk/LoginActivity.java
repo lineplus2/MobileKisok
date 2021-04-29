@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
+/////////////////////////////////////////자동로그인/////////////////////////////////////////////////////////////////
     void save() {
         SharedPreferences.Editor editor = pref.edit();
 
@@ -128,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editor.commit();
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     public void onRequestPermissionsResult(int permsRequestCode, @NonNull String[] permissions, @NonNull int[] grandResults) {

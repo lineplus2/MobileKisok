@@ -159,7 +159,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void checkRunTimePermission() {
-
         //런타임 퍼미션 처리
         // 1. 위치 권한을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(LoginActivity.this,

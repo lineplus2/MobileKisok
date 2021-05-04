@@ -1,15 +1,13 @@
 package com.example.kw_mk;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -37,8 +35,7 @@ public class ConsumerMainActivity extends AppCompatActivity {
         AActivity = ConsumerMainActivity.this;
 
 
-
-        App.gpsTracker = new GpsTracker(ConsumerMainActivity.this);
+        //App.gpsTracker = new GpsTracker(ConsumerMainActivity.this);  // GPS On
 
         trans = fm.beginTransaction();
         trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
@@ -46,6 +43,7 @@ public class ConsumerMainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.navigationView);
         navView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
     }
+
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener { // BottomNavigationView 버튼 속성
         @Override
@@ -64,5 +62,9 @@ public class ConsumerMainActivity extends AppCompatActivity {
             }
             return true;
         }
+    }
+
+    public void onClick() {
+
     }
 }

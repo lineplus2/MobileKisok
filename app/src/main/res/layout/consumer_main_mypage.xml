@@ -7,10 +7,12 @@
     android:fontFamily="@font/malgunbd"
     android:layout_marginLeft="10dp">
 
+
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:layout_weight=".5"
+        android:layout_weight="0.5"
         android:src="@drawable/image_plus"/>
 
     <TextView
@@ -79,5 +81,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button_background_blue"
+        android:text="로그아웃 "
+        />
 
 </LinearLayout>

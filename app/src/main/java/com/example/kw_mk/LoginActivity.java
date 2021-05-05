@@ -108,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
         // 저장시킬 이름이 이미 존재하면 덮어씌움
         editor.putString("ID", et_id.getText().toString().trim());
         editor.putString("PWD", et_pw.getText().toString().trim());
-        Log.d("세이브테스트 ::: ", "save");
 
         editor.commit();
     }
@@ -117,17 +116,6 @@ public class LoginActivity extends AppCompatActivity {
         // 저장된 이름이 존재하지 않을 시 기본값
         id = pref.getString("ID", "");
         pw = pref.getString("PWD", "");
-    }
-
-    void logout() {
-        pref = getSharedPreferences("loginData", MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = pref.edit();
-
-        editor.putString("ID", "");
-        editor.putString("PWD", "");
-
-        editor.commit();
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -159,7 +147,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void checkRunTimePermission() {
-
         //런타임 퍼미션 처리
         // 1. 위치 권한을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(LoginActivity.this,

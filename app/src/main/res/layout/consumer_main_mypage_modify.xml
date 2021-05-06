@@ -8,55 +8,78 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="사진 변경"
         android:textSize="30dp"
         android:textColor="@color/black"/>
     <ImageView
         android:layout_width="100dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="100dp"
         android:src="@drawable/image_plus"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="비밀번호 변경"
         android:textSize="30dp"
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/exPassword"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:hint="기존 비밀번호"
         />
     <EditText
-        android:id="@+id/changePassword"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:hint="변경할 비밀번호"
         />
-
     <EditText
-        android:id="@+id/changePasswordCheck"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:hint="비밀번호 확인"
         />
 
-    <Button
-        android:id="@+id/modify"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="변경하기"
+        android:layout_height="wrap_content"
+        android:text="email 변경"
         android:textSize="20dp"
         android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:hint="Email@google.com"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:background="@drawable/sign_button"
+            android:text="이메일확인"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button_background_blue"
+        android:text="수정하기 "
+        />
 
 </LinearLayout>

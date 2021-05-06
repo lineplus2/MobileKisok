@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import static com.example.kw_mk.LoginActivity.pref;
 
@@ -23,7 +25,7 @@ public class MypageModifyActivity extends Activity {
 
     Button modify;
 
-    EditText chPw, chPwC;
+    EditText exPw, chPw, chPwC;
 
     DocumentReference docRef;
 
@@ -34,9 +36,11 @@ public class MypageModifyActivity extends Activity {
         modify = findViewById(R.id.modify);
         chPw = findViewById(R.id.changePassword);
         chPwC = findViewById(R.id.changePasswordCheck);
+        exPw = findViewById(R.id.exPassword);
 
         final FirebaseUser user = App.mAuth.getCurrentUser();
         docRef = App.db.collection("User_Info").document(user.getEmail());
+
 
         if (user != null) {
         } else {
@@ -46,15 +50,20 @@ public class MypageModifyActivity extends Activity {
         modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String existingPassword = exPw.getText().toString();
                 final String newPassword = chPw.getText().toString();
                 final String newPasswordCheck = chPwC.getText().toString();
 
-                if (newPassword == null || newPasswordCheck == null) {
+                if (!existingPassword.equals(App.LoginUserPw)) {
+                    Toast.makeText(MypageModifyActivity.this, "기존 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                } else if (existingPassword.equals(newPassword)) {
+                    Toast.makeText(MypageModifyActivity.this, "변경하려는 비밀번호와 기존 비밀번호가 같습니다.", Toast.LENGTH_SHORT).show();
+                } else if (newPassword == null || newPasswordCheck == null) {
                     Toast.makeText(MypageModifyActivity.this, "빈칸을 입력해주세요", Toast.LENGTH_SHORT).show();
                 } else if (newPassword.length() < 6) {
                     Toast.makeText(MypageModifyActivity.this, "비밀번호를 6자 이상으로 입력해주세요", Toast.LENGTH_SHORT).show();
                 } else if (!newPassword.equals(newPasswordCheck)) {
-                    Toast.makeText(MypageModifyActivity.this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MypageModifyActivity.this, "변경하려는 비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                 } else {
                     // 비밀번호 변경 ( 변경 성공시 로그아웃 )
                     user.updatePassword(newPassword)

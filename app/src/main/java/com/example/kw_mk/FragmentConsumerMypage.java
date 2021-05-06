@@ -37,8 +37,6 @@ public class FragmentConsumerMypage extends Fragment {
         final FirebaseUser user = App.mAuth.getCurrentUser();
         docRef = App.db.collection("User_Info").document(user.getEmail());
 
-        context = container.getContext();
-
         logout = rootView.findViewById(R.id.logout_btn);
         myInfoModify = rootView.findViewById(R.id.myInfoModify);
         myName = rootView.findViewById(R.id.mypage_name);

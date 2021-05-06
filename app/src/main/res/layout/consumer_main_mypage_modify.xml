@@ -39,36 +39,7 @@
         android:layout_height="wrap_content"
         android:hint="비밀번호 확인"
         />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="email 변경"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/emailEditText"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:hint="Email@google.com"
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.4"
-            android:background="@drawable/sign_button"
-            android:text="이메일확인"
-            />
-    </LinearLayout>
+   
 
     <TextView
         android:layout_width="match_parent"

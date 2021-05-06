@@ -37,7 +37,14 @@
         <activity
             android:name=".ConsumerMainActivity"
             android:screenOrientation="portrait" />
-        <service android:name=".ServiceActivity" android:enabled="true" android:exported="true"/>
+        <activity
+            android:name=".MypageModifyActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".ServiceActivity"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

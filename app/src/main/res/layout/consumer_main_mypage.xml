@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
     android:fontFamily="@font/malgunbd"
-    android:layout_marginLeft="10dp">
-
+    android:orientation="vertical">
 
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:src="@drawable/image_plus"/>
+        android:src="@drawable/image_plus" />
 
     <TextView
         android:id="@+id/mypage_name"
@@ -21,8 +19,8 @@
         android:layout_height="0dp"
         android:layout_weight=".2"
         android:text="이름"
-        android:textSize="30dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/mypage_email"
@@ -30,8 +28,8 @@
         android:layout_height="0dp"
         android:layout_weight=".2"
         android:text="email"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,22 +42,25 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/record"/>
+            android:src="@drawable/record" />
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/card"/>
+            android:src="@drawable/card" />
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/notice"/>
+            android:src="@drawable/notice" />
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/cupon"/>
+            android:src="@drawable/cupon" />
     </LinearLayout>
 
     <TextView
@@ -67,8 +68,8 @@
         android:layout_height="0dp"
         android:layout_weight="0.2"
         android:text="예약 현황"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,12 +84,30 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="100dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_button_background_blue"
-        android:text="로그아웃 "
-        />
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_button_background_blue"
+            android:text="로그아웃 "
+            android:layout_margin="10px"/>
+
+        <Button
+            android:id="@+id/myInfoModify"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_button_background_blue"
+            android:text="내정보수정 "
+            android:layout_margin="10px"/>
+    </LinearLayout>
 
 </LinearLayout>

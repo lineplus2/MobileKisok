@@ -41,6 +41,7 @@
         android:layout_weight="1"
         android:hint="변경할 비밀번호"
         />
+
     <EditText
         android:id="@+id/changePasswordCheck"
         android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.example.kw_mk;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,6 +20,8 @@ public class ConsumerMainActivity extends AppCompatActivity {
     private FragmentConsumerMypage fragmentConsumerMypage;
     private FragmentTransaction trans;
 
+    public static Activity AActivity;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +31,7 @@ public class ConsumerMainActivity extends AppCompatActivity {
         fragmentConsumerOderlist = new FragmnetConsumerOderlist();
         fragmentConsumerMypage = new FragmentConsumerMypage();
 
-
-        App.gpsTracker = new GpsTracker(ConsumerMainActivity.this);
+        AActivity = ConsumerMainActivity.this;
 
         trans = fm.beginTransaction();
         trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
@@ -37,6 +39,7 @@ public class ConsumerMainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.navigationView);
         navView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
     }
+
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener { // BottomNavigationView 버튼 속성
         @Override

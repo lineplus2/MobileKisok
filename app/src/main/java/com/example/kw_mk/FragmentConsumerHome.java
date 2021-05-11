@@ -52,7 +52,6 @@ public class FragmentConsumerHome extends Fragment {
 
         grid.setAdapter(gridAdapter);
 
-
         // 그리드뷰 버튼
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

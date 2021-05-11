@@ -13,7 +13,9 @@ public class FragmnetConsumerOderlist extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.consumer_main_record, container, false);
+
         return rootView;
     }
 

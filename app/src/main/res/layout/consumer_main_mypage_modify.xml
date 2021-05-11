@@ -25,16 +25,19 @@
         android:textColor="@color/black"/>
 
     <EditText
+        android:id="@+id/exPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="기존 비밀번호"
         />
     <EditText
+        android:id="@+id/changePassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="변경할 비밀번호"
         />
     <EditText
+        android:id="@+id/changePasswordCheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="비밀번호 확인"
@@ -46,6 +49,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
     <Button
+        android:id="@+id/modify"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

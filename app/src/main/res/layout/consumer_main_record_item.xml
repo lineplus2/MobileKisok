@@ -12,12 +12,14 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/record_storeName"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="가게명"
             android:textSize="30dp"/>
         <TextView
+            android:id="@+id/record_MenuList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -31,6 +33,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/reviewWrite"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -38,6 +41,7 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/sign_button"/>
             <Button
+                android:id="@+id/details"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

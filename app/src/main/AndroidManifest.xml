@@ -40,6 +40,12 @@
         <activity
             android:name=".MypageModifyActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".record_reviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".record_contentActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".ServiceActivity"

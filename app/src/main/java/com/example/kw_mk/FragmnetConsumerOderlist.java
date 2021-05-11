@@ -1,6 +1,9 @@
 package com.example.kw_mk;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +42,7 @@ public class FragmnetConsumerOderlist extends Fragment {
     }
 
     public void InitializeData() {
-        mList = new ArrayList<>();
+        mList = new ArrayList<RecyclerItem>();
 
         mList.add(new RecyclerItem("제목01", "내용01"));
         mList.add(new RecyclerItem("제목02", "내용02"));
@@ -54,48 +57,49 @@ public class FragmnetConsumerOderlist extends Fragment {
 }
 
 class RecyclerItem {
-    private String titleStr;
-    private String descStr;
+    private String storeName;
+    private String menuList;
 
-    public RecyclerItem(String title, String desc) {
-        this.titleStr = title;
-        this.descStr = desc;
+    public RecyclerItem(String storeName, String menuList) {
+        this.storeName = storeName;
+        this.menuList = menuList;
     }
 
-    public void setTitle(String title) {
-        titleStr = title;
+    public void setStoreName(String storeName) { this.storeName = storeName; }
+
+    public void setMenuList(String menuList) {
+        this.menuList = menuList;
     }
 
-    public void setDesc(String desc) {
-        descStr = desc;
+    public String getStoreName() {
+        return this.storeName;
     }
 
-    public String getTitle() {
-        return this.titleStr;
-    }
-
-    public String getDesc() {
-        return this.descStr;
+    public String getMenuList() {
+        return this.menuList;
     }
 }
 
 class ViewHolder extends RecyclerView.ViewHolder {
-    TextView title;
-    TextView grade;
-    Button btn_delete;
+    TextView storeName;
+    TextView menuList;
+    Button btn_reviewWrite;
+    Button btn_details;
 
     ViewHolder(View itemView) {
         super(itemView);
 
-        title = itemView.findViewById(R.id.reTitle);
-        grade = itemView.findViewById(R.id.reDesc);
-        btn_delete = (Button) itemView.findViewById(R.id.btn_delete);
+        storeName = itemView.findViewById(R.id.record_storeName);
+        menuList = itemView.findViewById(R.id.record_MenuList);
+        btn_reviewWrite = (Button) itemView.findViewById(R.id.reviewWrite);
+        btn_details = (Button) itemView.findViewById(R.id.details);
 
     }
 }
 
 class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
 
+    Context context;
     private ArrayList<RecyclerItem> myDataList = null;
 
     MyAdapter(ArrayList<RecyclerItem> dataList) {
@@ -104,11 +108,10 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //전개자(Inflater)를 통해 얻은 참조 객체를 통해 뷰홀더 객체 생성
-        View view = inflater.inflate(R.layout.recyclerview_item, parent, false);
+        View view = inflater.inflate(R.layout.consumer_main_record_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
@@ -117,18 +120,25 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
 
-        viewHolder.title.setText(myDataList.get(position).getTitle());
-        viewHolder.grade.setText(myDataList.get(position).getDesc());
-
-        viewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
+        viewHolder.storeName.setText(myDataList.get(position).getStoreName());
+        viewHolder.menuList.setText(myDataList.get(position).getMenuList());
+        viewHolder.btn_reviewWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos = viewHolder.getAdapterPosition();
-                myDataList.remove(pos);
-                notifyDataSetChanged();
+                Context context = v.getContext();
+                Intent intent = new Intent(context, record_reviewActivity.class);
+                context.startActivity(intent);
             }
         });
 
+        viewHolder.btn_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, record_contentActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

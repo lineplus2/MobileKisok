@@ -13,6 +13,6 @@ public class Order_Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_main);
+        setContentView(R.layout.seller_main);
     }
 }

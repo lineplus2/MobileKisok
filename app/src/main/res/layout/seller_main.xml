@@ -27,6 +27,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:menu="@menu/order_main_bar" />
+        app:menu="@menu/seller_main_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;

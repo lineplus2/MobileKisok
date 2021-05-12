@@ -38,6 +38,8 @@ public class ConsumerMainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.navigationView);
         navView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+
+
     }
 
 

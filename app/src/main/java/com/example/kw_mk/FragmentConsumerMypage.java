@@ -72,7 +72,7 @@ public class FragmentConsumerMypage extends Fragment {
 
     // 로그아웃
     public void logout() {
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
 
         SharedPreferences.Editor editor = pref.edit();

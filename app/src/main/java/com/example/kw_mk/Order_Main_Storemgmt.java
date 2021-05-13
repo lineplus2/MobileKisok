@@ -14,6 +14,6 @@ public class Order_Main_Storemgmt extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.order_main_storemgmt, container, false);
+        return inflater.inflate(R.layout.seller_main_storemgmt, container, false);
     }
 }

@@ -118,7 +118,7 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
         viewHolder.storeName.setText(myDataList.get(position).getStoreName());
         viewHolder.menuList.setText(myDataList.get(position).getMenuList());
@@ -134,9 +134,8 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
         viewHolder.btn_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, record_contentActivity.class);
-                context.startActivity(intent);
+                myDataList.remove(position);
+                notifyDataSetChanged();
             }
         });
 

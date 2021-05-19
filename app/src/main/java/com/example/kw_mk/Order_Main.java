@@ -2,6 +2,8 @@ package com.example.kw_mk;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -32,13 +34,37 @@ public class Order_Main extends AppCompatActivity {
         storageRef = storage.getReference();
 
         if(firebaseUser == null){
-
+            myStartActivity(Order_storeaddActivity.class);
         }else{
             firebaseFirestore = FirebaseFirestore.getInstance();
-            myStartActivity(Order_menuActivity.class);
+            myStartActivity(Order_storeaddActivity.class);
+
         }
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.seller_main_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.order_store:
+                break;
+            case R.id.order_menu:
+                myStartActivity(Order_menuActivity.class);
+                break;
+            case R.id.order_order:
+                break;
+            case R.id.order_review:
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void myStartActivity(Class c){

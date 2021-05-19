@@ -37,7 +37,7 @@ import static com.example.kw_mk.WUtil.showToast;
 
 import static com.example.kw_mk.WUtil.INTENT_PATH;
 
-public class Order_menuActivity extends BasicActivity {
+public class Order_menuActivity extends AppCompatActivity {
     private static final String TAG = "Order_menuActivity";
     private ImageView foodimageView;
     private RelativeLayout loaderLayout;
@@ -57,6 +57,20 @@ public class Order_menuActivity extends BasicActivity {
         foodimageView.setOnClickListener(onClickListener);
         findViewById(R.id.picture).setOnClickListener(onClickListener);
         findViewById(R.id.gallery).setOnClickListener(onClickListener);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case 0: {
+                if(resultCode == Activity.RESULT_OK){
+                    profilePath = data.getStringExtra(INTENT_PATH);
+                    Glide.with(this).load(profilePath).centerCrop().override(500).into(foodimageView);
+                }
+                break;
+            }
+        }
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener(){
@@ -84,19 +98,6 @@ public class Order_menuActivity extends BasicActivity {
         }
     };
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
-            case 0: {
-                if(resultCode == Activity.RESULT_OK){
-                    profilePath = data.getStringExtra(INTENT_PATH);
-                    Glide.with(this).load(profilePath).centerCrop().override(500).into(foodimageView);
-                }
-                break;
-            }
-        }
-    }
 
     private void menuUpdate(){
         final String name = ((EditText)findViewById(R.id.sellerfoodname)).getText().toString();
@@ -149,7 +150,7 @@ public class Order_menuActivity extends BasicActivity {
     }
     private void storeUploader(menuInfo menuInfo){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(user.getUid()).set(menuInfo)
+        db.collection("food").document(user.getUid()).set(menuInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

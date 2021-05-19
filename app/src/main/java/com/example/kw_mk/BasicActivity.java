@@ -15,13 +15,6 @@ public class BasicActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
-    @Override
-    public void setContentView(@LayoutRes int layoutResID){
-        super.setContentView(layoutResID);
-
-        //Toolbar myToolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(myToolbar);
-    }
 
     public void setToolbarTitle(String title){
         ActionBar actionBar = getSupportActionBar();

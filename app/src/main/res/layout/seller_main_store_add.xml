@@ -29,13 +29,19 @@
         android:text="로고"
         android:textSize="20dp"
         android:textColor="@color/black"/>
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_weight=".8"
-        android:gravity="center"
-        android:src="@drawable/image_plus"
-        android:background="@drawable/edittextboxblue"/>
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/storeimageView"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_weight=".8"
+            android:background="@drawable/edittextboxblue"
+            android:gravity="center"
+            android:src="@drawable/image_plus" />
+    </androidx.cardview.widget.CardView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -57,14 +63,14 @@
 
 
         <EditText
+            android:id="@+id/storenameText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:hint="상호명"
             android:background="@drawable/edittextboxblue"
-            />
+            android:hint="상호명" />
 
 
     </LinearLayout>
@@ -81,17 +87,19 @@
         android:textSize="20dp"
         android:textColor="@color/black"
         />
+
     <EditText
+        android:id="@+id/storeintroduceText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:hint="5줄까지 작성 가능합니다."
-        android:textSize="20dp"
-        android:textColor="#000000"
         android:background="@drawable/edittextboxblue"
-        android:maxLines="5"
+        android:hint="5줄까지 작성 가능합니다."
         android:lines="3"
-        android:layout_margin="5dp"/>
+        android:maxLines="5"
+        android:textColor="#000000"
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -107,14 +115,14 @@
         />
 
     <EditText
+        android:id="@+id/storetellnumberText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="start"
         android:layout_marginLeft="10dp"
         android:layout_weight="0.5"
-        android:hint=""
         android:background="@drawable/edittextboxblue"
-        />
+        android:hint="" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -138,14 +146,14 @@
         >
 
         <EditText
+            android:id="@+id/storeadressText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:hint=" - 없이 입력하세요"
-            android:inputType="number"
-            />
+            android:inputType="number" />
 
         <Button
             android:layout_width="0dp"
@@ -158,24 +166,25 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/storeadress2Text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="start"
         android:layout_marginLeft="10dp"
         android:layout_weight="0.5"
         android:hint="상세주소"
-        android:inputType="number"
-        />
+        android:inputType="number" />
 
     <Button
+        android:id="@+id/storeaddButton"
         android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="0.5"
+        android:background="@color/materialBlue300"
         android:text="가입하기"
         android:textColor="#ffffff"
-        android:background="@color/materialBlue300"
         android:textStyle="bold" />
 </LinearLayout>

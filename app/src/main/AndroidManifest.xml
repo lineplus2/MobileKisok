@@ -62,6 +62,15 @@
         <activity
             android:name=".BasicActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".CameraActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GalleryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Order_storeaddActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".ServiceActivity"

@@ -11,5 +11,6 @@
     <color name="htmlLightSkyBlue">#87CEFA</color>
     <color name="black">#000000</color>
     <color name="skyblue">#99CCFF</color>
+    <color name="buttonColor">#64B5F6</color>
 
 </resources>

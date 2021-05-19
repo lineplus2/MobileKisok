@@ -8,8 +8,15 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class Order_Main extends AppCompatActivity {
+    private static final String TAG = "Order_Main";
+    private FirebaseUser firebaseUser;
+    private FirebaseFirestore firebaseFirestore;
+    private StorageReference storageRef;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private Order_Main_Storemgmt order_main_storemgmt = new Order_Main_Storemgmt();
@@ -19,11 +26,15 @@ public class Order_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_main);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user == null){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
+        if(firebaseUser == null){
 
         }else{
+            firebaseFirestore = FirebaseFirestore.getInstance();
             myStartActivity(Order_menuActivity.class);
         }
 

@@ -7,6 +7,15 @@ public class menuInfo {
     private String explain;
     private String price;
     private String category;
+    private String photoUrl;
+
+    public menuInfo(String name, String explain, String price, String category ,String photoUrl){
+        this.name = name;
+        this.explain = explain;
+        this.price = price;
+        this.category = category;
+        this.photoUrl = photoUrl;
+    }
 
     public menuInfo(String name, String explain, String price, String category){
         this.name = name;
@@ -14,6 +23,8 @@ public class menuInfo {
         this.price = price;
         this.category = category;
     }
+
+    public menuInfo() {}
 
     public String getName(){
         return this.name;
@@ -41,5 +52,12 @@ public class menuInfo {
     }
     public void setCategory(String category){
         this.category = category;
+    }
+
+    public String getPhotoUrl(){
+        return this.photoUrl;
+    }
+    public  void setPhotoUrl(String photoUrl){
+        this.photoUrl = photoUrl;
     }
 }

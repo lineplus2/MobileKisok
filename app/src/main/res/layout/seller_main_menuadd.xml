@@ -30,14 +30,16 @@
                     android:textSize="20dp"
                     android:textColor="#000000"
                     android:gravity="center|left"/>
+
                 <EditText
+                    android:id="@+id/sellerfoodname"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:hint="음식명"
-                    android:textSize="20dp"
                     android:textColor="#000000"
-                    android:gravity="center"/>
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -51,14 +53,16 @@
                     android:textSize="20dp"
                     android:textColor="#000000"
                     android:gravity="center|left"/>
+
                 <EditText
+                    android:id="@+id/sellerfoodexplain"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:hint="설명"
-                    android:textSize="20dp"
                     android:textColor="#000000"
-                    android:gravity="center"/>
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -72,14 +76,16 @@
                     android:textSize="20dp"
                     android:textColor="#000000"
                     android:gravity="center|left"/>
+
                 <EditText
+                    android:id="@+id/sellerfoodprice"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:hint="금액"
-                    android:textSize="20dp"
                     android:textColor="#000000"
-                    android:gravity="center"/>
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -93,17 +99,20 @@
                     android:textSize="20dp"
                     android:textColor="#000000"
                     android:gravity="center|left"/>
+
                 <EditText
+                    android:id="@+id/sellerfoodcategory"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:hint="ex)찌개 팝업추가"
-                    android:textSize="20dp"
                     android:textColor="#000000"
-                    android:gravity="center"/>
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <Button
+                android:id="@+id/menuaddButton"
                 android:layout_marginTop="30dp"
                 android:text="추가하기" />
         </TableLayout>

@@ -13,6 +13,7 @@
         android:textSize="30dp"
         android:textColor="@color/black"/>
     <ImageView
+        android:id="@+id/profileImageModify"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/image_plus"/>

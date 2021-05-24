@@ -44,7 +44,7 @@ public class Select_Page extends AppCompatActivity {
                                 finish();
                                 break;
                             case "1":
-                                intent = new Intent(Select_Page.this, SellerMainActivity.class);
+                                intent = new Intent(Select_Page.this, SellerStoreAdd.class);
                                 startActivity(intent);
                                 Toast.makeText(Select_Page.this, "Store :: 1", Toast.LENGTH_SHORT).show();
                                 finish();

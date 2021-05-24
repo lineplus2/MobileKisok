@@ -81,6 +81,9 @@
         <activity
             android:name=".SellerMainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".SellerStoreAdd"
+            android:screenOrientation="portrait" />
 
 
         <service

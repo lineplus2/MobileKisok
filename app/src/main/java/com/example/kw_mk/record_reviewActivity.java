@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,7 +39,7 @@ public class record_reviewActivity extends AppCompatActivity {
 
         write = findViewById(R.id.btn_write);
 
-        storeName.setText("testInfo");
+        storeName.setText("ㅁㄴㅇㅁㄴㅇ");
         price.setText("10000");
 
 
@@ -56,19 +58,14 @@ public class record_reviewActivity extends AppCompatActivity {
 
 
     void reviewWrite(String Menu, String Review, String StoreN) {
-        DocumentReference doc = db.collection("Store_Info").document(StoreN).collection("review").document(App.LoginUserEmail);
+        DocumentReference doc = db.collection("Store_Info").document(StoreN).collection("review").document();
 
         HashMap<String, Object> result = new HashMap<>();
         result.put("주문자", App.LoginUserEmail);
         result.put("주문메뉴", Menu);
-        result.put("리뷰", Review);
+        result.put("리뷰내용", Review);
+        result.put("작성시간", FieldValue.serverTimestamp());
 
-        HashMap<String, Object> write = new HashMap<>();
-        Date time = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String timeR = format.format(time);
-        write.put(timeR, result);
-
-        doc.update(write);
+        doc.set(result);
     }
 }

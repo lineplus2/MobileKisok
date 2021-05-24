@@ -78,7 +78,6 @@ public class FragmentConsumerHome extends Fragment {
 
         grid.setAdapter(gridAdapter);
 
-
         // 그리드뷰 버튼
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,6 +103,7 @@ public class FragmentConsumerHome extends Fragment {
 
     public void initData() {
 
+
         ReList = new ArrayList<homeRecyclerView>();
 
         db.collection("Store_Info")
@@ -112,14 +112,10 @@ public class FragmentConsumerHome extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            String StoreId, StoreAd;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-
-                                String StoreId = document.get("가게이름").toString();
-                                String StoreAd = document.get("위치").toString();
-                                Log.d(TAG, StoreId + " :: " + StoreAd);
-                                ReList.add(new homeRecyclerView(StoreId, StoreAd));
-
+                                Log.d(TAG, document.get("가게이름").toString() + " :: " + document.get("위치").toString());
+                                ReList.add(new homeRecyclerView(document.get("가게이름").toString(), document.get("위치").toString()));
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -127,10 +123,14 @@ public class FragmentConsumerHome extends Fragment {
                     }
                 });
 
-        Context context1 = getContext();
-        LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        recyclerView2.setLayoutManager(manager2);
-        recyclerView2.setAdapter(new HomeRecyclerAdapter(ReList));
+        Handler handler = new Handler();
+
+                Context context1 = getContext();
+                LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                recyclerView2.setLayoutManager(manager2);
+                recyclerView2.setAdapter(new HomeRecyclerAdapter(ReList));
+
+
     }
 }
 
@@ -211,7 +211,6 @@ class GridItemList extends BaseAdapter {
 
         nameText.setText(gridItem.getName());
         phoneText.setText(gridItem.getPosition());
-
         return convertView;
     }
 }
@@ -275,7 +274,6 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
 
         View view = inflater.inflate(R.layout.consumer_main_home_item, parent, false);
         HomeViewHolder viewHolder = new HomeViewHolder(view);
-        notifyDataSetChanged();
 
         return viewHolder;
     }
@@ -284,7 +282,6 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         holder.storeName.setText(HomeRecyclerList.get(position).getStoreName());
         holder.storeAddress.setText(HomeRecyclerList.get(position).getStoreAddress());
-        notifyDataSetChanged();
 
     }
 

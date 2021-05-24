@@ -3,6 +3,7 @@ package com.example.kw_mk;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +35,10 @@ public class FragmentConsumerHome extends Fragment {
     GridItemList gridAdapter;
     private Context context;
 
+    ArrayList<homeRecyclerView> ReList = new ArrayList<>();
+
+    RecyclerView recyclerView2;
+
     final String TAG = " FragmentConsumerHome";
 
 
@@ -41,18 +47,16 @@ public class FragmentConsumerHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.consumer_main_home, container, false);
 
-
         GridView grid = rootView.findViewById(R.id.mainGrid);
+        recyclerView2 = (RecyclerView) rootView.findViewById(R.id.reTest);
+
+
+        initData();
+
+
         gridAdapter = new GridItemList();
 
-
-        context = container.getContext();
-
-        testLo = new Location("Point A");
-
-        testLo.setLatitude(35.839323);
-        testLo.setLongitude(128.565597);
-
+        // GridView Setting
         gridAdapter.addItem(new GridItem("Item1", "1", "test"));
         gridAdapter.addItem(new GridItem("Item2", "2", "test"));
         gridAdapter.addItem(new GridItem("Item3", "3", "test"));
@@ -63,8 +67,44 @@ public class FragmentConsumerHome extends Fragment {
         gridAdapter.addItem(new GridItem("Item8", "8", "test"));
         gridAdapter.addItem(new GridItem("Item9", "9", "test"));
 
+
+        context = container.getContext();
+
+        testLo = new Location("Point A");
+
+        testLo.setLatitude(35.839323);
+        testLo.setLongitude(128.565597);
+
+
         grid.setAdapter(gridAdapter);
 
+
+        // 그리드뷰 버튼
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GridItem item = (GridItem) gridAdapter.getItem(position);
+
+                switch (item.getPosition()) {
+                    case "1":
+                        Toast.makeText(context, "버튼 1", Toast.LENGTH_LONG).show();
+
+                        break;
+                    case "2":
+                        Toast.makeText(context, "버튼 2", Toast.LENGTH_LONG).show();
+                        break;
+                    case "3":
+                        break;
+
+                }
+            }
+        });
+        return rootView;
+    }
+
+    public void initData() {
+
+        ReList = new ArrayList<homeRecyclerView>();
 
         db.collection("Store_Info")
                 .get()
@@ -78,6 +118,7 @@ public class FragmentConsumerHome extends Fragment {
                                 String StoreId = document.get("가게이름").toString();
                                 String StoreAd = document.get("위치").toString();
                                 Log.d(TAG, StoreId + " :: " + StoreAd);
+                                ReList.add(new homeRecyclerView(StoreId, StoreAd));
 
                             }
                         } else {
@@ -86,28 +127,10 @@ public class FragmentConsumerHome extends Fragment {
                     }
                 });
 
-
-        // 그리드뷰 버튼
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GridItem item = (GridItem) gridAdapter.getItem(position);
-
-                switch (item.getPosition()) {
-                    case "1":
-                        Toast.makeText(context, "버튼 1", Toast.LENGTH_LONG).show();
-                        break;
-                    case "2":
-                        Toast.makeText(context, "버튼 2", Toast.LENGTH_LONG).show();
-                        break;
-                    case "3":
-                        break;
-
-                }
-            }
-        });
-
-        return rootView;
+        Context context1 = getContext();
+        LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recyclerView2.setLayoutManager(manager2);
+        recyclerView2.setAdapter(new HomeRecyclerAdapter(ReList));
     }
 }
 
@@ -237,6 +260,7 @@ class HomeViewHolder extends RecyclerView.ViewHolder {
 
 class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
 
+    Context context;
     private ArrayList<homeRecyclerView> HomeRecyclerList = null;
 
     HomeRecyclerAdapter(ArrayList<homeRecyclerView> dataList) {
@@ -244,19 +268,28 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     }
 
 
-    @NonNull
     @Override
-    public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public HomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View view = inflater.inflate(R.layout.consumer_main_home_item, parent, false);
+        HomeViewHolder viewHolder = new HomeViewHolder(view);
+        notifyDataSetChanged();
+
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
+        holder.storeName.setText(HomeRecyclerList.get(position).getStoreName());
+        holder.storeAddress.setText(HomeRecyclerList.get(position).getStoreAddress());
+        notifyDataSetChanged();
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return HomeRecyclerList.size();
     }
 }

@@ -8,13 +8,14 @@ public class UserInfo {     // UserDataSet
     public String pw;
     public String name;
     public String phone;
-    public boolean store = false;
+    public String store;
 
     public UserInfo(String id, String pw, String name, String phone) {
         this.email = id;
         this.pw = pw;
         this.name = name;
         this.phone = phone;
+        this.store = "0";
     }
 
     public Map<String, Object> toMap() {

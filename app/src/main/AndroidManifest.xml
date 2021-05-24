@@ -44,9 +44,8 @@
         <activity
             android:name=".Select_Page"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Order_Main"
-            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".ConsumerMainActivity"
             android:screenOrientation="portrait" />
@@ -60,12 +59,7 @@
             android:name=".record_contentActivity"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".Order_menuActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Order_menuModifyActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".BasicActivity"
             android:screenOrientation="portrait" />
@@ -75,9 +69,21 @@
         <activity
             android:name=".GalleryActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SellerMainActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".Order_storeaddActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Order_menuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Order_menuModifyActivity"
+            android:screenOrientation="portrait" />
+
 
         <service
             android:name=".ServiceActivity"

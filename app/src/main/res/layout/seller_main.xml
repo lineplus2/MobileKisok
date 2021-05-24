@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fontFamily="@font/malgunbd"
-    tools:context=".Order_Main">
+    tools:context=".SellerMainActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"

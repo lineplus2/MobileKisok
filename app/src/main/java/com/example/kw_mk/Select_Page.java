@@ -37,14 +37,14 @@ public class Select_Page extends AppCompatActivity {
                     public void run() {
                         Intent intent;
                         switch (App.LoginUserStore) {
-                            case "0":
-                                intent = new Intent(Select_Page.this, SellerMainActivity.class);
+                            case "0": // 가게 등록 필요 ( 등록된 가게가 없을 경우 )
+                                intent = new Intent(Select_Page.this, SellerStoreAdd.class);
                                 startActivity(intent);
                                 Toast.makeText(Select_Page.this, "Store :: 0", Toast.LENGTH_SHORT).show();
                                 finish();
                                 break;
-                            case "1":
-                                intent = new Intent(Select_Page.this, SellerStoreAdd.class);
+                            case "1": // 가게 등록 불필요 ( 이미 등록된 가게가 있을 경우 )
+                                intent = new Intent(Select_Page.this, SellerMainActivity.class);
                                 startActivity(intent);
                                 Toast.makeText(Select_Page.this, "Store :: 1", Toast.LENGTH_SHORT).show();
                                 finish();

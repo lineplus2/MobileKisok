@@ -244,7 +244,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(LoginActivity.this, Select_Page.class);
+                    Intent intent = new Intent(LoginActivity.this, Loading.class);
                     LoginUserDataSet(Email);
                     startActivity(intent);
                     finish();

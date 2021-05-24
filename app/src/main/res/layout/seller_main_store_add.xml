@@ -34,12 +34,13 @@
         android:layout_height="100dp">
 
         <ImageView
-            android:id="@+id/storeimageView"
+            android:id="@+id/store_image"
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_weight=".8"
             android:background="@drawable/edittextboxblue"
             android:gravity="center"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/image_plus" />
     </androidx.cardview.widget.CardView>
     <TextView
@@ -63,11 +64,11 @@
 
 
         <EditText
-            android:id="@+id/storenameText"
+            android:id="@+id/store_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/edittextboxblue"
             android:hint="상호명" />
@@ -89,7 +90,7 @@
         />
 
     <EditText
-        android:id="@+id/storeintroduceText"
+        android:id="@+id/store_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="5dp"
@@ -115,11 +116,11 @@
         />
 
     <EditText
-        android:id="@+id/storetellnumberText"
+        android:id="@+id/store_num"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_weight="0.5"
         android:background="@drawable/edittextboxblue"
         android:hint="" />
@@ -146,7 +147,7 @@
         >
 
         <EditText
-            android:id="@+id/storeadressText"
+            android:id="@+id/store_address1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -166,7 +167,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/storeadress2Text"
+        android:id="@+id/store_address2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="start"
@@ -176,7 +177,7 @@
         android:inputType="number" />
 
     <Button
-        android:id="@+id/storeaddButton"
+        android:id="@+id/store_add_btn"
         android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_gravity="center"

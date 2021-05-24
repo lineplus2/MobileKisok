@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 
 
 public class Select_Page extends AppCompatActivity {
@@ -21,10 +26,8 @@ public class Select_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_page);
 
-
         btn_order = (Button) findViewById(R.id.btn_order);
         btn_customer = (Button) findViewById(R.id.btn_customer);
-
 
         // 오더용 버튼
         btn_order.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +57,7 @@ public class Select_Page extends AppCompatActivity {
                                 finish();
                         }
                     }
-                }, 1000);
+                }, 500);
 
             }
         });
@@ -71,5 +74,4 @@ public class Select_Page extends AppCompatActivity {
         });
 
     }
-
 }

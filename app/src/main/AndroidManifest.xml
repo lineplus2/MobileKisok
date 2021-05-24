@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -53,12 +52,6 @@
         <activity
             android:name=".MypageModifyActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".record_reviewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".record_contentActivity"
-            android:screenOrientation="portrait" />
 
         <activity
             android:name=".Order_menuActivity"
@@ -78,6 +71,16 @@
         <activity
             android:name=".Order_storeaddActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".record_contentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".record_reviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestActivity"
+            android:screenOrientation="portrait" />
+
 
         <service
             android:name=".ServiceActivity"

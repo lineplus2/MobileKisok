@@ -106,7 +106,10 @@ public class MypageModifyActivity extends AppCompatActivity {
         final String newPassword = chPw.getText().toString();
         final String newPasswordCheck = chPwC.getText().toString();
 
-        if (!existingPassword.equals(App.LoginUserPw)) {
+        if (existingPassword.equals("") || newPassword.equals("") || newPasswordCheck.equals("")) {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!existingPassword.equals(App.LoginUserPw)) {
             Toast.makeText(MypageModifyActivity.this, "기존 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
             return false;
         } else if (existingPassword.equals(newPassword)) {
@@ -159,7 +162,7 @@ public class MypageModifyActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(MypageModifyActivity.this, "성공", Toast.LENGTH_SHORT).show();
                     StorageReference stoRef;
-                    stoRef = App.storageRef.child("User_Info").child(App.LoginUserEmail+"/profileImage");
+                    stoRef = App.storageRef.child("User_Info").child(App.LoginUserEmail + "/profileImage");
                     stoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {

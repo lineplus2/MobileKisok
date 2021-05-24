@@ -134,8 +134,11 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
         viewHolder.btn_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDataList.remove(position);
-                notifyDataSetChanged();
+                Context acontext = v.getContext();
+                Intent intent = new Intent(acontext, TestActivity.class);
+                context.startActivity(intent);
+//                myDataList.remove(position);
+//                notifyDataSetChanged();
             }
         });
 

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fontFamily="@font/malgunbd"
     android:orientation="vertical">
 
@@ -26,10 +27,10 @@
         android:layout_height="wrap_content"
         android:text="가까운 추천 매장" />
 
-    <FrameLayout
-        android:id="@+id/testFrame"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reTest"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="match_parent"

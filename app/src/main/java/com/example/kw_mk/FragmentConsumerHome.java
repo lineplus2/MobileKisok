@@ -3,11 +3,13 @@ package com.example.kw_mk;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,14 +17,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import static com.example.kw_mk.App.db;
 import static com.example.kw_mk.App.testLo;
 
 public class FragmentConsumerHome extends Fragment {
     GridItemList gridAdapter;
     private Context context;
+
+    final String TAG = " FragmentConsumerHome";
 
 
     @Nullable
@@ -30,8 +41,10 @@ public class FragmentConsumerHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.consumer_main_home, container, false);
 
+
         GridView grid = rootView.findViewById(R.id.mainGrid);
         gridAdapter = new GridItemList();
+
 
         context = container.getContext();
 
@@ -51,6 +64,28 @@ public class FragmentConsumerHome extends Fragment {
         gridAdapter.addItem(new GridItem("Item9", "9", "test"));
 
         grid.setAdapter(gridAdapter);
+
+
+        db.collection("Store_Info")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                String StoreId = document.get("가게이름").toString();
+                                String StoreAd = document.get("위치").toString();
+                                Log.d(TAG, StoreId + " :: " + StoreAd);
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
 
         // 그리드뷰 버튼
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -75,6 +110,8 @@ public class FragmentConsumerHome extends Fragment {
         return rootView;
     }
 }
+
+// 그리드뷰
 
 class GridItem {
     String name;
@@ -153,5 +190,73 @@ class GridItemList extends BaseAdapter {
         phoneText.setText(gridItem.getPosition());
 
         return convertView;
+    }
+}
+
+
+// 리싸이클러뷰
+
+class homeRecyclerView {
+    String storeName;
+    String storeAddress;
+
+    homeRecyclerView(String Name, String Address) {
+        this.storeName = Name;
+        this.storeAddress = Address;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public void setStoreAddress(String storeAddress) {
+        this.storeAddress = storeAddress;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public String getStoreAddress() {
+        return storeAddress;
+    }
+}
+
+class HomeViewHolder extends RecyclerView.ViewHolder {
+    TextView storeName;
+    TextView storeAddress;
+
+    HomeViewHolder(View itemView) {
+        super(itemView);
+
+        storeName = itemView.findViewById(R.id.reStoreName);
+        storeAddress = itemView.findViewById(R.id.reStoreAddress);
+
+    }
+}
+
+class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
+
+    private ArrayList<homeRecyclerView> HomeRecyclerList = null;
+
+    HomeRecyclerAdapter(ArrayList<homeRecyclerView> dataList) {
+        HomeRecyclerList = dataList;
+    }
+
+
+    @NonNull
+    @Override
+    public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
     }
 }

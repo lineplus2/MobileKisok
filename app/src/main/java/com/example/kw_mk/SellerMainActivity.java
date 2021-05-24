@@ -20,7 +20,6 @@ public class SellerMainActivity extends AppCompatActivity {
     private FragmentSellerMenu fragmentSellerMenu;
     private FragmentTransaction transaction;
 
-    public static Activity AActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +30,6 @@ public class SellerMainActivity extends AppCompatActivity {
         fragmentSellerMenu = new FragmentSellerMenu();
         fragmentSellerOrder = new FragmentSellerOrder();
         fragmentSellerReview = new FragmentSellerReview();
-
-        AActivity = SellerMainActivity.this;
 
         transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, fragmentSellerStore).commitAllowingStateLoss();

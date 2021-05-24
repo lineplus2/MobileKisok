@@ -8,6 +8,7 @@ public class UserInfo {     // UserDataSet
     public String pw;
     public String name;
     public String phone;
+    public boolean store = false;
 
     public UserInfo(String id, String pw, String name, String phone) {
         this.email = id;
@@ -22,6 +23,7 @@ public class UserInfo {     // UserDataSet
         result.put("pw", pw);
         result.put("name", name);
         result.put("phone", phone);
+        result.put("store", store);
         return result;
     }
 }

@@ -80,6 +80,9 @@
         <activity
             android:name=".TestActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".SellerMainActivity"
+            android:screenOrientation="portrait" />
 
 
         <service

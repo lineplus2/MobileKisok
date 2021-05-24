@@ -268,6 +268,7 @@ public class LoginActivity extends AppCompatActivity {
                         App.LoginUserPw = (String) document.get("pw");
                         App.LoginUserName = (String) document.get("name");
                         App.LoginUserPhone = (String) document.get("phone");
+                        App.LoginUserStore = (String) document.get("store");
 
                         // 프로필사진 저장
                         stoRef = App.storageRef.child("User_Info").child(App.LoginUserEmail+"/profileImage");

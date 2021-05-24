@@ -16,6 +16,7 @@ public class App extends Application {
     public static String LoginUserPw = null;
     public static String LoginUserName = null;
     public static String LoginUserPhone = null;
+    public static String LoginUserStore = null;
     public static Uri LoginUserUri = null;
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();

@@ -1,6 +1,5 @@
 package com.example.kw_mk;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class SellerMainActivity extends AppCompatActivity {
 
     private FragmentManager fm = getSupportFragmentManager();
-    private FragmentSellerStore fragmentSellerStore;
+    private FragmentSellerHome fragmentSellerStore;
     private FragmentSellerOrder fragmentSellerOrder;
     private FragmentSellerReview fragmentSellerReview;
     private FragmentSellerMenu fragmentSellerMenu;
@@ -26,7 +25,7 @@ public class SellerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_main);
 
-        fragmentSellerStore = new FragmentSellerStore();
+        fragmentSellerStore = new FragmentSellerHome();
         fragmentSellerMenu = new FragmentSellerMenu();
         fragmentSellerOrder = new FragmentSellerOrder();
         fragmentSellerReview = new FragmentSellerReview();
@@ -47,10 +46,10 @@ public class SellerMainActivity extends AppCompatActivity {
                 case R.id.order_store:  // 홈
                     transaction.replace(R.id.frameLayout, fragmentSellerStore).commitAllowingStateLoss();
                     break;
-                case R.id.order_menu:  // 주문내역
+                case R.id.order_menu:  // 메뉴관리
                     transaction.replace(R.id.frameLayout, fragmentSellerMenu).commitAllowingStateLoss();
                     break;
-                case R.id.order_order:  // 내정보
+                case R.id.order_order:  // 주문관리
                     transaction.replace(R.id.frameLayout, fragmentSellerOrder).commitAllowingStateLoss();
                     break;
                 case R.id.order_review:  // 내정보

@@ -44,7 +44,6 @@ public class Select_Page extends AppCompatActivity {
                 String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 DocumentReference docRef = FirebaseFirestore.getInstance().collection("User_Info").document(email);
 
-
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete( Task<DocumentSnapshot> task) {

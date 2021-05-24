@@ -44,9 +44,6 @@
             android:name=".Select_Page"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Order_Main"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ConsumerMainActivity"
             android:screenOrientation="portrait" />
         <activity

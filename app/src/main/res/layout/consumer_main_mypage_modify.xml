@@ -13,6 +13,7 @@
         android:textSize="30dp"
         android:textColor="@color/black"/>
     <ImageView
+        android:id="@+id/profileImageModify"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/image_plus"/>
@@ -29,18 +30,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="기존 비밀번호"
+        android:inputType="textPassword"
         />
     <EditText
         android:id="@+id/changePassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="변경할 비밀번호"
+        android:inputType="textPassword"
         />
     <EditText
         android:id="@+id/changePasswordCheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="비밀번호 확인"
+        android:inputType="textPassword"
         />
    
 

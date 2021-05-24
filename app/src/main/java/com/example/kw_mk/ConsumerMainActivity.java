@@ -1,6 +1,7 @@
 package com.example.kw_mk;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.storage.StorageReference;
 
 public class ConsumerMainActivity extends AppCompatActivity {
 
@@ -21,6 +24,8 @@ public class ConsumerMainActivity extends AppCompatActivity {
     private FragmentTransaction trans;
 
     public static Activity AActivity;
+
+    StorageReference stoRef;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,11 +38,15 @@ public class ConsumerMainActivity extends AppCompatActivity {
 
         AActivity = ConsumerMainActivity.this;
 
+
+
         trans = fm.beginTransaction();
         trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
 
         BottomNavigationView navView = findViewById(R.id.navigationView);
         navView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+
+
     }
 
 

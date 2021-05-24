@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -51,6 +52,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MypageModifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".record_reviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".record_contentActivity"
             android:screenOrientation="portrait" />
 
         <activity

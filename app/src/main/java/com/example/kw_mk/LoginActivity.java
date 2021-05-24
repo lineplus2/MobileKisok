@@ -11,8 +11,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,12 +25,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.InputStream;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText et_id;
     EditText et_pw;
+
+    StorageReference stoRef;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -101,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-/////////////////////////////////////////자동로그인/////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////자동로그인/////////////////////////////////////////////////////////////////
     void save() {
         SharedPreferences.Editor editor = pref.edit();
 
@@ -253,10 +263,21 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
+                        StorageReference stoRef;
                         App.LoginUserEmail = (String) document.get("email");
                         App.LoginUserPw = (String) document.get("pw");
                         App.LoginUserName = (String) document.get("name");
                         App.LoginUserPhone = (String) document.get("phone");
+                        
+                        // 프로필사진 저장
+                        stoRef = App.storageRef.child("User_Info").child(App.LoginUserEmail+"/profileImage");
+                        stoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                App.LoginUserUri = uri;
+                            }
+                        });
+
                     } else {
                         Log.d(TAG, "No such document");
                     }

@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragmentSellerStore extends Fragment {
+public class FragmentSellerHome extends Fragment {
 
     TextView store_id, store_content, store_order_clear, store_order_now, store_order_reservation, store_order_cancel;
-    TextView store_num, store_representative, store_businessnum;
+    TextView store_num, store_representative, store_businessnum, store_location;
     Switch store_switch;
 
     @Nullable
@@ -32,6 +32,10 @@ public class FragmentSellerStore extends Fragment {
         store_order_cancel = rootView.findViewById(R.id.store_order_cancel);
         store_num = rootView.findViewById(R.id.store_num);
         store_representative = rootView.findViewById(R.id.store_representative);
+        store_location = rootView.findViewById(R.id.store_location);
+        store_businessnum = rootView.findViewById(R.id.store_businessnum);
+
+        //db에서 매장정보 가져오기
 
 
 

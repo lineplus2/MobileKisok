@@ -40,11 +40,11 @@ public class Select_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (store == true) { // 판매자 메인화면
-                    //Intent intent = new Intent(Select_Page.this, 메인);
-                    //startActivity(intent);
+                    Intent intent = new Intent(Select_Page.this, FragmentSellerHome.class);
+                    startActivity(intent);
                 } else if (store == false) { // 가게 추가하는 곳
-                    //Intent intent = new Intent(Select_Page.this, 가게추가하는 곳);
-                    //startActivity(intent);
+                    Intent intent = new Intent(Select_Page.this, SellerStoreAdd.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(Select_Page.this, "Error", Toast.LENGTH_SHORT).show();
                     finish();

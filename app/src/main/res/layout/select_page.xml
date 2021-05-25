@@ -1,57 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".Select_Page"
+    android:id="@+id/background"
+    android:background="@color/white"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/load_ima"/>
-        <Button
-            android:id="@+id/btn_order"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:text="오더용"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"
-            android:textSize="30dp"
-            android:background="@drawable/sign_button"
-            />
-        <Button
-            android:id="@+id/btn_customer"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:text="소비자"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"
-            android:textSize="30dp"
-            android:background="@drawable/sign_button"
-            />
+            android:id="@+id/load_ima"
+            tools:ignore="MissingConstraints" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7">
-    </LinearLayout>
-</LinearLayout>
+
+    <Button
+        android:id="@+id/btn_order"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_weight="1.2"
+        android:background="@drawable/sign_button"
+        android:text="판매자"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_customer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loading"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_customer"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_weight="1.2"
+        android:background="@drawable/sign_button"
+        android:text="소비자"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loading"
+        tools:ignore="MissingConstraints" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="91dp"
+        android:layout_height="93dp"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

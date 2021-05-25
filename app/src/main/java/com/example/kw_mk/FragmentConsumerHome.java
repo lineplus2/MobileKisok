@@ -130,7 +130,13 @@ public class FragmentConsumerHome extends Fragment {
         Context context1 = getContext();
         LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView2.setLayoutManager(manager2);
-        recyclerView2.setAdapter(new HomeRecyclerAdapter(ReList));
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recyclerView2.setAdapter(new HomeRecyclerAdapter(ReList));
+            }
+        }, 1000);
     }
 }
 
@@ -275,7 +281,6 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
 
         View view = inflater.inflate(R.layout.consumer_main_home_item, parent, false);
         HomeViewHolder viewHolder = new HomeViewHolder(view);
-        notifyDataSetChanged();
 
         return viewHolder;
     }
@@ -284,7 +289,6 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         holder.storeName.setText(HomeRecyclerList.get(position).getStoreName());
         holder.storeAddress.setText(HomeRecyclerList.get(position).getStoreAddress());
-        notifyDataSetChanged();
 
     }
 

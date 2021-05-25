@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,13 +63,8 @@ public class record_reviewActivity extends AppCompatActivity {
         result.put("주문자", App.LoginUserEmail);
         result.put("주문메뉴", Menu);
         result.put("리뷰", Review);
+        result.put("작성시간", FieldValue.serverTimestamp());
 
-        HashMap<String, Object> write = new HashMap<>();
-        Date time = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String timeR = format.format(time);
-        write.put(timeR, result);
-
-        doc.update(write);
+        doc.update(result);
     }
 }

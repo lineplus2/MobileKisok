@@ -40,7 +40,6 @@ public class Select_Page extends AppCompatActivity {
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_order.setEnabled(false);
                 String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 DocumentReference docRef = FirebaseFirestore.getInstance().collection("User_Info").document(email);
 

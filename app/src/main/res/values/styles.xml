@@ -16,6 +16,11 @@
         <item name="colorControlActivated">@color/textColorPrimary</item>
     </style>
 
+    <style name="Text_Black15" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">fill</item>
+    </style>
     <style name="Text_Black20" parent="Theme.AppCompat">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">20dp</item>

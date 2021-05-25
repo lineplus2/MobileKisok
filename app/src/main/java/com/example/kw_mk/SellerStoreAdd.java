@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.kw_mk.App.GET_GALLERY_IMAGE;
+import static com.example.kw_mk.App.SEARCH_ADDRESS_ACTIVITY;
 import static com.example.kw_mk.App.db;
 
 public class SellerStoreAdd extends AppCompatActivity {
@@ -81,6 +82,14 @@ public class SellerStoreAdd extends AppCompatActivity {
             }
         });
 
+        addres_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SellerStoreAdd.this, AddressWebViewActivity.class);
+                startActivityForResult(i, SEARCH_ADDRESS_ACTIVITY);
+            }
+        });
+
 
     }
 
@@ -90,6 +99,17 @@ public class SellerStoreAdd extends AppCompatActivity {
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             selectedImageUri = data.getData();
             store_image.setImageURI(selectedImageUri);
+        }
+
+        switch (requestCode) {
+            case SEARCH_ADDRESS_ACTIVITY:
+                if (resultCode == RESULT_OK) {
+                    String addressData = data.getExtras().getString("data");
+                    if (data != null) {
+                        store_address1.setText(addressData);
+                    }
+                }
+                break;
         }
     }
 

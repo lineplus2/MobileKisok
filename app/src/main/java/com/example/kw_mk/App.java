@@ -13,6 +13,7 @@ import com.google.firebase.storage.StorageReference;
 public class App extends Application {
 
     public static final int GET_GALLERY_IMAGE = 200;
+    public static final int SEARCH_ADDRESS_ACTIVITY = 10000;
 
     public static String LoginUserEmail = null;
     public static String LoginUserPw = null;

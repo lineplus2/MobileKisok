@@ -35,6 +35,8 @@ public class FragmentConsumerHome extends Fragment {
     GridItemList gridAdapter;
     private Context context;
 
+    HomeRecyclerAdapter adp;
+
     ArrayList<homeRecyclerView> ReList = new ArrayList<>();
 
     RecyclerView recyclerView2;
@@ -106,6 +108,7 @@ public class FragmentConsumerHome extends Fragment {
 
         ReList = new ArrayList<homeRecyclerView>();
 
+
         db.collection("Store_Info")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -113,13 +116,10 @@ public class FragmentConsumerHome extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-
                                 String StoreId = document.get("가게이름").toString();
                                 String StoreAd = document.get("위치").toString();
-                                Log.d(TAG, StoreId + " :: " + StoreAd);
                                 ReList.add(new homeRecyclerView(StoreId, StoreAd));
-
+                                adp.notifyDataSetChanged();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -127,16 +127,11 @@ public class FragmentConsumerHome extends Fragment {
                     }
                 });
 
-        Context context1 = getContext();
         LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView2.setLayoutManager(manager2);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView2.setAdapter(new HomeRecyclerAdapter(ReList));
-            }
-        }, 1000);
+
+        adp = new HomeRecyclerAdapter(ReList);
+        recyclerView2.setAdapter(adp);
     }
 }
 

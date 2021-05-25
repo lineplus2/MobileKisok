@@ -12,12 +12,16 @@ import com.google.firebase.storage.StorageReference;
 
 public class App extends Application {
 
+    public static final int GET_GALLERY_IMAGE = 200;
+    public static final int SEARCH_ADDRESS_ACTIVITY = 10000;
+
     public static String LoginUserEmail = null;
     public static String LoginUserPw = null;
     public static String LoginUserName = null;
     public static String LoginUserPhone = null;
     public static String LoginUserStore = null;
     public static Uri LoginUserUri = null;
+    public static Uri StoreUri = null;
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static FirebaseStorage storage = FirebaseStorage.getInstance();

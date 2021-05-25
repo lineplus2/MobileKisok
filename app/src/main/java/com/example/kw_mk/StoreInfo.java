@@ -1,20 +1,18 @@
 package com.example.kw_mk;
 
-import android.widget.EditText;
-
 public class StoreInfo {
     private String name;
-    private String introduce;
-    private String tellnumber;
-    private String adress;
-    private String adress2;
+    private String content;
+    private String num;
+    private String address1;
+    private String address2;
 
     public StoreInfo(String name, String introduce, String tellnumber, String adress, String adress2) {
         this.name = name;
-        this.introduce = introduce;
-        this.tellnumber = tellnumber;
-        this.adress = adress;
-        this.adress2 = adress2;
+        this.content = introduce;
+        this.num = tellnumber;
+        this.address1 = address1;
+        this.address2 = address2;
     }
 
     public String getName() {
@@ -25,35 +23,35 @@ public class StoreInfo {
         this.name = name;
     }
 
-    public String getIntroduce() {
-        return this.introduce;
+    public String getContent() {
+        return this.content;
     }
 
-    public void setIntroduce(String introduce) {
-        this.introduce = introduce;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getTellnumber() {
-        return this.tellnumber;
+    public String getNum() {
+        return this.num;
     }
 
-    public void setTellnumber(String tellnumber) {
-        this.tellnumber = tellnumber;
+    public void setNum(String num) {
+        this.num = num;
     }
 
-    public String getAdress() {
-        return this.adress;
+    public String getAddress1() {
+        return address1;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress1(String address1) {
+        this.address1 = address1;
     }
 
-    public String getAdress2() {
-        return this.adress2;
+    public String getAddress2() {
+        return address2;
     }
 
-    public void setAdress2(String adress2) {
-        this.adress2 = adress2;
+    public void setAddress2(String address2) {
+        this.address2 = address2;
     }
 }

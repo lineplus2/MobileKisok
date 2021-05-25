@@ -1,3 +1,4 @@
+/*
 package com.example.kw_mk;
 
 import android.os.Bundle;
@@ -77,3 +78,4 @@ public class Order_storeaddActivity extends AppCompatActivity {
         db.collection("store").document(user.getUid()).set(storeInfo);
     }
 }
+*/

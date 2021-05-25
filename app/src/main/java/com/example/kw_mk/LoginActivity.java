@@ -244,7 +244,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(LoginActivity.this, Select_Page.class);
+                    Intent intent = new Intent(LoginActivity.this, Loading.class);
                     LoginUserDataSet(Email);
                     startActivity(intent);
                     finish();
@@ -263,7 +263,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        StorageReference stoRef;
+                        StorageReference stoRef, storeRef;
                         App.LoginUserEmail = (String) document.get("email");
                         App.LoginUserPw = (String) document.get("pw");
                         App.LoginUserName = (String) document.get("name");
@@ -271,7 +271,14 @@ public class LoginActivity extends AppCompatActivity {
                         App.LoginUserStore = (String) document.get("store");
 
                         // 프로필사진 저장
-                        stoRef = App.storageRef.child("User_Info").child(App.LoginUserEmail+"/profileImage");
+                        stoRef = App.storageRef.child("User_Info").child(App.LoginUserEmail + "/profileImage");
+                        storeRef = App.storageRef.child("Store_Info").child(App.LoginUserEmail + "/storeImage");
+                        storeRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                App.StoreUri = uri;
+                            }
+                        });
                         stoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {

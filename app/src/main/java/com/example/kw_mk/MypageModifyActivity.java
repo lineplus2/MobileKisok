@@ -33,6 +33,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.InputStream;
 
+import static com.example.kw_mk.App.GET_GALLERY_IMAGE;
 import static com.example.kw_mk.LoginActivity.pref;
 
 
@@ -50,7 +51,7 @@ public class MypageModifyActivity extends AppCompatActivity {
 
     Uri selectedImageUri;
 
-    private final int GET_GALLERY_IMAGE = 200;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,7 +8,6 @@
     tools:context=".SignUpActivity">
 
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,8 +15,8 @@
         android:layout_weight="0.5"
         android:gravity="center"
         android:text="매장 등록"
-        android:textSize="30dp"
-        />
+        android:textSize="30dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -27,21 +26,24 @@
         android:layout_marginBottom="5px"
         android:layout_weight="0.3"
         android:text="로고"
-        android:textSize="20dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="100dp">
 
         <ImageView
-            android:id="@+id/storeimageView"
+            android:id="@+id/store_image"
             android:layout_width="150dp"
             android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight=".8"
             android:background="@drawable/edittextboxblue"
             android:gravity="center"
             android:src="@drawable/image_plus" />
     </androidx.cardview.widget.CardView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -51,9 +53,8 @@
         android:layout_marginBottom="5px"
         android:layout_weight="0.3"
         android:text="상호명"
-        android:textSize="20dp"
         android:textColor="@color/black"
-        />
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,11 +64,11 @@
 
 
         <EditText
-            android:id="@+id/storenameText"
+            android:id="@+id/store_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/edittextboxblue"
             android:hint="상호명" />
@@ -84,12 +85,11 @@
         android:layout_marginBottom="5px"
         android:layout_weight="0.3"
         android:text="매장소개"
-        android:textSize="20dp"
         android:textColor="@color/black"
-        />
+        android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/storeintroduceText"
+        android:id="@+id/store_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="5dp"
@@ -110,16 +110,15 @@
         android:layout_marginBottom="5px"
         android:layout_weight="0.3"
         android:text="전화번호"
-        android:textSize="20dp"
         android:textColor="@color/black"
-        />
+        android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/storetellnumberText"
+        android:id="@+id/store_num"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_weight="0.5"
         android:background="@drawable/edittextboxblue"
         android:hint="" />
@@ -133,40 +132,39 @@
         android:layout_marginBottom="5px"
         android:layout_weight="0.3"
         android:text="매장 위치"
-        android:textSize="20dp"
         android:textColor="@color/black"
-        />
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="5px"
         android:layout_weight="0.5"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/storeadressText"
+        <TextView
+            android:id="@+id/store_address1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:hint=" - 없이 입력하세요"
             android:inputType="number" />
 
         <Button
+            android:id="@+id/addres_details"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
-            android:text="우편번호 찾기"
             android:background="@color/materialBlue300"
-            android:textColor="#ffffff"
-            />
+            android:text="우편번호 찾기"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
     <EditText
-        android:id="@+id/storeadress2Text"
+        android:id="@+id/store_address2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="start"
@@ -176,7 +174,7 @@
         android:inputType="number" />
 
     <Button
-        android:id="@+id/storeaddButton"
+        android:id="@+id/store_add_btn"
         android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_gravity="center"

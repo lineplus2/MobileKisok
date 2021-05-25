@@ -133,6 +133,7 @@ public class SellerStoreAdd extends AppCompatActivity {
             result.put("가게소개", content);
             result.put("전화번호", num);
             result.put("사업자이메일", App.LoginUserEmail);
+            result.put("주소", address1);
             // db 등록
             DocumentReference docref = db.collection("Store_Info").document(App.LoginUserEmail);
             DocumentReference userdoc = db.collection("User_Info").document(App.LoginUserEmail);

@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
             if (check_result) {
-                //위치 값을 가져올 수 있음
+                //위치 값을 가져올 수 있음loading
             } else {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])

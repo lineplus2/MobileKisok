@@ -2,16 +2,18 @@ package com.example.kw_mk;
 
 import android.content.Context;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +23,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.ListPreloader;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static com.example.kw_mk.App.db;
+import static com.example.kw_mk.App.storageRef;
 import static com.example.kw_mk.App.testLo;
 
 public class FragmentConsumerHome extends Fragment {
@@ -105,20 +116,21 @@ public class FragmentConsumerHome extends Fragment {
     }
 
     public void initData() {
-
+        String uridata;
         ReList = new ArrayList<homeRecyclerView>();
 
 
-        db.collection("Store_Info")
-                .get()
+        db.collection("Store_Info").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                            for (final QueryDocumentSnapshot document : task.getResult()) {
+
+                                StorageReference str = storageRef.child("Store_Info").child(document.get("사업자이메일").toString() + "/storeImage");
+
                                 String StoreId = document.get("가게이름").toString();
-                                String StoreAd = document.get("위치").toString();
-                                ReList.add(new homeRecyclerView(StoreId, StoreAd));
+                                ReList.add(new homeRecyclerView(StoreId, str));
                                 adp.notifyDataSetChanged();
                             }
                         } else {
@@ -222,39 +234,41 @@ class GridItemList extends BaseAdapter {
 
 class homeRecyclerView {
     String storeName;
-    String storeAddress;
+    StorageReference storeUri;
 
-    homeRecyclerView(String Name, String Address) {
+    homeRecyclerView(String Name, StorageReference Image) {
+
         this.storeName = Name;
-        this.storeAddress = Address;
+        this.storeUri = Image;
     }
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
     }
 
-    public void setStoreAddress(String storeAddress) {
-        this.storeAddress = storeAddress;
+    public void setStoreUri(StorageReference storeUri) {
+        this.storeUri = storeUri;
     }
 
     public String getStoreName() {
         return storeName;
     }
 
-    public String getStoreAddress() {
-        return storeAddress;
+    public StorageReference getStoreUri() {
+        return storeUri;
     }
 }
 
 class HomeViewHolder extends RecyclerView.ViewHolder {
     TextView storeName;
-    TextView storeAddress;
+    ImageView storeImage;
 
     HomeViewHolder(View itemView) {
         super(itemView);
 
         storeName = itemView.findViewById(R.id.reStoreName);
-        storeAddress = itemView.findViewById(R.id.reStoreAddress);
+        storeImage = itemView.findViewById(R.id.reStoreImage);
+
 
     }
 }
@@ -274,16 +288,23 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
         context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.consumer_main_home_item, parent, false);
+        View view = inflater.inflate(R.layout.consumer_main_listitem, parent, false);
         HomeViewHolder viewHolder = new HomeViewHolder(view);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final HomeViewHolder holder, int position) {
+
         holder.storeName.setText(HomeRecyclerList.get(position).getStoreName());
-        holder.storeAddress.setText(HomeRecyclerList.get(position).getStoreAddress());
+        HomeRecyclerList.get(position).getStoreUri().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context).load(uri).into(holder.storeImage);
+            }
+        });
+
 
     }
 

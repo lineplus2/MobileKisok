@@ -6,6 +6,7 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/reStoreImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/image_plus"/>
@@ -16,6 +17,7 @@
         android:layout_marginLeft="5dp">
 
         <TextView
+            android:id="@+id/reStoreName"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"

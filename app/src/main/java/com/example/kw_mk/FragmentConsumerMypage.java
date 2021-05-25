@@ -62,7 +62,8 @@ public class FragmentConsumerMypage extends Fragment {
             Toast.makeText(getActivity(), "유저 정보를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
 
-        Glide.with(getActivity()).load(App.LoginUserUri).into(profileImage);
+        // 프로필사진 가져오기
+            Glide.with(getActivity()).load(App.LoginUserUri).into(profileImage);
 
         myInfoModify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,5 +96,6 @@ public class FragmentConsumerMypage extends Fragment {
 
         editor.commit();
         getActivity().finish();
+        App.userInit();
     }
 }

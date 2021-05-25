@@ -8,8 +8,8 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class AddressWebViewActivity extends AppCompatActivity {
 
+public class AddressWebViewActivity extends AppCompatActivity {
     private WebView browser;
 
     class MyJavaScriptInterface {
@@ -41,6 +41,6 @@ public class AddressWebViewActivity extends AppCompatActivity {
             }
         });
 
-        browser.loadUrl("http://서버주소/daum.html");
+        browser.loadUrl("http://lineplus2.ivyro.net/daum.html");
     }
 }

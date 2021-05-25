@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -26,6 +27,19 @@ public class App extends Application {
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static FirebaseStorage storage = FirebaseStorage.getInstance();
     public static StorageReference storageRef = storage.getReference();
+
+
+    public static Uri test = null;
+
+    public static void userInit() {
+        LoginUserEmail = null;
+        LoginUserPw = null;
+        LoginUserName = null;
+        LoginUserPhone = null;
+        LoginUserStore = null;
+        LoginUserUri = null;
+        StoreUri = null;
+    }
 
 
     public static GpsTracker gpsTracker;

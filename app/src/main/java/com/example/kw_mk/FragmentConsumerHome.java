@@ -295,11 +295,6 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
         this.context = context;
     }
 
-//    public interface ItemClickListener() {
-//        void onItemClick(int position);
-//    }
-
-
     @Override
     public HomeViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -322,6 +317,7 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
             }
         });
         email = HomeRecyclerList.get(position).getStoreEmail();
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

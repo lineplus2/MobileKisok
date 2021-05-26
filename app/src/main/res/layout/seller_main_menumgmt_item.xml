@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:fontFamily="@font/malgunbd">
+    android:fontFamily="@font/malgunbd"
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -19,26 +18,29 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/menuItemName"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="음식이름"
                 android:gravity="center|left"
-                android:textSize="20dp"/>
+                android:text="음식이름"
+                android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/menuItemPrice"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="간단한 설명"
-                android:gravity="center|left"/>
+                android:gravity="center|left"
+                android:text="가격" />
         </LinearLayout>
+
         <ImageView
+            android:id="@+id/menuItemImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:src="@drawable/kim"
-            />
+            android:src="@drawable/image_plus" />
 
     </LinearLayout>
 

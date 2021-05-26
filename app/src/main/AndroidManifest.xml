@@ -57,12 +57,6 @@
             android:name=".MypageModifyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Order_menuActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Order_menuModifyActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".BasicActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -88,6 +82,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ConsumerMainStore"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SellerMenuAddActivity"
             android:screenOrientation="portrait" />
 
         <service

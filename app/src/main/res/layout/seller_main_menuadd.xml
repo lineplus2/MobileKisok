@@ -12,164 +12,103 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <ScrollView
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <TableLayout
+
+            <ImageView
+                android:id="@+id/sellerfoodImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="300dp"
-                    android:layout_height="300dp">
-
-                    <ImageView
-                        android:id="@+id/foodimageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:srcCompat="@drawable/image_plus" />
-                </androidx.cardview.widget.CardView>
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                app:srcCompat="@drawable/image_plus" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="0.4">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".5"
-                        android:gravity="center|left"
-                        android:text="음식명"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".5"
+                    android:gravity="center|left"
+                    android:text="음식명"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
 
-                    <EditText
-                        android:id="@+id/sellerfoodname"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="음식명"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
-                </LinearLayout>
+                <EditText
+                    android:id="@+id/sellerfoodname"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="음식명"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.4">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".5"
-                        android:gravity="center|left"
-                        android:text="설명"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
 
-                    <EditText
-                        android:id="@+id/sellerfoodexplain"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="설명"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".5"
+                    android:gravity="center|left"
+                    android:text="설명"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                <EditText
+                    android:id="@+id/sellerfoodexplain"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="설명"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".5"
-                        android:gravity="center|left"
-                        android:text="금액"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.4">
 
-                    <EditText
-                        android:id="@+id/sellerfoodprice"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="금액"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".5"
+                    android:gravity="center|left"
+                    android:text="금액"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                <EditText
+                    android:id="@+id/sellerfoodprice"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="금액"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".5"
-                        android:gravity="center|left"
-                        android:text="카테고리"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
 
-                    <EditText
-                        android:id="@+id/sellerfoodcategory"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:hint="ex)찌개 팝업추가"
-                        android:textColor="#000000"
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/menuaddButton"
-                    android:layout_marginTop="30dp"
-                    android:text="추가하기" />
-            </TableLayout>
-        </ScrollView>
+            <Button
+                android:id="@+id/menuaddButton"
+                android:layout_marginTop="30dp"
+                android:text="추가하기" />
+        </TableLayout>
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/buttonsCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        app:cardCornerRadius="15dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="5dp">
-
-            <Button
-                android:id="@+id/picture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="사진촬영" />
-
-            <Button
-                android:id="@+id/gallery"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="앨범" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <include
-        layout="@layout/view_loader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
 </RelativeLayout>

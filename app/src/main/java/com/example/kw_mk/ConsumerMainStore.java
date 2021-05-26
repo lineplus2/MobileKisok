@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,11 +18,11 @@ public class ConsumerMainStore extends AppCompatActivity {
 
     TextView StoreName, StoreNum, StoreContent, StoreOwner, StoreAddress;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consumer_main_store);
+
 
         StoreName = findViewById(R.id.Store_Info_Name);
         StoreNum = findViewById(R.id.Store_Info_Num);

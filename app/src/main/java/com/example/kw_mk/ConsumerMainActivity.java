@@ -1,6 +1,9 @@
 package com.example.kw_mk;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +30,7 @@ public class ConsumerMainActivity extends AppCompatActivity {
 
     StorageReference stoRef;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,8 @@ public class ConsumerMainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.navigationView);
         navView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
+        getSupportActionBar().setTitle("홈");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
     }
 
@@ -59,9 +65,11 @@ public class ConsumerMainActivity extends AppCompatActivity {
                     trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
                     break;
                 case R.id.page_tv:  // 주문내역
+                    getSupportActionBar().setTitle("주문내역");
                     trans.replace(R.id.frameLayout, fragmentConsumerOderlist).commitAllowingStateLoss();
                     break;
                 case R.id.page_calendar:  // 내정보
+                    getSupportActionBar().setTitle("내 정보");
                     trans.replace(R.id.frameLayout, fragmentConsumerMypage).commitAllowingStateLoss();  // FragmentConsumerMyPage.class 수정필요
                     break;
             }

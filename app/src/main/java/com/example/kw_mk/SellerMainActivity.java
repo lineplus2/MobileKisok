@@ -1,9 +1,12 @@
 package com.example.kw_mk;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,6 +21,7 @@ public class SellerMainActivity extends AppCompatActivity {
     private FragmentSellerReview fragmentSellerReview;
     private FragmentSellerMenu fragmentSellerMenu;
     private FragmentTransaction transaction;
+    ActionBar ab;
 
 
     @Override
@@ -30,11 +34,16 @@ public class SellerMainActivity extends AppCompatActivity {
         fragmentSellerOrder = new FragmentSellerOrder();
         fragmentSellerReview = new FragmentSellerReview();
 
+        ab = getSupportActionBar() ;
+
         transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, fragmentSellerStore).commitAllowingStateLoss();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+
+        ab.setTitle("홈");
+        ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
     }
 
@@ -47,12 +56,15 @@ public class SellerMainActivity extends AppCompatActivity {
                     transaction.replace(R.id.frameLayout, fragmentSellerStore).commitAllowingStateLoss();
                     break;
                 case R.id.order_menu:  // 메뉴관리
+                    ab.setTitle("메뉴관리");
                     transaction.replace(R.id.frameLayout, fragmentSellerMenu).commitAllowingStateLoss();
                     break;
                 case R.id.order_order:  // 주문관리
+                    ab.setTitle("주문관리");
                     transaction.replace(R.id.frameLayout, fragmentSellerOrder).commitAllowingStateLoss();
                     break;
                 case R.id.order_review:  // 내정보
+                    ab.setTitle("내정보");
                     transaction.replace(R.id.frameLayout, fragmentSellerReview).commitAllowingStateLoss();
                     break;
             }

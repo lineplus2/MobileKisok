@@ -34,7 +34,6 @@ public class FragmentSellerHome extends Fragment {
         //if문
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seller_main_storemgmt, container, false);
         //rootView = (ViewGroup) inflater.inflate(R.layout.seller_main_fail, container, false);
-
         store_img = rootView.findViewById(R.id.store_img);
         store_id = rootView.findViewById(R.id.store_id);
         store_content = rootView.findViewById(R.id.store_content);

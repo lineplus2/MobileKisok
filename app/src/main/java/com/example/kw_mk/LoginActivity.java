@@ -65,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getSupportActionBar().hide();
+
         pref = getSharedPreferences("loginData", MODE_PRIVATE);
         load();
 

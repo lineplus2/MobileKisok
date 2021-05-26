@@ -1,11 +1,12 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="windowNoTitle">true</item>
+<!--        <item name="windowNoTitle">true</item>-->
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarTheme">@style/AppTheme.AppBarOverlay</item>
     </style>
 
     <style name="TextInputLayoutTheme" parent="Theme.AppCompat">
@@ -14,6 +15,10 @@
         <item name="colorAccent">@color/textColorPrimary</item>
         <item name="colorControlNormal">@color/textColorPrimary</item>
         <item name="colorControlActivated">@color/textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
     <style name="Text_Black15" parent="Theme.AppCompat">

@@ -206,7 +206,8 @@
             android:gravity="center"
             android:hint=" - 없이 입력하세요"
             android:inputType="number"
-            android:lines="2" />
+            android:lines="2"
+            android:maxLines="2"/>
 
         <Button
             android:id="@+id/addres_details"
@@ -234,8 +235,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
         android:background="@drawable/rounded_button_background_blue"
         android:text="가입하기"
         android:textColor="#ffffff"

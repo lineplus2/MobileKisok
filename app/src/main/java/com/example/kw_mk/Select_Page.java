@@ -60,19 +60,17 @@ public class Select_Page extends AppCompatActivity {
 
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete( Task<DocumentSnapshot> task) {
+                    public void onComplete(Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             String result = (String) document.get("store");
                             if (result.equals("0")) {
                                 Intent intent = new Intent(Select_Page.this, SellerStoreAdd.class);
                                 startActivity(intent);
-                                Toast.makeText(Select_Page.this, "Store :: 0", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else if (result.equals("1")) {
                                 Intent intent = new Intent(Select_Page.this, SellerMainActivity.class);
                                 startActivity(intent);
-                                Toast.makeText(Select_Page.this, "Store :: 1", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
                                 finish();

@@ -1,6 +1,7 @@
 package com.example.kw_mk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -130,7 +131,8 @@ public class FragmentConsumerHome extends Fragment {
                                 StorageReference str = storageRef.child("Store_Info").child(document.get("사업자이메일").toString() + "/storeImage");
 
                                 String StoreId = document.get("가게이름").toString();
-                                ReList.add(new homeRecyclerView(StoreId, str));
+                                String StoreUser = document.get("사업자이메일").toString();
+                                ReList.add(new homeRecyclerView(StoreId, str, StoreUser));
                                 adp.notifyDataSetChanged();
                             }
                         } else {
@@ -142,7 +144,7 @@ public class FragmentConsumerHome extends Fragment {
         LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView2.setLayoutManager(manager2);
 
-        adp = new HomeRecyclerAdapter(ReList);
+        adp = new HomeRecyclerAdapter(ReList, getContext());
         recyclerView2.setAdapter(adp);
     }
 }
@@ -235,11 +237,13 @@ class GridItemList extends BaseAdapter {
 class homeRecyclerView {
     String storeName;
     StorageReference storeUri;
+    String storeEmail;
 
-    homeRecyclerView(String Name, StorageReference Image) {
+    homeRecyclerView(String Name, StorageReference Image, String storeEmail) {
 
         this.storeName = Name;
         this.storeUri = Image;
+        this.storeEmail = storeEmail;
     }
 
     public void setStoreName(String storeName) {
@@ -250,12 +254,20 @@ class homeRecyclerView {
         this.storeUri = storeUri;
     }
 
+    public void setStoreEmail(String storeEmail) {
+        this.storeEmail = storeEmail;
+    }
+
     public String getStoreName() {
         return storeName;
     }
 
     public StorageReference getStoreUri() {
         return storeUri;
+    }
+
+    public String getStoreEmail() {
+        return storeEmail;
     }
 }
 
@@ -269,7 +281,6 @@ class HomeViewHolder extends RecyclerView.ViewHolder {
         storeName = itemView.findViewById(R.id.reStoreName);
         storeImage = itemView.findViewById(R.id.reStoreImage);
 
-
     }
 }
 
@@ -278,14 +289,19 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     Context context;
     private ArrayList<homeRecyclerView> HomeRecyclerList = null;
 
-    HomeRecyclerAdapter(ArrayList<homeRecyclerView> dataList) {
+
+    HomeRecyclerAdapter(ArrayList<homeRecyclerView> dataList, Context context) {
         HomeRecyclerList = dataList;
+        this.context = context;
     }
+
+//    public interface ItemClickListener() {
+//        void onItemClick(int position);
+//    }
 
 
     @Override
-    public HomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        context = parent.getContext();
+    public HomeViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.consumer_main_listitem, parent, false);
@@ -297,11 +313,21 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, int position) {
 
+        final String email;
         holder.storeName.setText(HomeRecyclerList.get(position).getStoreName());
         HomeRecyclerList.get(position).getStoreUri().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(context).load(uri).into(holder.storeImage);
+            }
+        });
+        email = HomeRecyclerList.get(position).getStoreEmail();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ConsumerMainStore.class);
+                intent.putExtra("Email", email);
+                v.getContext().startActivity(intent);
             }
         });
 

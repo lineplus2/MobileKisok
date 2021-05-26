@@ -86,6 +86,9 @@
         <activity
             android:name=".AddressWebViewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ConsumerMainStore"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".ServiceActivity"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,112 +31,121 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/Store_Info_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="상호명"
-                android:textSize="40dp"
                 android:layout_margin="10dp"
-                android:gravity="center"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="전화 : 000-0000"
-                android:textSize="25dp"
                 android:gravity="center"
-                android:layout_margin="5dp"/>
+                android:text="상호명"
+                android:textSize="40dp" />
 
             <TextView
+                android:id="@+id/Store_Info_Num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="매장 설명란"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="전화 : 000-0000"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/Store_Info_Content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:lines="10"
                 android:maxLines="10"
-                android:gravity="center"/>
+                android:text="매장 설명란" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/materialBlue300"
                 android:layout_marginTop="5dp"
-                />
+                android:background="@color/materialBlue300" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="메뉴"
-                android:theme="@style/Text_Black25"/>
+                android:theme="@style/Text_Black25" />
 
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/materialBlue300"
-                />
+                android:background="@color/materialBlue300" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="대표자"
-                    android:theme="@style/Text_Black20"
-                    />
+                    android:theme="@style/Text_Black20" />
+
                 <TextView
+                    android:id="@+id/Store_Info_Owner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="대표자"
-                    android:theme="@style/Text_Black20"/>
+                    android:theme="@style/Text_Black20" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:lines="2"
                     android:text="위치"
-                    android:theme="@style/Text_Black20"
-                    android:lines="2"/>
+                    android:theme="@style/Text_Black20" />
+
                 <TextView
+                    android:id="@+id/Store_Info_Address"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="경상북도 구미시 산동면 강동로 730 KR"
                     android:maxLines="2"
-                    android:theme="@style/Text_Black20"/>
+                    android:text="경상북도 구미시 산동면 강동로 730 KR"
+                    android:theme="@style/Text_Black20" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="사업자 번호"
-                    android:theme="@style/Text_Black20"/>
+                    android:theme="@style/Text_Black20" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="00000000"
-                    android:theme="@style/Text_Black20"/>
+                    android:theme="@style/Text_Black20" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

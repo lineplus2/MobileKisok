@@ -18,4 +18,5 @@ public class FragmentSellerReview extends Fragment {
 
         return rootView;
     }
+
 }

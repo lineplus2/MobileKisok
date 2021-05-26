@@ -15,6 +15,13 @@
         app:tabMode="fixed"
         app:tabTextColor="#3F51B5" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".1"
+        android:text="카테고리"
+        android:theme="@style/Text_Black20"/>
+
     <GridView
         android:id="@+id/mainGrid"
         android:layout_width="match_parent"
@@ -25,7 +32,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="가까운 추천 매장" />
+        android:text="가까운 추천 매장"
+        android:theme="@style/Text_Black20"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reTest"
@@ -37,7 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:text="가까운 매장 찾기" />
+        android:text="가까운 매장 찾기"
+        android:theme="@style/Text_Black20"/>
 
 
 </LinearLayout>

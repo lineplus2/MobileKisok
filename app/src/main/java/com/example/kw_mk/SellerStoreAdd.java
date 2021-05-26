@@ -2,6 +2,8 @@ package com.example.kw_mk;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -45,7 +48,6 @@ public class SellerStoreAdd extends AppCompatActivity {
 
     Uri selectedImageUri;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,10 @@ public class SellerStoreAdd extends AppCompatActivity {
         store_address2 = (EditText) findViewById(R.id.store_address2);
         store_add_btn = (Button) findViewById(R.id.store_add_btn);
         addres_details = (Button) findViewById(R.id.addres_details);
+
+
+        getSupportActionBar().setTitle("매장등록");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
 
 
         store_image.setOnClickListener(new View.OnClickListener() {

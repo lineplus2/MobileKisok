@@ -1,5 +1,7 @@
 package com.example.kw_mk;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,9 @@ public class record_reviewActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consumer_main_record_review);
+
+        getSupportActionBar().setTitle("리뷰작성");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
         storeName = findViewById(R.id.StoreName);
         price = findViewById(R.id.buyPrice);

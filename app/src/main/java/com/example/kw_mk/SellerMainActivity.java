@@ -63,8 +63,8 @@ public class SellerMainActivity extends AppCompatActivity {
                     ab.setTitle("주문관리");
                     transaction.replace(R.id.frameLayout, fragmentSellerOrder).commitAllowingStateLoss();
                     break;
-                case R.id.order_review:  // 내정보
-                    ab.setTitle("내정보");
+                case R.id.order_review:  // 리뷰관리
+                    ab.setTitle("리뷰관리");
                     transaction.replace(R.id.frameLayout, fragmentSellerReview).commitAllowingStateLoss();
                     break;
             }

@@ -36,6 +36,7 @@ public class TestActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testlayout);
+        getSupportActionBar().setTitle("상세 내역");
 
         Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
 

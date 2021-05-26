@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/store_id"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:text="상호명"
         android:textSize="30dp"
         android:textColor="#000000"
@@ -50,7 +50,7 @@
           android:text="영업상태"
           android:textSize="20dp"
           android:textColor="#000000"
-          android:gravity="center|left"
+          android:gravity="fill"
           />
         <Switch
             android:layout_width="0dp"
@@ -136,7 +136,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/edittextboxblue">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -151,7 +152,12 @@
                 android:text="주문완료"
                 android:gravity="center"
                 android:textSize="15dp"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/htmlSkyBlue"/>
             <TextView
                 android:id="@+id/store_order_clear"
                 android:layout_width="match_parent"
@@ -177,6 +183,10 @@
                 android:textSize="15dp"
                 android:textColor="#000000"/>
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/htmlSkyBlue"/>
+            <TextView
                 android:id="@+id/store_order_now"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -201,6 +211,10 @@
                 android:textSize="15dp"
                 android:textColor="#000000"/>
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/htmlSkyBlue"/>
+            <TextView
                 android:id="@+id/store_order_reservation"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -220,10 +234,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.4"
-                android:text="취소"
+                android:text="취소주문"
                 android:gravity="center"
                 android:textSize="15dp"
                 android:textColor="#000000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/htmlSkyBlue"/>
             <TextView
                 android:id="@+id/store_order_cancel"
                 android:layout_width="match_parent"

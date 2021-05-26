@@ -1,5 +1,6 @@
 package com.example.kw_mk;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,7 @@ public class FragmentConsumerMypage extends Fragment {
     DocumentReference docRef;
     StorageReference stoRef;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class FragmentConsumerMypage extends Fragment {
         myEmail = rootView.findViewById(R.id.mypage_email);
         profileImage = rootView.findViewById(R.id.myProfileImage);
 
+
         if (user != null) {
             String email = user.getEmail();
             myEmail.setText(email);
@@ -68,8 +71,10 @@ public class FragmentConsumerMypage extends Fragment {
         myInfoModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getActivity(), MypageModifyActivity.class);
                 startActivity(intent);
+
             }
         });
 

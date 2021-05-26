@@ -26,14 +26,15 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_weight="1.2"
-        android:background="@drawable/sign_button"
+        android:background="@drawable/rounded_button_background_blue"
         android:text="판매자"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_customer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loading"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/btn_customer"
@@ -42,14 +43,15 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_weight="1.2"
-        android:background="@drawable/sign_button"
+        android:background="@drawable/rounded_button_background_blue"
         android:text="소비자"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loading"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:textColor="@color/white"/>
 
     <ProgressBar
         android:id="@+id/loading"

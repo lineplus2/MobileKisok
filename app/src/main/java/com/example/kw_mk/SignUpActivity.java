@@ -1,6 +1,8 @@
 package com.example.kw_mk;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +28,7 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
 
+
     String email;
     String password;
     String passwordCheck;
@@ -46,6 +49,10 @@ public class SignUpActivity extends AppCompatActivity {
         this.mDBReference = FirebaseDatabase.getInstance().getReference();
 
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
+
+        getSupportActionBar().setTitle("회원가입");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#62B4F5")));
+
     }
 
     @Override

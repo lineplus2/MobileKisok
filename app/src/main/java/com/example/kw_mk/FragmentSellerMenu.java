@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class FragmentSellerMenu extends Fragment {
     private ProgressBar loading;
     MenuInfoRecyclerAdapter adap;
     Context context;
+    Handler handler;
 
     ArrayList<MenuInfoRecycler> menuListData = new ArrayList<>();
 
@@ -55,6 +57,7 @@ public class FragmentSellerMenu extends Fragment {
         loading = rootView.findViewById(R.id.loading2);
 
         context = container.getContext();
+        handler = new Handler();
 
         floatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override

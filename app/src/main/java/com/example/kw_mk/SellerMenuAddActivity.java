@@ -3,11 +3,13 @@ package com.example.kw_mk;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +29,10 @@ public class SellerMenuAddActivity extends AppCompatActivity {
     ImageView menuImage;
     EditText menuName, menuContent, menuPrice;
     Button menuAddBtn;
+    ProgressBar loading;
     Uri imageUri;
+    Handler handler;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +44,9 @@ public class SellerMenuAddActivity extends AppCompatActivity {
         menuContent = findViewById(R.id.sellerfoodexplain);
         menuPrice = findViewById(R.id.sellerfoodprice);
         menuAddBtn = findViewById(R.id.menuaddButton);
+        loading = findViewById(R.id.loading3);
+
+        handler = new Handler();
 
         menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +66,16 @@ public class SellerMenuAddActivity extends AppCompatActivity {
                 String Price = menuPrice.getText().toString();
 
                 addMenu(Image, name, content, Price);
-                finish();
+
+                loading.setVisibility(View.VISIBLE);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        finish();
+                        loading.setVisibility(View.INVISIBLE);
+                    }
+                }, 1500);
             }
         });
 

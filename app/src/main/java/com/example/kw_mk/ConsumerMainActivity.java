@@ -62,6 +62,7 @@ public class ConsumerMainActivity extends AppCompatActivity {
             trans = fm.beginTransaction();
             switch (menuItem.getItemId()) {
                 case R.id.page_home:  // 홈
+                    getSupportActionBar().setTitle("홈");
                     trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
                     break;
                 case R.id.page_tv:  // 주문내역

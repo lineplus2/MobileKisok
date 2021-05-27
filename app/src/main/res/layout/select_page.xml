@@ -26,7 +26,7 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_weight="1.2"
-        android:background="@drawable/rounded_button_background_blue"
+
         android:text="판매자"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_customer"
@@ -34,7 +34,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loading"
         tools:ignore="MissingConstraints"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_button_background_blue"
+       />
 
     <Button
         android:id="@+id/btn_customer"
@@ -55,7 +57,7 @@
 
     <ProgressBar
         android:id="@+id/loading"
-        style="?android:attr/progressBarStyle"
+        style="@style/ProgressBar_Large_new"
         android:layout_width="91dp"
         android:layout_height="93dp"
         android:layout_weight="1"

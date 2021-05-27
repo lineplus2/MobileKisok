@@ -43,6 +43,7 @@ public class Select_Page extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+
         btn_order = (Button) findViewById(R.id.btn_order);
         btn_customer = (Button) findViewById(R.id.btn_customer);
         loading = (ProgressBar) findViewById(R.id.loading);

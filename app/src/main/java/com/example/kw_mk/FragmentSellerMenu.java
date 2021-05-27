@@ -54,7 +54,6 @@ public class FragmentSellerMenu extends Fragment {
 
         floatingBtn = rootView.findViewById(R.id.floatingActionButton);
         menuList = rootView.findViewById(R.id.sellerMenuList);
-        loading = rootView.findViewById(R.id.loading2);
 
         context = container.getContext();
         handler = new Handler();

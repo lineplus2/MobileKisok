@@ -46,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@drawable/edittextboxblue2"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_button_background_blue"
         android:text="답변 작성"
         android:theme="@style/Text_Black20"
         />

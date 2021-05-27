@@ -18,7 +18,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/loading" />
+        android:src="@drawable/ic_baseline_add_shopping_cart_24"
+        android:backgroundTint="@color/htmlSkyBlue"
+        />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -53,6 +53,7 @@ public class SellerMainActivity extends AppCompatActivity {
             transaction = fm.beginTransaction();
             switch (menuItem.getItemId()) {
                 case R.id.order_store:  // 홈
+                    ab.setTitle("홈");
                     transaction.replace(R.id.frameLayout, fragmentSellerStore).commitAllowingStateLoss();
                     break;
                 case R.id.order_menu:  // 메뉴관리

@@ -1,6 +1,8 @@
 package com.example.kw_mk;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,9 @@ public class ConsumerMainStore extends AppCompatActivity {
         StoreContent = findViewById(R.id.Store_Info_Content);
         StoreOwner = findViewById(R.id.Store_Info_Owner);
         StoreAddress = findViewById(R.id.Store_Info_Address);
+
+        getSupportActionBar().setTitle("매장정보");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
 
         init_Info();

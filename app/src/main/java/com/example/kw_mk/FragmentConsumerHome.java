@@ -134,6 +134,7 @@ public class FragmentConsumerHome extends Fragment {
                                 String StoreUser = document.get("사업자이메일").toString();
                                 ReList.add(new homeRecyclerView(StoreId, str, StoreUser));
                                 adp.notifyDataSetChanged();
+
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

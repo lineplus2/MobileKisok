@@ -9,6 +9,10 @@
         <item name="actionBarTheme">@style/AppTheme.AppBarOverlay</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
     <style name="TextInputLayoutTheme" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorHint">@color/textColorPrimary</item>
@@ -17,9 +21,15 @@
         <item name="colorControlActivated">@color/textColorPrimary</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorPrimary">@color/black</item>
+    <style name="ProgressBar_Large_new" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable" > @drawable/progress_large_color</item>
+        <item name="android:minWidth" > 76dip</item>
+        <item name="android:maxWidth" > 76dip</item>
+        <item name="android:minHeight" > 76dip</item>
+        <item name="android:maxHeight" > 76dip</item>
     </style>
+
+
 
     <style name="Text_Black15" parent="Theme.AppCompat">
         <item name="android:textColor">@color/black</item>

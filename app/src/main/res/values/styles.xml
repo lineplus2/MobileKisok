@@ -10,7 +10,7 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@color/htmlGray</item>
     </style>
 
     <style name="TextInputLayoutTheme" parent="Theme.AppCompat">

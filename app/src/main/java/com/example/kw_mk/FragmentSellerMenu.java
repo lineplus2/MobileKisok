@@ -77,7 +77,6 @@ public class FragmentSellerMenu extends Fragment {
     }
 
     public void initData() {
-        String uridata;
         menuListData = new ArrayList<MenuInfoRecycler>();
 
         db.collection("Store_Info").document(App.LoginUserEmail).collection("Menu").get()

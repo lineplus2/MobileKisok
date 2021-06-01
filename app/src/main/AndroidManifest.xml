@@ -60,12 +60,6 @@
             android:name=".BasicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CameraActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".GalleryActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".record_contentActivity"
             android:screenOrientation="portrait" />
         <activity

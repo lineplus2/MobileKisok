@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.ListPreloader;
-import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -37,11 +31,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static com.example.kw_mk.App.db;
+import static com.example.kw_mk.App.myLocation;
 import static com.example.kw_mk.App.storageRef;
-import static com.example.kw_mk.App.testLo;
 
 public class FragmentConsumerHome extends Fragment {
     GridItemList gridAdapter;
@@ -52,6 +45,7 @@ public class FragmentConsumerHome extends Fragment {
     ArrayList<homeRecyclerView> ReList = new ArrayList<>();
 
     RecyclerView recyclerView2;
+
 
     final String TAG = " FragmentConsumerHome";
 
@@ -84,11 +78,6 @@ public class FragmentConsumerHome extends Fragment {
 
         context = container.getContext();
 
-        testLo = new Location("Point A");
-
-        testLo.setLatitude(35.839323);
-        testLo.setLongitude(128.565597);
-
 
         grid.setAdapter(gridAdapter);
 
@@ -117,7 +106,6 @@ public class FragmentConsumerHome extends Fragment {
     }
 
     public void initData() {
-        String uridata;
         ReList = new ArrayList<homeRecyclerView>();
 
 
@@ -128,11 +116,17 @@ public class FragmentConsumerHome extends Fragment {
                         if (task.isSuccessful()) {
                             for (final QueryDocumentSnapshot document : task.getResult()) {
 
+                                Location lo = null;
                                 StorageReference str = storageRef.child("Store_Info").child(document.get("사업자이메일").toString() + "/storeImage");
 
                                 String StoreId = document.get("가게이름").toString();
                                 String StoreUser = document.get("사업자이메일").toString();
-                                ReList.add(new homeRecyclerView(StoreId, str, StoreUser));
+                                double la = Double.valueOf(document.get("위도").toString()).doubleValue();
+                                double ln = Double.parseDouble(document.get("경도").toString());
+                                lo = new Location("Point");
+                                lo.setLatitude(la);
+                                lo.setLongitude(ln);
+                                ReList.add(new homeRecyclerView(StoreId, str, StoreUser, lo));
                                 adp.notifyDataSetChanged();
 
                             }
@@ -148,6 +142,7 @@ public class FragmentConsumerHome extends Fragment {
         adp = new HomeRecyclerAdapter(ReList, getContext());
         recyclerView2.setAdapter(adp);
     }
+
 }
 
 // 그리드뷰
@@ -239,12 +234,14 @@ class homeRecyclerView {
     String storeName;
     StorageReference storeUri;
     String storeEmail;
+    Location storeL;
 
-    homeRecyclerView(String Name, StorageReference Image, String storeEmail) {
+    homeRecyclerView(String Name, StorageReference Image, String storeEmail, Location storeLocation) {
 
         this.storeName = Name;
         this.storeUri = Image;
         this.storeEmail = storeEmail;
+        this.storeL = storeLocation;
     }
 
     public void setStoreName(String storeName) {
@@ -259,6 +256,10 @@ class homeRecyclerView {
         this.storeEmail = storeEmail;
     }
 
+    public void setStoreL(Location storeL) {
+        this.storeL = storeL;
+    }
+
     public String getStoreName() {
         return storeName;
     }
@@ -270,10 +271,14 @@ class homeRecyclerView {
     public String getStoreEmail() {
         return storeEmail;
     }
+
+    public Location getStoreL() {
+        return storeL;
+    }
 }
 
 class HomeViewHolder extends RecyclerView.ViewHolder {
-    TextView storeName;
+    TextView storeName, storeDistance;
     ImageView storeImage;
 
     HomeViewHolder(View itemView) {
@@ -281,6 +286,8 @@ class HomeViewHolder extends RecyclerView.ViewHolder {
 
         storeName = itemView.findViewById(R.id.reStoreName);
         storeImage = itemView.findViewById(R.id.reStoreImage);
+        storeDistance = itemView.findViewById(R.id.distance);
+
 
     }
 }
@@ -317,6 +324,11 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
                 Glide.with(context).load(uri).into(holder.storeImage);
             }
         });
+
+        int loToInt = (int) HomeRecyclerList.get(position).getStoreL().distanceTo(myLocation);
+
+        holder.storeDistance.setText(loToInt + "M");
+
         email = HomeRecyclerList.get(position).getStoreEmail();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

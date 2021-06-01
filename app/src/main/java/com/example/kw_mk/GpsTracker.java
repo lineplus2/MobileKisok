@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 
-import static com.example.kw_mk.App.testLo;
+import static com.example.kw_mk.App.myLocation;
 
 public class GpsTracker extends Service implements LocationListener {
 
@@ -25,7 +25,7 @@ public class GpsTracker extends Service implements LocationListener {
     double longitude;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
-    private static final long MIN_TIME_BW_UPDATES = 5000;
+    private static final long MIN_TIME_BW_UPDATES = 1000;
     protected LocationManager locationManager;
 
 
@@ -42,12 +42,12 @@ public class GpsTracker extends Service implements LocationListener {
         double distance;
 
         distance = start.distanceTo(End);
-        dis = (int)distance;
-        if(dis < 500) {
+        dis = (int) distance;
+        if (dis < 500) {
             meter = Double.toString(distance);
             Log.d("디스탠스 ::: ", "다와감");
         }
-        Log.d("디스탠스 ::: ", ""+dis);
+        Log.d("디스탠스 ::: ", "" + dis);
     }
 
     public Location getLocation() {
@@ -116,11 +116,7 @@ public class GpsTracker extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if (location != null) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-            //Toast.makeText(mContext, "경도 : " + latitude + "\n위도 : " + longitude, Toast.LENGTH_SHORT).show();
-            distacne(testLo, location);
-            Log.d("값 ::::: ", latitude + "|||" + longitude);
+            myLocation = location;
         } else {
         }
     }

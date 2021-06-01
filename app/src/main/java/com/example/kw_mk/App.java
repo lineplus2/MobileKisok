@@ -1,6 +1,7 @@
 package com.example.kw_mk;
 
 import android.app.Application;
+import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 
@@ -30,6 +31,7 @@ public class App extends Application {
 
 
     public static Uri test = null;
+    public static Intent serviceIntent;
 
     public static void userInit() {
         LoginUserEmail = null;
@@ -41,10 +43,8 @@ public class App extends Application {
         StoreUri = null;
     }
 
-
     public static GpsTracker gpsTracker;
 
-    public static Location testLo;
-
+    public static Location myLocation = new Location("Pi");
 
 }

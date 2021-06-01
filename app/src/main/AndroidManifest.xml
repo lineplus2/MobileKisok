@@ -60,12 +60,6 @@
             android:name=".BasicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CameraActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".GalleryActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".record_contentActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -86,11 +80,18 @@
         <activity
             android:name=".SellerMenuAddActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="MapViewTest"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".ServiceActivity"
             android:enabled="true"
             android:exported="true" />
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="4bf481590583c5875024ff2ae84c5607" />
     </application>
 
 </manifest>

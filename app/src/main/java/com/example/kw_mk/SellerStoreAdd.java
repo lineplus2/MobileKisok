@@ -4,13 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +35,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.kw_mk.App.GET_GALLERY_IMAGE;
@@ -40,13 +48,18 @@ import static com.example.kw_mk.App.db;
 public class SellerStoreAdd extends AppCompatActivity {
 
     ImageView store_image;
-    EditText store_name, store_content, store_num, store_address2;
+    EditText store_name, store_content, store_num, store_ownerName, store_buinessNum, store_address2;
     Button store_add_btn, addres_details;
     TextView store_address1;
+    Spinner categorySpinner;
 
-    String name, content, num, address1, address2;
+    String name, content, num, ownerName, businessnumber, address1, address2, category;
+
+    ArrayAdapter<String> arrayAdater;
+    String[] arr;
 
     Uri selectedImageUri;
+    Geocoder geocoder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,10 +70,16 @@ public class SellerStoreAdd extends AppCompatActivity {
         store_name = (EditText) findViewById(R.id.store_name);
         store_content = (EditText) findViewById(R.id.store_content);
         store_num = (EditText) findViewById(R.id.store_num);
+        store_ownerName = findViewById(R.id.store_ownerName);
+        store_buinessNum = findViewById(R.id.store_businessnum);
         store_address1 = (TextView) findViewById(R.id.store_address1);
         store_address2 = (EditText) findViewById(R.id.store_address2);
         store_add_btn = (Button) findViewById(R.id.store_add_btn);
         addres_details = (Button) findViewById(R.id.addres_details);
+        categorySpinner = findViewById(R.id.spinner);
+        geocoder = new Geocoder(this);
+
+        setCategory();
 
 
         getSupportActionBar().setTitle("매장등록");
@@ -119,6 +138,45 @@ public class SellerStoreAdd extends AppCompatActivity {
         }
     }
 
+    void setCategory() {
+        arr = getResources().getStringArray(R.array.category);
+        arrayAdater = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
+        categorySpinner.setAdapter(arrayAdater);
+
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        category = "한식";
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        category = "중식";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     private void store_add() {
 
         this.name = store_name.getText().toString();
@@ -126,6 +184,8 @@ public class SellerStoreAdd extends AppCompatActivity {
         this.num = store_num.getText().toString();
         this.address1 = store_address1.getText().toString();
         this.address2 = store_address2.getText().toString();
+        this.ownerName = store_ownerName.getText().toString();
+        this.businessnumber = store_buinessNum.getText().toString();
 
         if (name.equals("")) {
             Toast.makeText(this, "상호명을 입력해주세요", Toast.LENGTH_LONG).show();
@@ -140,6 +200,27 @@ public class SellerStoreAdd extends AppCompatActivity {
             result.put("전화번호", num);
             result.put("사업자이메일", App.LoginUserEmail);
             result.put("주소", address1);
+            result.put("상세주소", address2);
+            result.put("사업자명", ownerName);
+            result.put("사업자번호", businessnumber);
+            result.put("카테고리", category);
+
+            //위,경도 구하기
+            List<Address> list = null;
+            try {
+                list = geocoder.getFromLocationName(address1, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (list != null) {
+                if (list.size() == 0) {
+                } else {
+                    result.put("위도", String.valueOf(list.get(0).getLatitude()));
+                    result.put("경도", String.valueOf(list.get(0).getLongitude()));
+                }
+            }
+
             // db 등록
             DocumentReference docref = db.collection("Store_Info").document(App.LoginUserEmail);
             DocumentReference userdoc = db.collection("User_Info").document(App.LoginUserEmail);

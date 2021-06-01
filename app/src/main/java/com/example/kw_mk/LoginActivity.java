@@ -36,6 +36,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 
+import static com.example.kw_mk.App.serviceIntent;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button btn_signup;
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth = App.mAuth;
     FirebaseFirestore db = App.db;
+
 
     EditText et_id;
     EditText et_pw;
@@ -74,6 +77,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
+
+        serviceIntent = new Intent(this, ServiceActivity.class);
+        startService(serviceIntent);
 
 
         //위치권한 확인

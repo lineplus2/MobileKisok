@@ -13,14 +13,13 @@
         android:layout_marginTop="634dp"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="41dp"
+        android:backgroundTint="@color/htmlSkyBlue"
         android:clickable="true"
+        android:src="@drawable/ic_baseline_add_shopping_cart_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_add_shopping_cart_24"
-        android:backgroundTint="@color/htmlSkyBlue"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -74,7 +73,8 @@
                 android:text="메뉴"
                 android:theme="@style/Text_Black25" />
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/storeMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" />
@@ -143,6 +143,7 @@
                     android:theme="@style/Text_Black20" />
 
                 <TextView
+                    android:id="@+id/store_Info_businessNum"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

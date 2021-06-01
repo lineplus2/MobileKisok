@@ -10,26 +10,32 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/testBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="dddddddd"/>
 
     <TextView
-        android:id="@+id/testOrderName"
+        android:id="@+id/testTextview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="StoreName"/>
 
     <TextView
-        android:id="@+id/testOrderMenu"
+        android:id="@+id/testTextview2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="StoreName"/>
     <TextView
-        android:id="@+id/testOrderPrice"
+        android:id="@+id/testTextview3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="StoreName"/>
+
+    <EditText
+        android:id="@+id/testEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

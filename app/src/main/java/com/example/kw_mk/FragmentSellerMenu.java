@@ -43,12 +43,9 @@ public class FragmentSellerMenu extends Fragment {
 
     FloatingActionButton floatingBtn;
     RecyclerView menuList;
-    private ProgressBar loading;
     MenuInfoRecyclerAdapter adap;
     Context context;
     Handler handler;
-
-    ActionBar ab;
 
     ArrayList<MenuInfoRecycler> menuListData = new ArrayList<>();
 
@@ -71,7 +68,6 @@ public class FragmentSellerMenu extends Fragment {
 
             }
         });
-
 
         return rootView;
     }
@@ -100,8 +96,6 @@ public class FragmentSellerMenu extends Fragment {
 
                                 menuListData.add(new MenuInfoRecycler(name, price, str));
                                 adap.notifyDataSetChanged();
-                                ab.setTitle("메뉴수정");
-                                ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
                             }
                         } else {
                             Log.d("Error :::: ", "Error getting documents: ", task.getException());

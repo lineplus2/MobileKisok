@@ -2,8 +2,10 @@ package com.example.kw_mk;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,7 +29,7 @@ public class ConsumerMainActivity extends AppCompatActivity {
     private FragmentTransaction trans;
 
     public static Activity AActivity;
-
+    Intent serviceIntent;
     StorageReference stoRef;
 
 
@@ -42,8 +44,6 @@ public class ConsumerMainActivity extends AppCompatActivity {
 
         AActivity = ConsumerMainActivity.this;
 
-
-
         trans = fm.beginTransaction();
         trans.replace(R.id.frameLayout, fragmentConsumerHome).commitAllowingStateLoss();
 
@@ -55,6 +55,11 @@ public class ConsumerMainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(serviceIntent);
+    }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener { // BottomNavigationView 버튼 속성
         @Override

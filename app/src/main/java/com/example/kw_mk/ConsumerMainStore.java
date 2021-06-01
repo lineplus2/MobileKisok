@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -40,6 +41,7 @@ public class ConsumerMainStore extends AppCompatActivity {
 
     TextView StoreName, StoreNum, StoreContent, StoreOwner, StoreAddress, StoreBusinessNum;
     RecyclerView menuList;
+    FloatingActionButton fltbtn;
 
     ArrayList<MenuListItem> menuListItem;
 
@@ -56,6 +58,7 @@ public class ConsumerMainStore extends AppCompatActivity {
         StoreOwner = findViewById(R.id.Store_Info_Owner);
         StoreAddress = findViewById(R.id.Store_Info_Address);
         StoreBusinessNum = findViewById(R.id.store_Info_businessNum);
+        fltbtn = findViewById(R.id.floatingActionButton3);
 
         menuList = findViewById(R.id.storeMenu);
 
@@ -64,6 +67,12 @@ public class ConsumerMainStore extends AppCompatActivity {
 
 
         init_Info();
+
+        fltbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
     void init_Info() {
@@ -77,7 +86,7 @@ public class ConsumerMainStore extends AppCompatActivity {
                 StoreNum.setText(document.get("전화번호").toString());
                 StoreContent.setText(document.get("가게소개").toString());
                 StoreOwner.setText(document.get("사업자명").toString());
-                StoreAddress.setText(document.get("주소").toString());
+                StoreAddress.setText(document.get("주소").toString() + "  " + document.get("상세주소"));
                 StoreBusinessNum.setText(document.get("사업자번호").toString());
             }
         });
@@ -200,6 +209,11 @@ class menuListAdapter extends RecyclerView.Adapter<MenuListViewHolder> {
             });
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
     @Override

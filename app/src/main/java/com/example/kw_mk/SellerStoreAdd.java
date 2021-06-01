@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,8 +35,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.kw_mk.App.GET_GALLERY_IMAGE;
@@ -55,6 +59,7 @@ public class SellerStoreAdd extends AppCompatActivity {
     String[] arr;
 
     Uri selectedImageUri;
+    Geocoder geocoder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +77,7 @@ public class SellerStoreAdd extends AppCompatActivity {
         store_add_btn = (Button) findViewById(R.id.store_add_btn);
         addres_details = (Button) findViewById(R.id.addres_details);
         categorySpinner = findViewById(R.id.spinner);
+        geocoder = new Geocoder(this);
 
         setCategory();
 
@@ -198,6 +204,23 @@ public class SellerStoreAdd extends AppCompatActivity {
             result.put("사업자명", ownerName);
             result.put("사업자번호", businessnumber);
             result.put("카테고리", category);
+
+            //위,경도 구하기
+            List<Address> list = null;
+            try {
+                list = geocoder.getFromLocationName(address1, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (list != null) {
+                if (list.size() == 0) {
+                } else {
+                    result.put("위도", String.valueOf(list.get(0).getLatitude()));
+                    result.put("경도", String.valueOf(list.get(0).getLongitude()));
+                }
+            }
+
             // db 등록
             DocumentReference docref = db.collection("Store_Info").document(App.LoginUserEmail);
             DocumentReference userdoc = db.collection("User_Info").document(App.LoginUserEmail);

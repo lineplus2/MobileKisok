@@ -32,7 +32,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.kw_mk.App.db;
 import static com.example.kw_mk.App.storageRef;
@@ -46,6 +48,9 @@ public class ConsumerMainStore extends AppCompatActivity {
     ArrayList<MenuListItem> menuListItem;
 
     menuListAdapter adapter;
+
+    public static String email;
+    public static ArrayList addList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,18 +70,21 @@ public class ConsumerMainStore extends AppCompatActivity {
         getSupportActionBar().setTitle("매장정보");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
-
         init_Info();
 
         fltbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ConsumerMainStore.this, ConsumerPayActivity.class);
+                intent.putExtra("Email", email);
+                startActivity(intent);
+
             }
         });
     }
 
     void init_Info() {
-        final String email = getIntent().getStringExtra("Email");
+        email = getIntent().getStringExtra("Email");
         menuListItem = new ArrayList<MenuListItem>();
 
         db.collection("Store_Info").document(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -115,7 +123,7 @@ public class ConsumerMainStore extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(ConsumerMainStore.this, LinearLayoutManager.VERTICAL, false);
         menuList.setLayoutManager(manager);
-        adapter = new menuListAdapter(menuListItem, ConsumerMainStore.this );
+        adapter = new menuListAdapter(menuListItem, ConsumerMainStore.this);
         menuList.setAdapter(adapter);
 
 
@@ -197,7 +205,7 @@ class menuListAdapter extends RecyclerView.Adapter<MenuListViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MenuListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MenuListViewHolder holder, final int position) {
         holder.menuName.setText(menuListItem.get(position).name);
         holder.menuPrice.setText(menuListItem.get(position).price);
         if (menuListItem.get(position).img != null) {
@@ -212,6 +220,13 @@ class menuListAdapter extends RecyclerView.Adapter<MenuListViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ShoppingCartActivity.class);
+                intent.putExtra("email", ConsumerMainStore.email);
+                intent.putExtra("menuName", menuListItem.get(position).name);
+                intent.putExtra("menuPrice", menuListItem.get(position).price);
+
+                v.getContext().startActivity(intent);
+
             }
         });
     }

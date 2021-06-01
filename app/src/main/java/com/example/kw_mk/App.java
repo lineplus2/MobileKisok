@@ -1,15 +1,25 @@
 package com.example.kw_mk;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 
 public class App extends Application {
@@ -43,8 +53,13 @@ public class App extends Application {
         StoreUri = null;
     }
 
+    public static ArrayList<payMenuList> payMenuListItem = new ArrayList<>();
+
     public static GpsTracker gpsTracker;
 
     public static Location myLocation = new Location("Pi");
+
+
+
 
 }

@@ -107,7 +107,11 @@
             <Button
                 android:id="@+id/menuaddButton"
                 android:layout_marginTop="30dp"
-                android:text="추가하기" />
+                android:text="추가하기"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_button_background_blue"/>
 
             <ProgressBar
                 android:id="@+id/loading3"

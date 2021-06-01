@@ -1,6 +1,8 @@
 package com.example.kw_mk;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,6 +49,9 @@ public class SellerMenuAddActivity extends AppCompatActivity {
         loading = findViewById(R.id.loading3);
 
         handler = new Handler();
+
+        getSupportActionBar().setTitle("메뉴추가");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
 
         menuImage.setOnClickListener(new View.OnClickListener() {
             @Override

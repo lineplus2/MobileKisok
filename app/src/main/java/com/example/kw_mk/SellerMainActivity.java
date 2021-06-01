@@ -21,7 +21,6 @@ public class SellerMainActivity extends AppCompatActivity {
     private FragmentSellerReview fragmentSellerReview;
     private FragmentSellerMenu fragmentSellerMenu;
     private FragmentTransaction transaction;
-    ActionBar ab;
 
 
     @Override
@@ -34,16 +33,14 @@ public class SellerMainActivity extends AppCompatActivity {
         fragmentSellerOrder = new FragmentSellerOrder();
         fragmentSellerReview = new FragmentSellerReview();
 
-        ab = getSupportActionBar() ;
-
         transaction = fm.beginTransaction();
         transaction.replace(R.id.frameLayout, fragmentSellerStore).commitAllowingStateLoss();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
-        ab.setTitle("홈");
-        ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
+        getSupportActionBar().setTitle("홈");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
     }
 
@@ -53,19 +50,19 @@ public class SellerMainActivity extends AppCompatActivity {
             transaction = fm.beginTransaction();
             switch (menuItem.getItemId()) {
                 case R.id.order_store:  // 홈
-                    ab.setTitle("홈");
+                    getSupportActionBar().setTitle("홈");
                     transaction.replace(R.id.frameLayout, fragmentSellerStore).commitAllowingStateLoss();
                     break;
                 case R.id.order_menu:  // 메뉴관리
-                    ab.setTitle("메뉴관리");
+                    getSupportActionBar().setTitle("메뉴관리");
                     transaction.replace(R.id.frameLayout, fragmentSellerMenu).commitAllowingStateLoss();
                     break;
                 case R.id.order_order:  // 주문관리
-                    ab.setTitle("주문관리");
+                    getSupportActionBar().setTitle("주문관리");
                     transaction.replace(R.id.frameLayout, fragmentSellerOrder).commitAllowingStateLoss();
                     break;
                 case R.id.order_review:  // 리뷰관리
-                    ab.setTitle("리뷰관리");
+                    getSupportActionBar().setTitle("리뷰관리");
                     transaction.replace(R.id.frameLayout, fragmentSellerReview).commitAllowingStateLoss();
                     break;
             }

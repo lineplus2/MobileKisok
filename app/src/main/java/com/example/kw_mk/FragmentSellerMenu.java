@@ -1,8 +1,11 @@
 package com.example.kw_mk;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,6 +48,8 @@ public class FragmentSellerMenu extends Fragment {
     Context context;
     Handler handler;
 
+    ActionBar ab;
+
     ArrayList<MenuInfoRecycler> menuListData = new ArrayList<>();
 
     @Nullable
@@ -63,6 +68,7 @@ public class FragmentSellerMenu extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SellerMenuAddActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -94,6 +100,8 @@ public class FragmentSellerMenu extends Fragment {
 
                                 menuListData.add(new MenuInfoRecycler(name, price, str));
                                 adap.notifyDataSetChanged();
+                                ab.setTitle("메뉴수정");
+                                ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
                             }
                         } else {
                             Log.d("Error :::: ", "Error getting documents: ", task.getException());

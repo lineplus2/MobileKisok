@@ -1,12 +1,8 @@
 package com.example.kw_mk;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.storage.StorageReference;
+
+import static com.example.kw_mk.App.serviceIntent;
 
 public class ConsumerMainActivity extends AppCompatActivity {
 
@@ -29,8 +26,6 @@ public class ConsumerMainActivity extends AppCompatActivity {
     private FragmentTransaction trans;
 
     public static Activity AActivity;
-    Intent serviceIntent;
-    StorageReference stoRef;
 
 
     @Override

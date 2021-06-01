@@ -6,11 +6,13 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
+import static com.example.kw_mk.App.gpsTracker;
+
 public class ServiceActivity extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        App.gpsTracker = new GpsTracker(this);
+        gpsTracker = new GpsTracker(this);
         return START_STICKY;
     }
 
@@ -22,7 +24,7 @@ public class ServiceActivity extends Service {
 
     @Override
     public void onDestroy() {
-        App.gpsTracker.stopUsingGPS();
         super.onDestroy();
+        gpsTracker.stopUsingGPS();
     }
 }

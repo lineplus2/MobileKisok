@@ -15,12 +15,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+
+import static com.example.kw_mk.App.db;
 
 public class FragmnetConsumerOderlist extends Fragment {
 
-    RecyclerView re = null;
+    RecyclerView re;
     ArrayList<RecyclerItem> mList = new ArrayList<>();
+    MyAdapter mAdapter;
 
 
     @Nullable
@@ -28,13 +36,10 @@ public class FragmnetConsumerOderlist extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.consumer_main_record, container, false);
 
-        this.InitializeData();
         Context context = container.getContext();
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewTest);
-        LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new MyAdapter(mList));  // Adapter 등록
+        re = (RecyclerView) rootView.findViewById(R.id.recyclerViewTest);
 
+        InitializeData();
 
         return rootView;
     }
@@ -42,12 +47,30 @@ public class FragmnetConsumerOderlist extends Fragment {
     public void InitializeData() {
         mList = new ArrayList<RecyclerItem>();
 
-        mList.add(new RecyclerItem("제목01", "내용01"));
-        mList.add(new RecyclerItem("제목02", "내용02"));
-        mList.add(new RecyclerItem("제목03", "내용03"));
-        mList.add(new RecyclerItem("제목04", "내용04"));
-        mList.add(new RecyclerItem("제목05", "내용05"));
-        mList.add(new RecyclerItem("제목06", "내용06"));
+        db.collection("User_Info").document(App.LoginUserEmail).collection("OrderList")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            String name = document.get("주문한가게이름").toString();
+                            String menu = document.get("주문시간").toString();
+                            String price = document.get("결제금액").toString();
+                            String needs = document.get("요청사항").toString();
+                            String email = document.get("주문한가게이메일").toString();
+                            String id = document.getId();
+
+                            mList.add(new RecyclerItem(name, menu, id, price, needs, email));
+                            mAdapter.notifyDataSetChanged();
+
+                        }
+                    }
+                });
+
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        re.setLayoutManager(manager); // LayoutManager 등록
+        mAdapter = new MyAdapter(mList);
+        re.setAdapter(mAdapter);  // Adapter 등록
 
     }
 
@@ -57,16 +80,42 @@ public class FragmnetConsumerOderlist extends Fragment {
 class RecyclerItem {
     private String storeName;
     private String menuList;
+    String price;
+    String needs;
+    private String Id;
+    private String email;
 
-    public RecyclerItem(String storeName, String menuList) {
+    public RecyclerItem(String storeName, String menuList, String id, String price, String needs, String email) {
         this.storeName = storeName;
         this.menuList = menuList;
+        this.price = price;
+        this.Id = id;
+        this.needs = needs;
+        this.email = email;
     }
 
-    public void setStoreName(String storeName) { this.storeName = storeName; }
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
 
     public void setMenuList(String menuList) {
         this.menuList = menuList;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setNeeds(String needs) {
+        this.needs = needs;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getStoreName() {
@@ -75,6 +124,22 @@ class RecyclerItem {
 
     public String getMenuList() {
         return this.menuList;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getNeeds() {
+        return needs;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
 
@@ -125,6 +190,9 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, record_reviewActivity.class);
+                intent.putExtra("storeName", myDataList.get(position).getStoreName());
+                intent.putExtra("payPrice", myDataList.get(position).getPrice());
+                intent.putExtra("email", myDataList.get(position).getEmail());
                 context.startActivity(intent);
             }
         });
@@ -133,10 +201,11 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
             @Override
             public void onClick(View v) {
                 Context acontext = v.getContext();
-                Intent intent = new Intent(acontext, TestActivity.class);
+                Intent intent = new Intent(acontext, record_contentActivity.class);
+                intent.putExtra("storeName", myDataList.get(position).getStoreName());
+                intent.putExtra("payPrice", myDataList.get(position).getPrice());
+                intent.putExtra("needs", myDataList.get(position).getNeeds());
                 context.startActivity(intent);
-//                myDataList.remove(position);
-//                notifyDataSetChanged();
             }
         });
 

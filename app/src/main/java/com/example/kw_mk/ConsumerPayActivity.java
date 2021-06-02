@@ -77,6 +77,8 @@ public class ConsumerPayActivity extends AppCompatActivity {
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HashMap<String, Object> mPay = new HashMap<>();
+                // 주문넣기
                 HashMap<String, Object> store = new HashMap<>();
                 String payC = null;
                 int id = rGroup.getCheckedRadioButtonId();
@@ -106,11 +108,21 @@ public class ConsumerPayActivity extends AppCompatActivity {
                 if (payMenuListItem.size() != 0) {
                     store.put("결제방법", payC);
                     docref.set(store);
+                    payMenuListItem.clear();
                     finish();
                 } else {
                     Toast.makeText(ConsumerPayActivity.this, "주문목록이 없습니다.", Toast.LENGTH_SHORT).show();
                 }
 
+                // 자신의 주문목록에 넣기
+                mPay.put("주문시간", FieldValue.serverTimestamp());
+                mPay.put("주문한가게이름", storeName.getText().toString());
+                mPay.put("가게전화번호", storeNum.getText().toString());
+                mPay.put("결제금액", totalAmount.getText().toString());
+                mPay.put("요청사항", needs.getText().toString());
+                mPay.put("주문한가게이메일", email);
+
+                db.collection("User_Info").document(App.LoginUserEmail).collection("OrderList").document().set(mPay);
             }
         });
     }

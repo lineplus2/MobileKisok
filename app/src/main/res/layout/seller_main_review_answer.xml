@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="5dp">
-
+    android:layout_margin="5dp"
+    android:orientation="vertical">
 
 
     <TextView
@@ -13,22 +11,23 @@
         android:layout_height="wrap_content"
         android:text="답변 작성"
         android:theme="@style/Text_Black25"
+
         />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="10"
-        android:lines="10"
         android:background="@drawable/edittextboxblue"
-        />
+        android:lines="10"
+        android:maxLines="10" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:textColor="@color/white"
         android:background="@drawable/rounded_button_background_blue"
         android:text="답변 작성"
-        android:textSize="20dp"
-        />
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 </LinearLayout>

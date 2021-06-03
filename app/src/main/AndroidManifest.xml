@@ -83,6 +83,13 @@
         <activity
             android:name="MapViewTest"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShoppingCartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ConsumerPayActivity"
+            android:screenOrientation="portrait" />
+
 
         <service
             android:name=".ServiceActivity"

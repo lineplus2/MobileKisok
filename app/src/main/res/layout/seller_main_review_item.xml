@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/sellerReviewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="작성자"
-        android:theme="@style/Text_Black25"
-        />
+        android:theme="@style/Text_Black25" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="주문 목록"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="주문 목록"
-            android:textSize="20dp"
-            />
+            android:textSize="20dp" />
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="리뷰 내용"
-        android:theme="@style/Text_Black25"/>
+        android:theme="@style/Text_Black25" />
+
     <TextView
+        android:id="@+id/sellerReviewC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="10"
-        android:lines="5"
         android:background="@drawable/edittextboxblue"
-        />
+        android:lines="5"
+        android:maxLines="10" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_marginTop="10dp"
-        android:background="@color/materialBlue700"/>
+        android:background="@color/materialBlue700" />
 
 </LinearLayout>

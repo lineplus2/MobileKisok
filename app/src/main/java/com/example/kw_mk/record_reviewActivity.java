@@ -7,18 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 import static com.example.kw_mk.App.db;
@@ -27,6 +26,8 @@ public class record_reviewActivity extends AppCompatActivity {
     Button write;
     EditText review;
     TextView storeName, price, menu;
+
+    String email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,15 +44,18 @@ public class record_reviewActivity extends AppCompatActivity {
 
         write = findViewById(R.id.btn_write);
 
-        storeName.setText("testInfo");
-        price.setText("10000");
+        storeName.setText(getIntent().getStringExtra("storeName"));
+        price.setText(getIntent().getStringExtra("payPrice"));
+        email = getIntent().getStringExtra("email");
+
+        Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
 
 
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String reviewD = review.getText().toString();
                 String buyMenu = menu.getText().toString();
+                String reviewD = review.getText().toString();
                 String storeN = storeName.getText().toString();
 
                 reviewWrite(buyMenu, reviewD, storeN);
@@ -62,14 +66,14 @@ public class record_reviewActivity extends AppCompatActivity {
 
 
     void reviewWrite(String Menu, String Review, String StoreN) {
-        DocumentReference doc = db.collection("Store_Info").document(StoreN).collection("review").document(App.LoginUserEmail);
+
 
         HashMap<String, Object> result = new HashMap<>();
         result.put("주문자", App.LoginUserEmail);
-        result.put("주문메뉴", Menu);
+        result.put("주문자명", App.LoginUserName);
         result.put("리뷰", Review);
         result.put("작성시간", FieldValue.serverTimestamp());
 
-        doc.update(result);
+        db.collection("Store_Info").document(email).collection("Review").document().set(result);
     }
 }

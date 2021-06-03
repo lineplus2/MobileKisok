@@ -1,147 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:fontFamily="@font/malgunbd">
+    android:fontFamily="@font/malgunbd"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
+                android:id="@+id/payStoreName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="상호명"
-                android:theme="@style/Text_Black25"
                 android:layout_marginTop="20dp"
+                android:text="상호명"
+                android:theme="@style/Text_Black25" />
                 />
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/Text_Black20"
-                android:layout_marginTop="10dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="매장 전화"/>
+                android:layout_marginTop="10dp"
+                android:theme="@style/Text_Black20">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="전화번호"/>
+                    android:text="매장 전화" />
+
+                <TextView
+                    android:id="@+id/payStoreNum"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="전화번호" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="@color/htmlSkyBlue"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:background="@color/htmlSkyBlue" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="주문목록"
-                android:theme="@style/Text_Black20"
-                android:layout_marginTop="5dp"/>
+                android:theme="@style/Text_Black20" />
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menuList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="@color/htmlSkyBlue"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:background="@color/htmlSkyBlue" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/Text_Black20"
-                android:layout_marginTop="5dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="합계금액"/>
+                android:layout_marginTop="5dp"
+                android:theme="@style/Text_Black20">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="10000원"/>
+                    android:text="합계금액" />
+
+                <TextView
+                    android:id="@+id/totalAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="10000원" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_weight="1">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="fill"
                     android:text="결제방법"
-                    android:theme="@style/Text_Black20"
-                    android:gravity="fill"/>
+                    android:theme="@style/Text_Black20" />
 
                 <RadioGroup
+                    android:id="@+id/r_group"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RadioButton
+                        android:id="@+id/r_btn1"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="선결제"/>
+                        android:checked="true"
+                        android:text="선결제" />
+
                     <RadioButton
+                        android:id="@+id/r_btn2"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="방문결제"/>
+                        android:text="방문결제" />
                 </RadioGroup>
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="요청사항"
-                android:theme="@style/Text_Black20"
-                android:layout_marginTop="10dp"/>
+                android:theme="@style/Text_Black20" />
 
             <EditText
+                android:id="@+id/needs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="요청사항을 입력해주세요"
                 android:lines="3"
-                android:maxLines="3"
-                android:hint="요청사항"/>
+                android:maxLines="3" />
         </TableLayout>
     </ScrollView>
 
 
     <Button
+        android:id="@+id/payBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="결제하기"
-        android:background="@drawable/rounded_button_background_blue"
-        android:textColor="@color/white"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded_button_background_blue"
+        android:text="결제하기"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

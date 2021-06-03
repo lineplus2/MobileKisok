@@ -138,7 +138,6 @@ public class FragmentConsumerHome extends Fragment {
 
         LinearLayoutManager manager2 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerView2.setLayoutManager(manager2);
-
         adp = new HomeRecyclerAdapter(ReList, getContext());
         recyclerView2.setAdapter(adp);
     }

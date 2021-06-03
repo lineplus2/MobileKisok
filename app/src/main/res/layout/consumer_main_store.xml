@@ -41,7 +41,8 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="상호명"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/Store_Info_Num"

@@ -3,6 +3,7 @@ package com.example.kw_mk;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,6 +53,8 @@ public class FragmentConsumerHome extends Fragment {
     final String TAG = " FragmentConsumerHome";
 
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,9 +63,7 @@ public class FragmentConsumerHome extends Fragment {
         GridView grid = rootView.findViewById(R.id.mainGrid);
         recyclerView2 = (RecyclerView) rootView.findViewById(R.id.reTest);
 
-
         initData();
-
 
         gridAdapter = new GridItemList();
 
@@ -75,9 +78,7 @@ public class FragmentConsumerHome extends Fragment {
         gridAdapter.addItem(new GridItem("Item8", "8", "test"));
         gridAdapter.addItem(new GridItem("Item9", "9", "test"));
 
-
         context = container.getContext();
-
 
         grid.setAdapter(gridAdapter);
 
@@ -91,12 +92,30 @@ public class FragmentConsumerHome extends Fragment {
                 switch (item.getPosition()) {
                     case "1":
                         Toast.makeText(context, "버튼 1", Toast.LENGTH_LONG).show();
-
                         break;
                     case "2":
                         Toast.makeText(context, "버튼 2", Toast.LENGTH_LONG).show();
                         break;
                     case "3":
+                        Toast.makeText(context, "버튼 3", Toast.LENGTH_LONG).show();
+                        break;
+                    case "4":
+                        Toast.makeText(context, "버튼 4", Toast.LENGTH_LONG).show();
+                        break;
+                    case "5":
+                        Toast.makeText(context, "버튼 5", Toast.LENGTH_LONG).show();
+                        break;
+                    case "6":
+                        Toast.makeText(context, "버튼 6", Toast.LENGTH_LONG).show();
+                        break;
+                    case "7":
+                        Toast.makeText(context, "버튼 7", Toast.LENGTH_LONG).show();
+                        break;
+                    case "8":
+                        Toast.makeText(context, "버튼 8", Toast.LENGTH_LONG).show();
+                        break;
+                    case "9":
+                        Toast.makeText(context, "버튼 9", Toast.LENGTH_LONG).show();
                         break;
 
                 }
@@ -186,6 +205,17 @@ class GridItem {
 class GridItemList extends BaseAdapter {
     ArrayList<GridItem> items = new ArrayList<GridItem>();
     Context context;
+    private Integer images[] = {
+            R.drawable.bibimbap,
+            R.drawable.sushi,
+            R.drawable.jajangmyeon,
+            R.drawable.fast_food,
+            R.drawable.steak,
+            R.drawable.tteokbokki,
+            R.drawable.bakery,
+            R.drawable.cooking,
+            R.drawable.beer
+    };
 
     public void addItem(GridItem item) {
         items.add(item);
@@ -210,19 +240,28 @@ class GridItemList extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         context = parent.getContext();
         GridItem gridItem = items.get(position);
+        ImageView imageView = null;
 
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.grid_item, parent, false);
+//            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            convertView = inflater.inflate(R.layout.grid_item, parent, false);
+            imageView = new ImageView(context);
+        }else {
+            imageView = (ImageView) convertView;
         }
 
-        TextView nameText = convertView.findViewById(R.id.name_text);
-        TextView phoneText = convertView.findViewById(R.id.phone_text);
+        imageView.setLayoutParams(new GridLayout.LayoutParams());
+        imageView.setScaleType(ImageView.ScaleType.FIT_END);
+        imageView.setPadding(10, 10, 10, 10);
+        imageView.setImageResource(images[position]);
 
-        nameText.setText(gridItem.getName());
-        phoneText.setText(gridItem.getPosition());
+//        TextView nameText = convertView.findViewById(R.id.name_text);
+//        TextView phoneText = convertView.findViewById(R.id.phone_text);
+//
+//        nameText.setText(gridItem.getName());
+//        phoneText.setText(gridItem.getPosition());
 
-        return convertView;
+        return imageView;
     }
 }
 

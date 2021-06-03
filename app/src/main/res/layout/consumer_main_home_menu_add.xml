@@ -96,13 +96,14 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".3"
-                    android:text="감소" />
+                    android:background="@drawable/ic_baseline_expand_more_24"
+                    />
 
                 <TextView
                     android:id="@+id/mount"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight=".4"
+                    android:layout_weight=".5"
                     android:gravity="center"
                     android:inputType="number"
                     android:text="1" />
@@ -112,7 +113,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".3"
-                    android:text="증가" />
+                    android:background="@drawable/ic_baseline_expand_less_24"
+                    />
 
             </LinearLayout>
 

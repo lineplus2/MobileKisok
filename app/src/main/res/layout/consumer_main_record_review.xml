@@ -108,8 +108,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/edittextbox"
-                    android:text="리뷰작성" />
+                    android:background="@drawable/rounded_button_background_blue"
+                    android:text="리뷰작성"
+                    android:textColor="@color/white"/>
 
                 <TextView
                     android:layout_width="0dp"

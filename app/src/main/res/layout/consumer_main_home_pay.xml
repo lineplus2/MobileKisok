@@ -24,7 +24,6 @@
                 android:layout_marginTop="20dp"
                 android:text="상호명"
                 android:theme="@style/Text_Black25" />
-                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,11 +146,9 @@
 
     <Button
         android:id="@+id/payBtn"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_gravity="center"
         android:background="@drawable/rounded_button_background_blue"
         android:text="결제하기"
         android:textColor="@color/white" />

@@ -8,7 +8,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:theme="@style/Text_Black15">
 
         <TextView
             android:id="@+id/payMenuName"
@@ -32,7 +33,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="수량 : " />
+            android:text="수량 : "
+            android:theme="@style/Text_Black15"/>
 
         <TextView
             android:id="@+id/payAmount"
@@ -54,7 +56,10 @@
             android:id="@+id/menuDel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="제거" />
+            android:text="제거"
+            android:background="@drawable/rounded_button_background_blue"
+            android:textColor="@color/white"
+            />
 
 
     </LinearLayout>

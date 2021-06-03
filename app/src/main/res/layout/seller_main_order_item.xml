@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="예상 도착 시각"
-            android:theme="@style/Text_Black25" />
+            android:theme="@style/Text_Black20" />
 
         <TextView
             android:layout_width="0dp"
@@ -57,14 +57,18 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="00:00"
-            android:theme="@style/Text_Black25" />
+            android:theme="@style/Text_Black20" />
     </LinearLayout>
 
     <Button
         android:id="@+id/orderCompliteBtn"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="주문완료" />
+        android:text="주문완료"
+        android:background="@drawable/rounded_button_background_blue"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:layout_width="match_parent"

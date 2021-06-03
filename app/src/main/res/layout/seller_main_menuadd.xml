@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
-                app:srcCompat="@drawable/image_plus" />
+                app:srcCompat="@drawable/ic_baseline_add_a_photo_24" />
 
 
             <LinearLayout

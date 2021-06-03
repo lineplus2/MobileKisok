@@ -89,8 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        >
+        android:gravity="center">
 
         <Button
             android:id="@+id/logout_btn"
@@ -99,7 +98,8 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded_button_background_blue"
             android:text="로그아웃 "
-            android:layout_margin="10px"/>
+            android:layout_margin="10px"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/myInfoModify"
@@ -108,7 +108,8 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded_button_background_blue"
             android:text="내정보수정 "
-            android:layout_margin="10px"/>
+            android:layout_margin="10px"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </LinearLayout>

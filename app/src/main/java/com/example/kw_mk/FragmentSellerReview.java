@@ -60,8 +60,9 @@ public class FragmentSellerReview extends Fragment {
                             for (final QueryDocumentSnapshot document : task.getResult()) {
                                 String name = document.get("주문자명").toString();
                                 String review = document.get("리뷰").toString();
+                                String menu = document.get("주문목록").toString();
 
-                                list.add(new ReviewItem(name, review));
+                                list.add(new ReviewItem(name, review, menu));
 
                                 LinearLayoutManager manager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                                 ReView.setLayoutManager(manager2);
@@ -81,10 +82,12 @@ public class FragmentSellerReview extends Fragment {
 class ReviewItem {
     String name;
     String review;
+    String menu;
 
-    ReviewItem(String name, String review) {
+    ReviewItem(String name, String review, String menu) {
         this.name = name;
         this.review = review;
+        this.menu = menu;
     }
 
 }
@@ -93,12 +96,14 @@ class ReviewViewHolder extends RecyclerView.ViewHolder {
 
     TextView nameText;
     TextView reviewText;
+    TextView menuText;
 
     ReviewViewHolder(View itemView) {
         super(itemView);
 
         nameText = itemView.findViewById(R.id.sellerReviewName);
         reviewText = itemView.findViewById(R.id.sellerReviewC);
+        menuText = itemView.findViewById(R.id.sellerReviewMenuList);
 
     }
 }
@@ -129,6 +134,7 @@ class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
     public void onBindViewHolder(@NonNull final ReviewViewHolder holder, int position) {
         holder.nameText.setText(ReviewRecyclerList.get(position).name);
         holder.reviewText.setText(ReviewRecyclerList.get(position).review);
+        holder.menuText.setText(ReviewRecyclerList.get(position).menu);
     }
 
     @Override

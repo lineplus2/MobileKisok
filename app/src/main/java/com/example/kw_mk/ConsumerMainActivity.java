@@ -50,11 +50,11 @@ public class ConsumerMainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        stopService(serviceIntent);
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(serviceIntent);
+    }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener { // BottomNavigationView 버튼 속성
         @Override

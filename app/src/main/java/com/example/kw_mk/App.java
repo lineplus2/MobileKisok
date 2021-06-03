@@ -43,6 +43,7 @@ public class App extends Application {
     public static Uri test = null;
     public static Intent serviceIntent;
 
+
     public static void userInit() {
         LoginUserEmail = null;
         LoginUserPw = null;

@@ -53,6 +53,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
     public static payMenuListAdapter payAdapter;
 
     String email;
+    StringBuilder menu = new StringBuilder("");
 
     int sum = 0;
 
@@ -102,6 +103,12 @@ public class ConsumerPayActivity extends AppCompatActivity {
 
                 for (int i = 0; i < payMenuListItem.size(); i++) {
                     docref.collection("주문목록").document(payMenuListItem.get(i).payName).set(payMenuListItem.get(i));
+                    if(i != payMenuListItem.size()-1 ){
+                        menu.append(payMenuListItem.get(i).payName +"          수량 : " + payMenuListItem.get(i).amount);
+                        menu.append("\n");
+                    } else {
+                        menu.append(payMenuListItem.get(i).payName +"          수량 : " + payMenuListItem.get(i).amount);
+                    }
                 }
 
 
@@ -121,6 +128,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
                 mPay.put("결제금액", totalAmount.getText().toString());
                 mPay.put("요청사항", needs.getText().toString());
                 mPay.put("주문한가게이메일", email);
+                mPay.put("주문목록", menu.toString());
 
                 db.collection("User_Info").document(App.LoginUserEmail).collection("OrderList").document().set(mPay);
             }

@@ -25,7 +25,6 @@
                 android:text="상호명"
                 android:theme="@style/Text_Black25" />
                 />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

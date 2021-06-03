@@ -46,6 +46,7 @@ public class record_reviewActivity extends AppCompatActivity {
 
         storeName.setText(getIntent().getStringExtra("storeName"));
         price.setText(getIntent().getStringExtra("payPrice"));
+        menu.setText(getIntent().getStringExtra("menuList"));
         email = getIntent().getStringExtra("email");
 
         Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
@@ -73,6 +74,7 @@ public class record_reviewActivity extends AppCompatActivity {
         result.put("주문자명", App.LoginUserName);
         result.put("리뷰", Review);
         result.put("작성시간", FieldValue.serverTimestamp());
+        result.put("주문목록", menu.getText().toString());
 
         db.collection("Store_Info").document(email).collection("Review").document().set(result);
     }

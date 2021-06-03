@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class record_contentActivity extends AppCompatActivity {
 
-    TextView name, price, needs;
+    TextView name, price, needs, contentMenu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class record_contentActivity extends AppCompatActivity {
         name = findViewById(R.id.recordName);
         price = findViewById(R.id.recordPrice);
         needs = findViewById(R.id.recordNeeds);
+        contentMenu = findViewById(R.id.contentMenu);
 
         init_Info();
     }
@@ -26,5 +27,6 @@ public class record_contentActivity extends AppCompatActivity {
         name.setText(getIntent().getStringExtra("storeName"));
         price.setText(getIntent().getStringExtra("payPrice"));
         needs.setText(getIntent().getStringExtra("needs"));
+        contentMenu.setText(getIntent().getStringExtra("menuList"));
     }
 }

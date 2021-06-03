@@ -54,7 +54,7 @@ public class FragmnetConsumerOderlist extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         for (DocumentSnapshot document : task.getResult()) {
                             String name = document.get("주문한가게이름").toString();
-                            String menu = document.get("주문시간").toString();
+                            String menu = document.get("주문목록").toString();
                             String price = document.get("결제금액").toString();
                             String needs = document.get("요청사항").toString();
                             String email = document.get("주문한가게이메일").toString();
@@ -193,6 +193,7 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
                 intent.putExtra("storeName", myDataList.get(position).getStoreName());
                 intent.putExtra("payPrice", myDataList.get(position).getPrice());
                 intent.putExtra("email", myDataList.get(position).getEmail());
+                intent.putExtra("menuList", myDataList.get(position).getMenuList());
                 context.startActivity(intent);
             }
         });
@@ -205,6 +206,7 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
                 intent.putExtra("storeName", myDataList.get(position).getStoreName());
                 intent.putExtra("payPrice", myDataList.get(position).getPrice());
                 intent.putExtra("needs", myDataList.get(position).getNeeds());
+                intent.putExtra("menuList", myDataList.get(position).getMenuList());
                 context.startActivity(intent);
             }
         });

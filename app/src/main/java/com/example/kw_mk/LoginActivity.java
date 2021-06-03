@@ -78,8 +78,8 @@ public class LoginActivity extends AppCompatActivity {
         et_id = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
 
-//        serviceIntent = new Intent(this, ServiceActivity.class);
-//        startService(serviceIntent);
+        serviceIntent = new Intent(this, ServiceActivity.class);
+        startService(serviceIntent);
 
 
         //위치권한 확인

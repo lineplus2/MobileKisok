@@ -52,6 +52,7 @@ public class FragmentConsumerHome extends Fragment {
 
     final String TAG = " FragmentConsumerHome";
 
+    ImageView category1,category2,category3,category4,category5,category6,category7,category8,category9;
 
 
 
@@ -60,7 +61,17 @@ public class FragmentConsumerHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.consumer_main_home, container, false);
 
-        GridView grid = rootView.findViewById(R.id.mainGrid);
+        category1 = rootView.findViewById(R.id.category1);
+        category2 = rootView.findViewById(R.id.category2);
+        category3 = rootView.findViewById(R.id.category3);
+        category4 = rootView.findViewById(R.id.category4);
+        category5 = rootView.findViewById(R.id.category5);
+        category6 = rootView.findViewById(R.id.category6);
+        category7 = rootView.findViewById(R.id.category7);
+        category8 = rootView.findViewById(R.id.category8);
+        category9 = rootView.findViewById(R.id.category9);
+
+//        GridView grid = rootView.findViewById(R.id.mainGrid);
         recyclerView2 = (RecyclerView) rootView.findViewById(R.id.reTest);
 
         initData();
@@ -80,11 +91,11 @@ public class FragmentConsumerHome extends Fragment {
 
         context = container.getContext();
 
-        grid.setAdapter(gridAdapter);
+//        grid.setAdapter(gridAdapter);
 
 
         // 그리드뷰 버튼
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+/*//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GridItem item = (GridItem) gridAdapter.getItem(position);
@@ -120,7 +131,7 @@ public class FragmentConsumerHome extends Fragment {
 
                 }
             }
-        });
+        });*/
         return rootView;
     }
 

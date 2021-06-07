@@ -49,8 +49,6 @@ public class record_reviewActivity extends AppCompatActivity {
         menu.setText(getIntent().getStringExtra("menuList"));
         email = getIntent().getStringExtra("email");
 
-        Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
-
 
         write.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -54,7 +54,6 @@ public class FragmentSellerOrder extends Fragment {
     RecyclerView orderMenu;
 
     DocumentReference orderStoref;
-    DocumentReference itemso;
 
     @Nullable
     @Override
@@ -87,31 +86,32 @@ public class FragmentSellerOrder extends Fragment {
                                                        final ArrayList<orderItem> itemList = new ArrayList<>();
                                                        String name = document.get("주문자이름").toString();
                                                        String id = document.getId();
-
+                                                       String pay = document.get("결제방법").toString();
                                                        DocumentReference co = orderStoref.collection("RealTimeOrder").document(id);
 
+                                                       if (pay.equals("방문결제")) {
 
-                                                       co.collection("주문목록").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                           @Override
-                                                           public void onComplete(@NonNull Task<QuerySnapshot> ta) {
-                                                               if (ta.isSuccessful()) {
-                                                                   for (QueryDocumentSnapshot doc : ta.getResult()) {
+                                                           co.collection("주문목록").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                               @Override
+                                                               public void onComplete(@NonNull Task<QuerySnapshot> ta) {
+                                                                   if (ta.isSuccessful()) {
+                                                                       for (QueryDocumentSnapshot doc : ta.getResult()) {
 
-                                                                       String itemName = doc.get("payName").toString();
-                                                                       String itemAmount = doc.get("amount").toString();
-                                                                       itemList.add(new orderItem(itemName, itemAmount));
+                                                                           String itemName = doc.get("payName").toString();
+                                                                           String itemAmount = doc.get("amount").toString();
+                                                                           itemList.add(new orderItem(itemName, itemAmount));
 
+                                                                       }
+                                                                   } else {
+                                                                       Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                                                                    }
-                                                               } else {
-                                                                   Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+
                                                                }
+                                                           });
+                                                           orderList.add(new orderListItem(name, id, itemList));
+                                                           orderListAdapter.notifyDataSetChanged();
+                                                       }
 
-                                                           }
-                                                       });
-
-
-                                                       orderList.add(new orderListItem(name, id, itemList));
-                                                       orderListAdapter.notifyDataSetChanged();
                                                    }
                                                }
                                            }
@@ -210,7 +210,8 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(context, orderListItem.get(position).getId(), Toast.LENGTH_SHORT).show();
+                                orderListItem.remove(position);
+                                notifyDataSetChanged();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -218,8 +219,8 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
                             public void onFailure(@NonNull Exception e) {
                             }
                         });
-                orderListItem.remove(position);
-                notifyDataSetChanged();
+
+
             }
         });
 
@@ -233,9 +234,9 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
             @Override
             public void run() {
                 ItemAdapter.notifyDataSetChanged();
+                notifyDataSetChanged();
             }
         }, 1000);
-
 
         holder.orderName.setText(orderListItem.get(position).orderByName);
     }
@@ -330,32 +331,3 @@ class orderItemAdapter extends RecyclerView.Adapter<orderItemViewHolder> {
         return orderItem.size();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

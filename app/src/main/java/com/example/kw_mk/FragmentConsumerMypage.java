@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.StorageReference;
@@ -103,6 +104,7 @@ public class FragmentConsumerMypage extends Fragment {
         editor.commit();
         getActivity().stopService(serviceIntent);
         getActivity().finish();
+        FirebaseAuth.getInstance().signOut();
         App.userInit();
     }
 }

@@ -40,7 +40,6 @@ import static com.example.kw_mk.App.myLocation;
 import static com.example.kw_mk.App.storageRef;
 
 public class FragmentConsumerHome extends Fragment {
-    GridItemList gridAdapter;
     private Context context;
 
     HomeRecyclerAdapter adp;
@@ -52,8 +51,7 @@ public class FragmentConsumerHome extends Fragment {
 
     final String TAG = " FragmentConsumerHome";
 
-    ImageView category1,category2,category3,category4,category5,category6,category7,category8,category9;
-
+    ImageView category1, category2, category3, category4, category5, category6, category7, category8, category9;
 
 
     @Nullable
@@ -71,69 +69,80 @@ public class FragmentConsumerHome extends Fragment {
         category8 = rootView.findViewById(R.id.category8);
         category9 = rootView.findViewById(R.id.category9);
 
-//        GridView grid = rootView.findViewById(R.id.mainGrid);
         recyclerView2 = (RecyclerView) rootView.findViewById(R.id.reTest);
 
         initData();
 
-        gridAdapter = new GridItemList();
-
-        // GridView Setting
-        gridAdapter.addItem(new GridItem("Item1", "1", "test"));
-        gridAdapter.addItem(new GridItem("Item2", "2", "test"));
-        gridAdapter.addItem(new GridItem("Item3", "3", "test"));
-        gridAdapter.addItem(new GridItem("Item4", "4", "test"));
-        gridAdapter.addItem(new GridItem("Item5", "5", "test"));
-        gridAdapter.addItem(new GridItem("item6", "6", "test"));
-        gridAdapter.addItem(new GridItem("Item7", "7", "test"));
-        gridAdapter.addItem(new GridItem("Item8", "8", "test"));
-        gridAdapter.addItem(new GridItem("Item9", "9", "test"));
-
         context = container.getContext();
 
-//        grid.setAdapter(gridAdapter);
+        category1.setOnClickListener(categoryClick);
+        category2.setOnClickListener(categoryClick);
+        category3.setOnClickListener(categoryClick);
+        category4.setOnClickListener(categoryClick);
+        category5.setOnClickListener(categoryClick);
+        category6.setOnClickListener(categoryClick);
+        category7.setOnClickListener(categoryClick);
+        category8.setOnClickListener(categoryClick);
+        category9.setOnClickListener(categoryClick);
 
-
-        // 그리드뷰 버튼
-/*//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GridItem item = (GridItem) gridAdapter.getItem(position);
-
-                switch (item.getPosition()) {
-                    case "1":
-                        Toast.makeText(context, "버튼 1", Toast.LENGTH_LONG).show();
-                        break;
-                    case "2":
-                        Toast.makeText(context, "버튼 2", Toast.LENGTH_LONG).show();
-                        break;
-                    case "3":
-                        Toast.makeText(context, "버튼 3", Toast.LENGTH_LONG).show();
-                        break;
-                    case "4":
-                        Toast.makeText(context, "버튼 4", Toast.LENGTH_LONG).show();
-                        break;
-                    case "5":
-                        Toast.makeText(context, "버튼 5", Toast.LENGTH_LONG).show();
-                        break;
-                    case "6":
-                        Toast.makeText(context, "버튼 6", Toast.LENGTH_LONG).show();
-                        break;
-                    case "7":
-                        Toast.makeText(context, "버튼 7", Toast.LENGTH_LONG).show();
-                        break;
-                    case "8":
-                        Toast.makeText(context, "버튼 8", Toast.LENGTH_LONG).show();
-                        break;
-                    case "9":
-                        Toast.makeText(context, "버튼 9", Toast.LENGTH_LONG).show();
-                        break;
-
-                }
-            }
-        });*/
         return rootView;
     }
+
+    View.OnClickListener categoryClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent categoryintent;
+            switch (v.getId()) {
+                case R.id.category1:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "한식");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category2:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "일식");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category3:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "중식");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category4:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "양식");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category5:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "패스트푸드");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category6:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "분식");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category7:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "베이커리");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category8:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "찜탕");
+                    startActivity(categoryintent);
+                    break;
+                case R.id.category9:
+                    categoryintent = new Intent(getContext(), ConsumerCategory.class);
+                    categoryintent.putExtra("category", "술집");
+                    startActivity(categoryintent);
+                    break;
+
+            }
+        }
+    };
+
 
     public void initData() {
         ReList = new ArrayList<homeRecyclerView>();
@@ -156,8 +165,13 @@ public class FragmentConsumerHome extends Fragment {
                                 lo = new Location("Point");
                                 lo.setLatitude(la);
                                 lo.setLongitude(ln);
-                                ReList.add(new homeRecyclerView(StoreId, str, StoreUser, lo));
                                 adp.notifyDataSetChanged();
+
+                                int loTo = (int) lo.distanceTo(myLocation);
+
+                                if (loTo < 1000) {
+                                    ReList.add(new homeRecyclerView(StoreId, str, StoreUser, lo));
+                                }
 
                             }
                         } else {
@@ -172,108 +186,6 @@ public class FragmentConsumerHome extends Fragment {
         recyclerView2.setAdapter(adp);
     }
 
-}
-
-// 그리드뷰
-
-class GridItem {
-    String name;
-    String position;
-    String category;
-
-    public GridItem(String name, String phone, String category) {
-        this.name = name;
-        this.position = phone;
-        this.category = category;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String phone) {
-        this.position = position;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-}
-
-
-class GridItemList extends BaseAdapter {
-    ArrayList<GridItem> items = new ArrayList<GridItem>();
-    Context context;
-    private Integer images[] = {
-            R.drawable.bibimbap,
-            R.drawable.sushi,
-            R.drawable.jajangmyeon,
-            R.drawable.fast_food,
-            R.drawable.steak,
-            R.drawable.tteokbokki,
-            R.drawable.bakery,
-            R.drawable.cooking,
-            R.drawable.beer
-    };
-
-    public void addItem(GridItem item) {
-        items.add(item);
-    }
-
-    @Override
-    public int getCount() {
-        return items.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return items.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        context = parent.getContext();
-        GridItem gridItem = items.get(position);
-        ImageView imageView = null;
-
-        if (convertView == null) {
-//            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            convertView = inflater.inflate(R.layout.grid_item, parent, false);
-            imageView = new ImageView(context);
-        }else {
-            imageView = (ImageView) convertView;
-        }
-
-        imageView.setLayoutParams(new GridLayout.LayoutParams());
-        imageView.setScaleType(ImageView.ScaleType.FIT_END);
-        imageView.setPadding(10, 10, 10, 10);
-        imageView.setImageResource(images[position]);
-
-//        TextView nameText = convertView.findViewById(R.id.name_text);
-//        TextView phoneText = convertView.findViewById(R.id.phone_text);
-//
-//        nameText.setText(gridItem.getName());
-//        phoneText.setText(gridItem.getPosition());
-
-        return imageView;
-    }
 }
 
 

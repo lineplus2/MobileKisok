@@ -2,13 +2,13 @@
 <resources>
     <string-array name="category">
         <item>한식</item>
-        <item>item 2</item>
-        <item>item 3</item>
-        <item>item 4</item>
-        <item>item 5</item>
-        <item>item 6</item>
-        <item>item 7</item>
-        <item>item 8</item>
+        <item>일식</item>
         <item>중식</item>
+        <item>양식</item>
+        <item>패스트푸드</item>
+        <item>분식</item>
+        <item>베이커리</item>
+        <item>찜탕</item>
+        <item>술집</item>
     </string-array>
 </resources>

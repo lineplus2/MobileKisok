@@ -72,30 +72,30 @@ public class FragmentSellerOrder extends Fragment {
                                                        String pay = document.get("결제방법").toString();
                                                        DocumentReference co = orderStoref.collection("RealTimeOrder").document(id);
 
-                                                       if (pay.equals("방문결제")) {
+//                                                       if (pay.equals("방문결제")) {
 
-                                                           co.collection("주문목록").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                               @Override
-                                                               public void onComplete(@NonNull Task<QuerySnapshot> ta) {
-                                                                   if (ta.isSuccessful()) {
-                                                                       for (QueryDocumentSnapshot doc : ta.getResult()) {
+                                                       co.collection("주문목록").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                           @Override
+                                                           public void onComplete(@NonNull Task<QuerySnapshot> ta) {
+                                                               if (ta.isSuccessful()) {
+                                                                   for (QueryDocumentSnapshot doc : ta.getResult()) {
 
-                                                                           String itemName = doc.get("payName").toString();
-                                                                           String itemAmount = doc.get("amount").toString();
-                                                                           itemList.add(new orderItem(itemName, itemAmount));
+                                                                       String itemName = doc.get("payName").toString();
+                                                                       String itemAmount = doc.get("amount").toString();
+                                                                       itemList.add(new orderItem(itemName, itemAmount));
 
-                                                                       }
-                                                                   } else {
-                                                                       Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                                                                    }
-
+                                                               } else {
+                                                                   Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                                                                }
-                                                           });
-                                                           orderList.add(new orderListItem(name, id, itemList));
-                                                           orderListAdapter.notifyDataSetChanged();
-                                                       }
 
+                                                           }
+                                                       });
+                                                       orderList.add(new orderListItem(name, id, itemList));
+                                                       orderListAdapter.notifyDataSetChanged();
                                                    }
+
+//                                                   }
                                                }
                                            }
                                        }

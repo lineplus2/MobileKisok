@@ -54,8 +54,7 @@ public class App extends Application {
     public static final RequestOptions imageOptions = RequestOptions
             .bitmapTransform(new RoundedCorners(20))
             .override(200, 200)
-            .placeholder(R.drawable.loadingspinner);
-
-
+            .placeholder(R.drawable.loadingspinner)
+            .error(R.drawable.noimage);
 
 }

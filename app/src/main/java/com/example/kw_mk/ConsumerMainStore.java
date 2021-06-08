@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.kw_mk.App.db;
+import static com.example.kw_mk.App.imageOptions;
 import static com.example.kw_mk.App.storageRef;
 
 public class ConsumerMainStore extends AppCompatActivity {
@@ -212,7 +215,7 @@ class menuListAdapter extends RecyclerView.Adapter<MenuListViewHolder> {
             menuListItem.get(position).img.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    Glide.with(context).load(uri).into(holder.menuImage);
+                    Glide.with(context).load(uri).apply(imageOptions).into(holder.menuImage);
                 }
             });
         }

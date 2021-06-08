@@ -36,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.InputStream;
 
 import static com.example.kw_mk.App.GET_GALLERY_IMAGE;
+import static com.example.kw_mk.App.imageOptions;
 import static com.example.kw_mk.LoginActivity.pref;
 
 
@@ -173,7 +174,7 @@ public class MypageModifyActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             App.LoginUserUri = uri;
-                            Glide.with(FragmentConsumerMypage.conContext).load(App.LoginUserUri).into(FragmentConsumerMypage.profileImage);
+                            Glide.with(FragmentConsumerMypage.conContext).load(App.LoginUserUri).apply(imageOptions).into(FragmentConsumerMypage.profileImage);
                         }
                     });
                 }

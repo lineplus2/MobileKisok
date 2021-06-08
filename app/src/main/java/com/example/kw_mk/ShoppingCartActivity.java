@@ -1,24 +1,19 @@
 package com.example.kw_mk;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.StorageReference;
 
-import java.util.HashMap;
-
+import static com.example.kw_mk.App.imageOptions;
 import static com.example.kw_mk.App.payMenuListItem;
 import static com.example.kw_mk.App.storageRef;
 
@@ -42,7 +37,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
         incBtn = findViewById(R.id.incBtn);
         decBtn = findViewById(R.id.decBtn);
 
-
         initData();
 
     }
@@ -55,7 +49,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         storageRef.child("Store_Info").child(email).child("Menu").child(name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(ShoppingCartActivity.this).load(uri).into(menuImg);
+                Glide.with(ShoppingCartActivity.this).load(uri).apply(imageOptions).into(menuImg);
             }
         });
 

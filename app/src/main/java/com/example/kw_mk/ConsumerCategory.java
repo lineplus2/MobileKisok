@@ -31,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 import static com.example.kw_mk.App.db;
+import static com.example.kw_mk.App.imageOptions;
 import static com.example.kw_mk.App.myLocation;
 import static com.example.kw_mk.App.storageRef;
 
@@ -185,7 +186,7 @@ class categoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
         categoryRecyclerList.get(position).getStoreUri().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri).into(holder.storeImage);
+                Glide.with(context).load(uri).apply(imageOptions).into(holder.storeImage);
             }
         });
 

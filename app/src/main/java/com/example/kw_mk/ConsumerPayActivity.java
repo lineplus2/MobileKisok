@@ -1,17 +1,12 @@
 package com.example.kw_mk;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,23 +15,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.ServerTimestamp;
-import com.google.firebase.storage.StorageReference;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import kr.co.bootpay.Bootpay;
 import kr.co.bootpay.BootpayAnalytics;
@@ -113,15 +101,14 @@ public class ConsumerPayActivity extends AppCompatActivity {
                         .setBootExtra(bootExtra)
                         .setUX(UX.PG_DIALOG)
 //                .setUserPhone("010-1234-5678") // 구매자 전화번호
-                        .setName("맥북프로's 임다") // 결제할 상품명
+                        .setName("") // 결제할 상품명
                         .setOrderId("1234") // 결제 고유번호 (expire_month)
                         .setPrice(price) // 결제할 금액
-                        .addItem("마우's 스", 1, "ITEM_CODE_MOUSE", 100) // 주문정보에 담길 상품정보, 통계를 위해 사용
+                        .addItem("마우스", 1, "ITEM_CODE_MOUSE", 100) // 주문정보에 담길 상품정보, 통계를 위해 사용
                         .addItem("키보드", 1, "ITEM_CODE_KEYBOARD", 200, "패션", "여성상의", "블라우스") // 주문정보에 담길 상품정보, 통계를 위해 사용
                         .onConfirm(new ConfirmListener() { // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
                             @Override
                             public void onConfirm(@Nullable String message) {
-
                                 if (0 < stuck) Bootpay.confirm(message); // 재고가 있을 경우.
                                 else
                                     Bootpay.removePaymentWindow(); // 재고가 없어 중간에 결제창을 닫고 싶을 경우
@@ -163,7 +150,6 @@ public class ConsumerPayActivity extends AppCompatActivity {
                                         menu.append(payMenuListItem.get(i).payName + "          수량 : " + payMenuListItem.get(i).amount);
                                     }
                                 }
-
 
                                 // 자신의 주문목록에 넣기
                                 mPay.put("주문시간", FieldValue.serverTimestamp());

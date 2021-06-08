@@ -2,25 +2,19 @@ package com.example.kw_mk;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.location.Location;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 import static com.example.kw_mk.App.db;
+import static com.example.kw_mk.App.imageOptions;
 import static com.example.kw_mk.App.myLocation;
 import static com.example.kw_mk.App.storageRef;
 
@@ -169,9 +164,9 @@ public class FragmentConsumerHome extends Fragment {
 
                                 int loTo = (int) lo.distanceTo(myLocation);
 
-                                if (loTo < 1000) {
-                                    ReList.add(new homeRecyclerView(StoreId, str, StoreUser, lo));
-                                }
+//                                if (loTo < 1000) {
+                                ReList.add(new homeRecyclerView(StoreId, str, StoreUser, lo));
+//                                }
 
                             }
                         } else {
@@ -242,6 +237,7 @@ class HomeViewHolder extends RecyclerView.ViewHolder {
     TextView storeName, storeDistance;
     ImageView storeImage;
 
+
     HomeViewHolder(View itemView) {
         super(itemView);
 
@@ -277,14 +273,21 @@ class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, int position) {
 
+
+        GradientDrawable drawable = (GradientDrawable) context.getDrawable(R.drawable.imagerounding);
+
+
         final String email;
         holder.storeName.setText(HomeRecyclerList.get(position).getStoreName());
         HomeRecyclerList.get(position).getStoreUri().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri).into(holder.storeImage);
+                Glide.with(context).load(uri).apply(imageOptions).into(holder.storeImage);
             }
         });
+//        holder.storeImage.setBackground(drawable);
+//        holder.storeImage.setClipToOutline(true);
+
 
         int loToInt = (int) HomeRecyclerList.get(position).getStoreL().distanceTo(myLocation);
 

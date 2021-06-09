@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,24 +85,24 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
                                     startToast("회원가입에 성공하였습니다.");
                                     userInfo = new UserInfo(email, password, name, phone); // 유저정보셋팅
                                     userValue = userInfo.toMap(); // 유저정보대입준비
 
                                     //FireStore 값(유저정보) 삽입
-                                    App.db.collection("User_Info").document(email).set(userValue).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    App.db.collection("User_Info").document(email)
+                                            .set(userValue).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onSuccess(Void aVoid) { // 성공시
+                                        public void onSuccess(Void aVoid) {
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
-                                        public void onFailure(@NonNull Exception e) { // 실패시
+                                        public void onFailure(@NonNull Exception e) {
                                         }
                                     });
+
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startLoginActivity();
-
                                 } else {
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());

@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
@@ -104,14 +103,18 @@ public class SellerMenuAddActivity extends AppCompatActivity {
         menuInfo.put("메뉴가격", Price);
 
         if (uri != null) {
-            App.storageRef.child("Store_Info").child(App.LoginUserEmail).child("Menu").child(name).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            App.storageRef.child("Store_Info").child(App.LoginUserEmail).child("Menu").child(name)
+                    .putFile(imageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                }
-            });
+                        }
+                    });
         }
 
-        db.collection("Store_Info").document(App.LoginUserEmail).collection("Menu").document(name).set(menuInfo);
+        db.collection("Store_Info").document(App.LoginUserEmail)
+                .collection("Menu").document(name)
+                .set(menuInfo);
     }
 }

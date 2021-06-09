@@ -1,28 +1,25 @@
 package com.example.kw_mk;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,8 +30,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.InputStream;
 
 import static com.example.kw_mk.App.serviceIntent;
 
@@ -51,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore db = App.db;
 
 
-    EditText et_id;
-    EditText et_pw;
+    EditText loginEmail;
+    EditText loginPassword;
 
     StorageReference stoRef;
 
@@ -75,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_signup = findViewById(R.id.btn_signup);
         btn_login = findViewById(R.id.btn_login);
-        et_id = findViewById(R.id.et_id);
-        et_pw = findViewById(R.id.et_pw);
+        loginEmail = findViewById(R.id.et_id);
+        loginPassword = findViewById(R.id.et_pw);
 
         serviceIntent = new Intent(this, ServiceActivity.class);
         startService(serviceIntent);
@@ -94,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(onClickListener);
 
         if (id != "" && pw != "") {
-            et_id.setText(id);
-            et_pw.setText(pw);
+            loginEmail.setText(id);
+            loginPassword.setText(pw);
             btn_login.callOnClick();
         }
 
@@ -124,8 +119,8 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
 
         // 저장시킬 이름이 이미 존재하면 덮어씌움
-        editor.putString("ID", et_id.getText().toString().trim());
-        editor.putString("PWD", et_pw.getText().toString().trim());
+        editor.putString("ID", loginEmail.getText().toString().trim());
+        editor.putString("PWD", loginPassword.getText().toString().trim());
 
         editor.commit();
     }
@@ -239,8 +234,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void Login() {  //로그인
-        Email = ((EditText) findViewById(R.id.et_id)).getText().toString();
-        Password = ((EditText) findViewById(R.id.et_pw)).getText().toString();
+        Email = loginEmail.getText().toString();
+        Password = loginPassword.getText().toString();
 
         if (TextUtils.isEmpty(Email)) {
             return;
@@ -248,19 +243,19 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Intent intent = new Intent(LoginActivity.this, Select_Page.class);
-                    LoginUserDataSet(Email);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        mAuth.signInWithEmailAndPassword(Email, Password).
+                addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) { // 로그인 성공시
+                            Intent intent = new Intent(LoginActivity.this, Select_Page.class);
+                            LoginUserDataSet(Email);
+                            startActivity(intent);
+                            finish();
+                        } else {  // 로그인 실패시
+                        }
+                    }
+                });
     }
 
     private void LoginUserDataSet(String Email) {  // 로그인유저 데이터 저장

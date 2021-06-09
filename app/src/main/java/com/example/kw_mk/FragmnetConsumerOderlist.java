@@ -185,6 +185,8 @@ class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         viewHolder.storeName.setText(myDataList.get(position).getStoreName());
         viewHolder.menuList.setText(myDataList.get(position).getMenuList());
+
+
         viewHolder.btn_reviewWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

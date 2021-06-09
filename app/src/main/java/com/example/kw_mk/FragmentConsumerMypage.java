@@ -1,10 +1,8 @@
 package com.example.kw_mk;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +17,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.StorageReference;
 
+import static com.example.kw_mk.App.imageOptions;
 import static com.example.kw_mk.App.serviceIntent;
 import static com.example.kw_mk.LoginActivity.pref;
 
@@ -67,7 +66,7 @@ public class FragmentConsumerMypage extends Fragment {
         }
 
         // 프로필사진 가져오기
-            Glide.with(getActivity()).load(App.LoginUserUri).into(profileImage);
+        Glide.with(getActivity()).load(App.LoginUserUri).apply(imageOptions).into(profileImage);
 
         myInfoModify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +102,7 @@ public class FragmentConsumerMypage extends Fragment {
         editor.commit();
         getActivity().stopService(serviceIntent);
         getActivity().finish();
+        FirebaseAuth.getInstance().signOut();
         App.userInit();
     }
 }

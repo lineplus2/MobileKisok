@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import static com.example.kw_mk.App.db;
+import static com.example.kw_mk.App.imageOptions;
 
 public class FragmentSellerHome extends Fragment {
 
@@ -56,7 +59,7 @@ public class FragmentSellerHome extends Fragment {
 
     void init() {
         // DB 가져오기
-        Glide.with(getActivity()).load(App.StoreUri).into(store_img);
+        Glide.with(getActivity()).load(App.StoreUri).apply(imageOptions).into(store_img);
         final DocumentReference doc = db.collection("Store_Info").document(App.LoginUserEmail);
         doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -68,7 +71,7 @@ public class FragmentSellerHome extends Fragment {
                     store_num.setText((String) document.get("전화번호"));
                     store_representative.setText((String) document.get("사업자명"));
                     store_businessnum.setText((String) document.get("사업자번호"));
-                    store_category.setText((String)document.get("카테고리"));
+                    store_category.setText((String) document.get("카테고리"));
                 } else {
                 }
             }

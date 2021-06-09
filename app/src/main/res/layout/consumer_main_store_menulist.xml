@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="3dp"
     android:fontFamily="@font/malgunbd"
     android:orientation="vertical">
 
@@ -15,7 +16,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="3dp">
 
             <TextView
                 android:id="@+id/menuListName"
@@ -40,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:src="@drawable/ic_baseline_add_a_photo_24" />
+            android:src="@drawable/loadingspinner" />
 
     </LinearLayout>
 

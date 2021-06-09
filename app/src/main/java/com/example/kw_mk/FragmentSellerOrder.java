@@ -1,20 +1,12 @@
 package com.example.kw_mk;
 
 import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,26 +16,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirestoreRegistrar;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.StorageReference;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.example.kw_mk.App.db;
-import static com.example.kw_mk.App.storageRef;
 
 public class FragmentSellerOrder extends Fragment {
 
@@ -54,7 +37,6 @@ public class FragmentSellerOrder extends Fragment {
     RecyclerView orderMenu;
 
     DocumentReference orderStoref;
-    DocumentReference itemso;
 
     @Nullable
     @Override
@@ -81,38 +63,31 @@ public class FragmentSellerOrder extends Fragment {
                                            @Override
                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                if (task.isSuccessful()) {
-
-
                                                    for (final QueryDocumentSnapshot document : task.getResult()) {
                                                        final ArrayList<orderItem> itemList = new ArrayList<>();
                                                        String name = document.get("주문자이름").toString();
                                                        String id = document.getId();
-
                                                        DocumentReference co = orderStoref.collection("RealTimeOrder").document(id);
-
-
-                                                       co.collection("주문목록").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                           @Override
-                                                           public void onComplete(@NonNull Task<QuerySnapshot> ta) {
-                                                               if (ta.isSuccessful()) {
-                                                                   for (QueryDocumentSnapshot doc : ta.getResult()) {
-
-                                                                       String itemName = doc.get("payName").toString();
-                                                                       String itemAmount = doc.get("amount").toString();
-                                                                       itemList.add(new orderItem(itemName, itemAmount));
-
+                                                       co.collection("주문목록").get()
+                                                               .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                   @Override
+                                                                   public void onComplete(@NonNull Task<QuerySnapshot> ta) {
+                                                                       if (ta.isSuccessful()) {
+                                                                           for (QueryDocumentSnapshot doc : ta.getResult()) {
+                                                                               String itemName = doc.get("payName").toString();
+                                                                               String itemAmount = doc.get("amount").toString();
+                                                                               itemList.add(new orderItem(itemName, itemAmount));
+                                                                           }
+                                                                       } else {
+                                                                           Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+                                                                       }
                                                                    }
-                                                               } else {
-                                                                   Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-                                                               }
-
-                                                           }
-                                                       });
-
-
+                                                               });
                                                        orderList.add(new orderListItem(name, id, itemList));
                                                        orderListAdapter.notifyDataSetChanged();
                                                    }
+
+//                                                   }
                                                }
                                            }
                                        }
@@ -210,7 +185,8 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(context, orderListItem.get(position).getId(), Toast.LENGTH_SHORT).show();
+                                orderListItem.remove(position);
+                                notifyDataSetChanged();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -218,8 +194,8 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
                             public void onFailure(@NonNull Exception e) {
                             }
                         });
-                orderListItem.remove(position);
-                notifyDataSetChanged();
+
+
             }
         });
 
@@ -233,9 +209,9 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
             @Override
             public void run() {
                 ItemAdapter.notifyDataSetChanged();
+                notifyDataSetChanged();
             }
         }, 1000);
-
 
         holder.orderName.setText(orderListItem.get(position).orderByName);
     }
@@ -330,32 +306,3 @@ class orderItemAdapter extends RecyclerView.Adapter<orderItemViewHolder> {
         return orderItem.size();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

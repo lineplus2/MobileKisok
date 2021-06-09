@@ -1,10 +1,12 @@
 package com.example.kw_mk;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.storage.StorageReference;
 
 import static com.example.kw_mk.App.serviceIntent;
 
@@ -48,6 +49,15 @@ public class ConsumerMainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("홈");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Back button pressed.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ConsumerMainActivity.this, Select_Page.class);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
     }
 
     @Override

@@ -21,6 +21,7 @@ public class record_contentActivity extends AppCompatActivity {
         contentMenu = findViewById(R.id.contentMenu);
 
         init_Info();
+
     }
 
     void init_Info() {

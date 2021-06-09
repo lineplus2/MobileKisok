@@ -1,9 +1,11 @@
 package com.example.kw_mk;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -42,6 +44,15 @@ public class SellerMainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("홈");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Back button pressed.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SellerMainActivity.this, Select_Page.class);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener { // BottomNavigationView 버튼 속성

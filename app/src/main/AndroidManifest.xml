@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
@@ -88,6 +90,13 @@
         <activity
             android:name=".ConsumerPayActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ConsumerCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".payActivity"
+            android:screenOrientation="portrait" />
+
 
         <service
             android:name=".ServiceActivity"

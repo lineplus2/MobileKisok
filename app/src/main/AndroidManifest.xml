@@ -29,9 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".LoginActivity"></activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Intro_Activity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,13 +82,13 @@
             android:name=".SellerMenuAddActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="MapViewTest"
+            android:name=".MapViewTest"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ShoppingCartActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ConsumerPayActivity"
+            android:name=".ConsumerPayActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ConsumerCategory"

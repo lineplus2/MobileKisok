@@ -32,6 +32,10 @@ public class App extends Application {
     public static FirebaseStorage storage = FirebaseStorage.getInstance();
     public static StorageReference storageRef = storage.getReference();
 
+
+    public static Location storeLocation;
+    public static Location userLocation;
+
     public static Uri test = null;
     public static Intent serviceIntent;
 

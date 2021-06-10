@@ -31,8 +31,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 
-import static com.example.kw_mk.App.serviceIntent;
-
 public class LoginActivity extends AppCompatActivity {
 
     private Button btn_signup;
@@ -45,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth = App.mAuth;
     FirebaseFirestore db = App.db;
 
+    GpsTracker gps;
 
     EditText loginEmail;
     EditText loginPassword;
@@ -73,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         loginEmail = findViewById(R.id.et_id);
         loginPassword = findViewById(R.id.et_pw);
 
-        serviceIntent = new Intent(this, ServiceActivity.class);
-        startService(serviceIntent);
+        gps = new GpsTracker(LoginActivity.this);
+        App.userLocation = gps.getLocation();
 
 
         //위치권한 확인

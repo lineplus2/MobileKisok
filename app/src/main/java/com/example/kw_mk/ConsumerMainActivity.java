@@ -16,8 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import static com.example.kw_mk.App.serviceIntent;
-
 public class ConsumerMainActivity extends AppCompatActivity {
 
     private FragmentManager fm = getSupportFragmentManager();
@@ -63,7 +61,6 @@ public class ConsumerMainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopService(serviceIntent);
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener { // BottomNavigationView 버튼 속성

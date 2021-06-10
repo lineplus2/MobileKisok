@@ -18,7 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -41,6 +43,7 @@ import kr.co.bootpay.model.BootUser;
 
 import static com.example.kw_mk.App.db;
 import static com.example.kw_mk.App.payMenuListItem;
+import static com.example.kw_mk.App.storeLocation;
 
 public class ConsumerPayActivity extends AppCompatActivity {
 
@@ -106,12 +109,23 @@ public class ConsumerPayActivity extends AppCompatActivity {
                         break;
                 }
 
-                DocumentReference docref = db.collection("Store_Info").document(email).collection("RealTimeOrder").document();
+                final DocumentReference docref = db.collection("Store_Info").document(email).collection("RealTimeOrder").document();
                 store.put("요청사항", needs.getText().toString());
                 store.put("결제금액", totalAmount.getText().toString());
                 store.put("주문자이메일", App.LoginUserEmail);
                 store.put("주문시간", FieldValue.serverTimestamp());
                 store.put("주문자이름", App.LoginUserName);
+
+                db.collection("Store_Info").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+
+                        storeLocation.setLatitude(Double.parseDouble(document.get("위도").toString()));
+                        storeLocation.setLongitude(Double.parseDouble(document.get("경도").toString()));
+                    }
+                });
+
 
                 for (int i = 0; i < payMenuListItem.size(); i++) {
                     docref.collection("주문목록").document(payMenuListItem.get(i).payName).set(payMenuListItem.get(i));
@@ -156,7 +170,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
 //                .setUserPhone("010-1234-5678") // 구매자 전화번호
                         .setName("결제상품명") // 결제할 상품명
                         .setOrderId("1234") // 결제 고유번호 (expire_month)
-                        .setPrice(price) // 결제할 금액
+                        .setPrice(100) // 결제할 금액
                         .addItem("마우스", 1, "ITEM_CODE_MOUSE", 100) // 주문정보에 담길 상품정보, 통계를 위해 사용
                         .addItem("키보드", 1, "ITEM_CODE_KEYBOARD", 200, "패션", "여성상의", "블라우스") // 주문정보에 담길 상품정보, 통계를 위해 사용
                         .onConfirm(new ConfirmListener() { // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행

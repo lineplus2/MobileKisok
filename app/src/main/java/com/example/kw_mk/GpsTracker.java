@@ -10,10 +10,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
-
-import android.util.Log;
 
 import static com.example.kw_mk.App.myLocation;
 
@@ -43,7 +42,7 @@ public class GpsTracker extends Service implements LocationListener {
 
         distance = start.distanceTo(End);
         dis = (int) distance;
-        if (dis < 500) {
+        if (dis < 1000) {
             meter = Double.toString(distance);
             Log.d("디스탠스 ::: ", "다와감");
         }
@@ -131,6 +130,7 @@ public class GpsTracker extends Service implements LocationListener {
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
+
     }
 
     @Override

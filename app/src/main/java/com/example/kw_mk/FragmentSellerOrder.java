@@ -60,6 +60,7 @@ public class FragmentSellerOrder extends Fragment {
             @Override
             public void onClick(View v) {
 //                init_List(); 예약 리사이클러뷰
+                Toast.makeText(getContext(), "예약버튼", Toast.LENGTH_SHORT).show();
             }
         });
 

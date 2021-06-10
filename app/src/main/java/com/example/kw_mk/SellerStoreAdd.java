@@ -215,6 +215,9 @@ public class SellerStoreAdd extends AppCompatActivity {
                     result.put("위도", String.valueOf(list.get(0).getLatitude()));
                     result.put("경도", String.valueOf(list.get(0).getLongitude()));
                 }
+            } else {
+                result.put("위도", "0");
+                result.put("경도", "0");
             }
 
             // db 등록

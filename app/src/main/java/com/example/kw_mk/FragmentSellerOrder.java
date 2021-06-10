@@ -72,7 +72,6 @@ public class FragmentSellerOrder extends Fragment {
     }
 
 
-
     void init_List() {
         orderList = new ArrayList<>();
 

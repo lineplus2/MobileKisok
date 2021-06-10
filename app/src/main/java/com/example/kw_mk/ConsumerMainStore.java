@@ -8,23 +8,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -34,9 +29,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.kw_mk.App.db;
 import static com.example.kw_mk.App.imageOptions;
@@ -52,7 +45,7 @@ public class ConsumerMainStore extends AppCompatActivity {
 
     menuListAdapter adapter;
 
-    public static String email;
+    public static String email, storeLo, storeLa;
     public static ArrayList addList;
 
     @Override
@@ -80,11 +73,12 @@ public class ConsumerMainStore extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ConsumerMainStore.this, ConsumerPayActivity.class);
                 intent.putExtra("Email", email);
+                intent.putExtra("longitude", storeLo);
+                intent.putExtra("latitude", storeLa);
                 startActivity(intent);
-
             }
         });
-        
+
     }
 
     void init_Info() {
@@ -100,6 +94,8 @@ public class ConsumerMainStore extends AppCompatActivity {
                 StoreOwner.setText(document.get("사업자명").toString());
                 StoreAddress.setText(document.get("주소").toString() + "  " + document.get("상세주소"));
                 StoreBusinessNum.setText(document.get("사업자번호").toString());
+                storeLa = document.get("위도").toString();
+                storeLo = document.get("경도").toString();
             }
         });
 

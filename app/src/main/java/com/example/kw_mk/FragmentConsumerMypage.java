@@ -23,7 +23,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.StorageReference;
 
 import static com.example.kw_mk.App.imageOptions;
-import static com.example.kw_mk.App.serviceIntent;
 import static com.example.kw_mk.LoginActivity.pref;
 
 public class FragmentConsumerMypage extends Fragment {
@@ -100,7 +99,6 @@ public class FragmentConsumerMypage extends Fragment {
         editor.putString("PWD", "");
 
         editor.commit();
-        getActivity().stopService(serviceIntent);
         getActivity().finish();
         FirebaseAuth.getInstance().signOut();
         App.userInit();

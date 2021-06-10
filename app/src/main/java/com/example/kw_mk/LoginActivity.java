@@ -72,8 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         loginEmail = findViewById(R.id.et_id);
         loginPassword = findViewById(R.id.et_pw);
 
-        gps = new GpsTracker(LoginActivity.this);
-        App.userLocation = gps.getLocation();
+        App.userLocation = new GpsTracker(LoginActivity.this).getLocation();
 
 
         //위치권한 확인

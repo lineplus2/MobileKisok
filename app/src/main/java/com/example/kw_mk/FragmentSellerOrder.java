@@ -39,6 +39,7 @@ public class FragmentSellerOrder extends Fragment {
 
     DocumentReference orderStoref;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class FragmentSellerOrder extends Fragment {
 
 
     void init_List() {
+
         orderList = new ArrayList<>();
 
         orderStoref.collection("RealTimeOrder").get()

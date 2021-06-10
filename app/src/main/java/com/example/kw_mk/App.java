@@ -61,4 +61,6 @@ public class App extends Application {
             .placeholder(R.drawable.loadingspinner)
             .error(R.drawable.noimage);
 
+    public static Intent gpsIntent;
+
 }

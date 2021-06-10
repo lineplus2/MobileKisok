@@ -3,9 +3,7 @@ package com.example.kw_mk;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +29,6 @@ public class Loading extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-    }, 1000);
+        }, 1000);
     }
 }

@@ -15,6 +15,7 @@ import android.util.Log;
 import androidx.core.content.ContextCompat;
 
 import static com.example.kw_mk.App.myLocation;
+import static com.example.kw_mk.App.storeLocation;
 
 public class GpsTracker extends Service implements LocationListener {
 
@@ -41,10 +42,11 @@ public class GpsTracker extends Service implements LocationListener {
         double distance;
 
         distance = start.distanceTo(End);
-        dis = (int) distance;
-        if (dis < 1000) {
+        dis = (int) distance; // 거리계산 값
+        if (dis < 500) {
             meter = Double.toString(distance);
             Log.d("디스탠스 ::: ", "다와감");
+            stopUsingGPS();
         }
         Log.d("디스탠스 ::: ", "" + dis);
     }
@@ -116,6 +118,9 @@ public class GpsTracker extends Service implements LocationListener {
     public void onLocationChanged(Location location) {
         if (location != null) {
             myLocation = location;
+            if (storeLocation != null) {
+                distacne(myLocation, storeLocation);
+            }
         } else {
         }
     }

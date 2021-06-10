@@ -1,6 +1,7 @@
 package com.example.kw_mk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ import kr.co.bootpay.model.BootExtra;
 import kr.co.bootpay.model.BootUser;
 
 import static com.example.kw_mk.App.db;
+import static com.example.kw_mk.App.gpsIntent;
 import static com.example.kw_mk.App.payMenuListItem;
 import static com.example.kw_mk.App.storeLocation;
 
@@ -64,6 +66,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
 
     String email;
     StringBuilder menu = new StringBuilder("");
+    String longitude, latitude;
 
     int sum = 0;
 
@@ -81,6 +84,9 @@ public class ConsumerPayActivity extends AppCompatActivity {
         needs = findViewById(R.id.needs);
         rGroup = findViewById(R.id.r_group);
 
+        longitude = getIntent().getStringExtra("longitude");
+        latitude = getIntent().getStringExtra("latitude");
+
         BootpayAnalytics.init(ConsumerPayActivity.this, "60bd8a01d8c1bd00202bbe02");
 
         initData();
@@ -89,6 +95,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffffff")));
 
 
+        // 주문하기 버튼
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +108,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
                 HashMap<String, Object> mPay = new HashMap<>();
                 // 주문넣기
                 HashMap<String, Object> store = new HashMap<>();
+                HashMap<String, Object> realtimeoder = new HashMap<>();
                 String payC = null;
                 int id = rGroup.getCheckedRadioButtonId();
 
@@ -163,9 +171,26 @@ public class ConsumerPayActivity extends AppCompatActivity {
 
                 db.collection("User_Info").document(App.LoginUserEmail).collection("OrderList").document().set(mPay);
 
+                // 실시간 결제 시스템 넣기
+                realtimeoder.put("주문시간", FieldValue.serverTimestamp());
+                realtimeoder.put("주문한가게이름", storeName.getText().toString());
+                realtimeoder.put("가게전화번호", storeNum.getText().toString());
+                realtimeoder.put("주문한가게이메일", email);
+                realtimeoder.put("주문목록", menu.toString());
+                realtimeoder.put("가게위도", latitude);
+                realtimeoder.put("가게경도", longitude);
+
+
+                storeLocation.setLatitude(Double.parseDouble(latitude));
+                storeLocation.setLongitude(Double.parseDouble(longitude));
+                gpsIntent = new Intent(ConsumerPayActivity.this, ServiceActivity.class);
+                startService(gpsIntent);
+
+
+                db.collection("User_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document().set(realtimeoder);
+
+
                 // 결제
-
-
                 Bootpay.init(getFragmentManager())
                         .setApplicationId("60bd8a01d8c1bd00202bbe02") // 해당 프로젝트(안드로이드)의 application id 값(위의 값 복붙)
                         .setPG(PG.INICIS) // 결제할 PG 사

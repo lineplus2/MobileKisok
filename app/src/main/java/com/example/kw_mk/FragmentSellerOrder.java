@@ -33,6 +33,7 @@ public class FragmentSellerOrder extends Fragment {
     ArrayList<orderListItem> orderList;
     orderListAdapter orderListAdapter;
 
+    Button btn_1, btn_2;
 
     RecyclerView orderMenu;
 
@@ -44,9 +45,23 @@ public class FragmentSellerOrder extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seller_main_order, container, false);
 
         orderMenu = rootView.findViewById(R.id.orderList);
+        btn_1 = rootView.findViewById(R.id.order_btn);
+        btn_2 = rootView.findViewById(R.id.order_btn2);
 
         orderStoref = db.collection("Store_Info").document(App.LoginUserEmail);
 
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                init_List();
+            }
+        });
+        btn_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                init_List(); 예약 리사이클러뷰
+            }
+        });
 
         orderMenu.setHasFixedSize(true);
 
@@ -54,6 +69,8 @@ public class FragmentSellerOrder extends Fragment {
 
         return rootView;
     }
+
+
 
     void init_List() {
         orderList = new ArrayList<>();
@@ -86,19 +103,14 @@ public class FragmentSellerOrder extends Fragment {
                                                        orderList.add(new orderListItem(name, id, itemList));
                                                        orderListAdapter.notifyDataSetChanged();
                                                    }
-
-//                                                   }
                                                }
                                            }
                                        }
                 );
-
-
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         orderMenu.setLayoutManager(manager);
         orderListAdapter = new orderListAdapter(orderList, getContext());
         orderMenu.setAdapter(orderListAdapter);
-
     }
 }
 

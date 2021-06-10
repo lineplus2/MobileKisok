@@ -114,6 +114,8 @@ public class ConsumerPayActivity extends AppCompatActivity {
                         break;
                 }
 
+
+                // 가게로 주문정보 넣기
                 final DocumentReference docref = db.collection("Store_Info").document(email).collection("RealTimeOrder").document();
                 store.put("요청사항", needs.getText().toString());
                 store.put("결제금액", totalAmount.getText().toString());

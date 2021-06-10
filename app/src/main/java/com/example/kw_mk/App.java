@@ -33,8 +33,8 @@ public class App extends Application {
     public static StorageReference storageRef = storage.getReference();
 
 
-    public static Location storeLocation;
-    public static Location userLocation;
+    public static Location storeLocation = new Location("store");
+    public static Location userLocation = new Location("user");
 
     public static Uri test = null;
     public static Intent serviceIntent;

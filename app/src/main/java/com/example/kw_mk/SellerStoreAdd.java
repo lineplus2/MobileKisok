@@ -27,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,21 +51,23 @@ public class SellerStoreAdd extends AppCompatActivity {
     Uri selectedImageUri;
     Geocoder geocoder;
 
+    List<Address> geolist = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_main_store_add);
 
-        store_image = (ImageView) findViewById(R.id.store_image);
-        store_name = (EditText) findViewById(R.id.store_name);
-        store_content = (EditText) findViewById(R.id.store_content);
-        store_num = (EditText) findViewById(R.id.store_num);
+        store_image = findViewById(R.id.store_image);
+        store_name = findViewById(R.id.store_name);
+        store_content = findViewById(R.id.store_content);
+        store_num = findViewById(R.id.store_num);
         store_ownerName = findViewById(R.id.store_ownerName);
         store_buinessNum = findViewById(R.id.store_businessnum);
-        store_address1 = (TextView) findViewById(R.id.store_address1);
-        store_address2 = (EditText) findViewById(R.id.store_address2);
-        store_add_btn = (Button) findViewById(R.id.store_add_btn);
-        addres_details = (Button) findViewById(R.id.addres_details);
+        store_address1 = findViewById(R.id.store_address1);
+        store_address2 = findViewById(R.id.store_address2);
+        store_add_btn = findViewById(R.id.store_add_btn);
+        addres_details = findViewById(R.id.addres_details);
         categorySpinner = findViewById(R.id.spinner);
         geocoder = new Geocoder(this);
 
@@ -202,18 +205,22 @@ public class SellerStoreAdd extends AppCompatActivity {
             result.put("카테고리", category);
 
             //위,경도 구하기
-            List<Address> list = null;
+
+            geolist = new ArrayList<>();
+            String address = address1;
+
             try {
-                list = geocoder.getFromLocationName(address1, 1);
+                geolist = geocoder.getFromLocationName(address, 1);
             } catch (IOException e) {
+                Toast.makeText(this, "주소변환 실패", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
-            if (list != null) {
-                if (list.size() == 0) {
+            if (geolist != null) {
+                if (geolist.size() == 0) {
                 } else {
-                    result.put("위도", String.valueOf(list.get(0).getLatitude()));
-                    result.put("경도", String.valueOf(list.get(0).getLongitude()));
+                    result.put("위도", String.valueOf(geolist.get(0).getLatitude()));
+                    result.put("경도", String.valueOf(geolist.get(0).getLongitude()));
                 }
             } else {
                 result.put("위도", "0");

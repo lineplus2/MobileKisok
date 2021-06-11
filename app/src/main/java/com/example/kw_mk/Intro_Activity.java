@@ -22,7 +22,7 @@ public class Intro_Activity extends AppCompatActivity {
             @Override public void run() {
                 Intent intent = new Intent (getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
-                finish(); } },2000); //1초 후 인트로 실행 }
+                finish(); } },2000); //2초 인트로 실행 }
     }
 
 }

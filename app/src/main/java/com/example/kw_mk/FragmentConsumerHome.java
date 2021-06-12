@@ -164,9 +164,9 @@ public class FragmentConsumerHome extends Fragment {
 
                                 int loTo = (int) lo.distanceTo(myLocation);
 
-//                                if (loTo < 1000) {
-                                ReList.add(new homeRecyclerView(StoreId, str, StoreUser, lo));
-//                                }
+                                if (loTo < 1000) {
+                                    ReList.add(new homeRecyclerView(StoreId, str, StoreUser, lo));
+                                }
 
                             }
                         } else {

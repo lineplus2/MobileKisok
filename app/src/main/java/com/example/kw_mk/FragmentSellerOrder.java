@@ -30,8 +30,8 @@ import static com.example.kw_mk.App.db;
 
 public class FragmentSellerOrder extends Fragment {
 
-    ArrayList<orderListItem> orderList;
-    orderListAdapter orderListAdapter;
+    ArrayList<orderListItem> orderList, reserveList;
+    orderListAdapter orderListAdapter, reserveListAdapter;
 
     Button btn_1, btn_2;
 
@@ -50,30 +50,72 @@ public class FragmentSellerOrder extends Fragment {
         btn_2 = rootView.findViewById(R.id.order_btn2);
 
         orderStoref = db.collection("Store_Info").document(App.LoginUserEmail);
+        order_ListSet();
 
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                init_List();
+                order_ListSet();
             }
         });
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                init_List(); 예약 리사이클러뷰
+                reserve_ListSet();
                 Toast.makeText(getContext(), "예약버튼", Toast.LENGTH_SHORT).show();
             }
         });
 
         orderMenu.setHasFixedSize(true);
 
-        init_List();
 
         return rootView;
     }
 
 
-    void init_List() {
+    void reserve_ListSet() {
+        reserveList = new ArrayList<>();
+
+        orderStoref.collection("Reserve").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                           @Override
+                                           public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                               if (task.isSuccessful() && task != null) {
+                                                   for (final QueryDocumentSnapshot document : task.getResult()) {
+                                                       final ArrayList<orderItem> itemList = new ArrayList<>();
+                                                       String name = document.get("주문자이름").toString();
+                                                       String id = document.getId();
+                                                       DocumentReference co = orderStoref.collection("Reserve").document(id);
+                                                       co.collection("주문목록").get()
+                                                               .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                   @Override
+                                                                   public void onComplete(@NonNull Task<QuerySnapshot> ta) {
+                                                                       if (ta.isSuccessful()) {
+                                                                           for (QueryDocumentSnapshot doc : ta.getResult()) {
+                                                                               String itemName = doc.get("payName").toString();
+                                                                               String itemAmount = doc.get("amount").toString();
+                                                                               itemList.add(new orderItem(itemName, itemAmount));
+                                                                           }
+                                                                       } else {
+                                                                           Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+                                                                       }
+                                                                   }
+                                                               });
+                                                       reserveList.add(new orderListItem(name, id, itemList));
+                                                       reserveListAdapter.notifyDataSetChanged();
+                                                   }
+                                               }
+                                           }
+                                       }
+                );
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        orderMenu.setLayoutManager(manager);
+        reserveListAdapter = new orderListAdapter(reserveList, getContext());
+        orderMenu.setAdapter(reserveListAdapter);
+    }
+
+
+    void order_ListSet() {
 
         orderList = new ArrayList<>();
 
@@ -193,7 +235,6 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId())
                         .delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

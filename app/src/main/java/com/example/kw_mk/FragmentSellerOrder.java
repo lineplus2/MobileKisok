@@ -51,6 +51,36 @@ public class FragmentSellerOrder extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seller_main_order, container, false);
+
+        orderMenu = rootView.findViewById(R.id.orderList);
+        btn_1 = rootView.findViewById(R.id.order_btn);
+        btn_2 = rootView.findViewById(R.id.order_btn2);
+
+        orderStoref = db.collection("Store_Info").document(App.LoginUserEmail);
+        order_ListSet();
+
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnSet = 0;
+                order_ListSet();
+            }
+        });
+        btn_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnSet = 1;
+                reserve_ListSet();
+            }
+        });
+
+        orderMenu.setHasFixedSize(true);
 
         db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -85,7 +115,6 @@ public class FragmentSellerOrder extends Fragment {
                     switch (dc.getType()) {
                         case ADDED:
                             namedd = dc.getDocument().get("주문자이름").toString();
-                            alertShow(namedd);
                             break;
                         case MODIFIED:
                             break;
@@ -93,42 +122,13 @@ public class FragmentSellerOrder extends Fragment {
                             break;
                     }
                 }
+                alertShow(namedd);
 
                 if (btnSet == 1) {
                     reserve_ListSet();
                 }
             }
         });
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.seller_main_order, container, false);
-
-        orderMenu = rootView.findViewById(R.id.orderList);
-        btn_1 = rootView.findViewById(R.id.order_btn);
-        btn_2 = rootView.findViewById(R.id.order_btn2);
-
-        orderStoref = db.collection("Store_Info").document(App.LoginUserEmail);
-        order_ListSet();
-
-        btn_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnSet = 0;
-                order_ListSet();
-            }
-        });
-        btn_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnSet = 1;
-                reserve_ListSet();
-            }
-        });
-
-        orderMenu.setHasFixedSize(true);
 
 
         return rootView;

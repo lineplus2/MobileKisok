@@ -250,7 +250,6 @@ public class ConsumerPayActivity extends AppCompatActivity {
                         .request();
             }
         });
-        finish();
     }
 
     public void initData() {

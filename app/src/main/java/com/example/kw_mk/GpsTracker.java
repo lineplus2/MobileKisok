@@ -58,8 +58,7 @@ public class GpsTracker extends Service implements LocationListener {
         if (dis < 500 && alarm == 0) {
             alarm++;
             meter = Double.toString(distance);
-            Log.d("디스탠스 ::: ", "다와감");
-            // 알람주기
+            // 일정거리 근처
             db.collection("Store_Info").document(App.orderEmail).collection("RealTimeOrder")
                     .whereEqualTo("주문자이메일", App.LoginUserEmail)
                     .get()

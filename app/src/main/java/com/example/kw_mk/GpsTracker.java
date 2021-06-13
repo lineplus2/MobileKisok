@@ -15,6 +15,7 @@ import android.util.Log;
 import androidx.core.content.ContextCompat;
 
 import static com.example.kw_mk.App.myLocation;
+import static com.example.kw_mk.App.payMenuListItem2;
 import static com.example.kw_mk.App.storeLocation;
 
 public class GpsTracker extends Service implements LocationListener {
@@ -23,6 +24,7 @@ public class GpsTracker extends Service implements LocationListener {
     Location location;
     double latitude;
     double longitude;
+    int alarm = 0;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
     private static final long MIN_TIME_BW_UPDATES = 1000;
@@ -32,6 +34,7 @@ public class GpsTracker extends Service implements LocationListener {
     public GpsTracker(Context context) {
         this.mContext = context;
         myLocation = getLocation();
+        alarm = 0;
     }
 
 
@@ -43,9 +46,14 @@ public class GpsTracker extends Service implements LocationListener {
 
         distance = start.distanceTo(End);
         dis = (int) distance; // 거리계산 값
-        if (dis < 500) {
+        if (dis < 500 && alarm == 0) {
+            alarm = 1;
             meter = Double.toString(distance);
             Log.d("디스탠스 ::: ", "다와감");
+            // 알람주기
+
+
+            payMenuListItem2.clear();
             stopUsingGPS();
         }
         Log.d("디스탠스 ::: ", "" + dis);

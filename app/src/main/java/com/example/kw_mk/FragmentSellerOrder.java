@@ -235,6 +235,17 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId()).collection("주문목록").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (final QueryDocumentSnapshot document : task.getResult()) {
+                                document.getReference().delete();
+                            }
+                        }
+
+                    }
+                });
                 db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId())
                         .delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

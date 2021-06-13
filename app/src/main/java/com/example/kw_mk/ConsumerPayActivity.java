@@ -195,59 +195,64 @@ public class ConsumerPayActivity extends AppCompatActivity {
 
 
                 // 결제
-                Bootpay.init(getFragmentManager())
-                        .setApplicationId("60bd8a01d8c1bd00202bbe02") // 해당 프로젝트(안드로이드)의 application id 값(위의 값 복붙)
-                        .setPG(PG.INICIS) // 결제할 PG 사
-                        .setMethod(Method.CARD) // 결제수단
-                        .setContext(ConsumerPayActivity.this)
-                        .setBootUser(bootUser)
-                        .setBootExtra(bootExtra)
-                        .setUX(UX.PG_DIALOG)
+                if (payC.equals("선결제")) {
+                    Bootpay.init(getFragmentManager())
+                            .setApplicationId("60bd8a01d8c1bd00202bbe02") // 해당 프로젝트(안드로이드)의 application id 값(위의 값 복붙)
+                            .setPG(PG.INICIS) // 결제할 PG 사
+                            .setMethod(Method.CARD) // 결제수단
+                            .setContext(ConsumerPayActivity.this)
+                            .setBootUser(bootUser)
+                            .setBootExtra(bootExtra)
+                            .setUX(UX.PG_DIALOG)
 //                .setUserPhone("010-1234-5678") // 구매자 전화번호
-                        .setName("결제상품명") // 결제할 상품명
-                        .setOrderId("1234") // 결제 고유번호 (expire_month)
-                        .setPrice(100) // 결제할 금액
-                        .addItem("마우스", 1, "ITEM_CODE_MOUSE", 100) // 주문정보에 담길 상품정보, 통계를 위해 사용
-                        .addItem("키보드", 1, "ITEM_CODE_KEYBOARD", 200, "패션", "여성상의", "블라우스") // 주문정보에 담길 상품정보, 통계를 위해 사용
-                        .onConfirm(new ConfirmListener() { // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
-                            @Override
-                            public void onConfirm(@Nullable String message) {
-                                Log.d("confirm", "컴펌 실행");
-                                if (0 < stuck)
-                                    Bootpay.confirm(message); // 재고가 있을 경우.
-                                else {
-                                    Log.d("confirm", message);
-                                    Bootpay.removePaymentWindow(); // 재고가 없어 중간에 결제창을 닫고 싶을 경우
-                                }
-                            }
-                        })
-                        .onDone(new DoneListener() { // 결제완료시 호출, 아이템 지급 등 데이터 동기화 로직을 수행합니다
-                            @Override
-                            public void onDone(@Nullable String message) {
-                                Log.d("done", message);
-                            }
-                        })
-                        .onReady(new ReadyListener() { // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
-                            @Override
-                            public void onReady(@Nullable String message) {
-                                Log.d("ready", message);
-                            }
-                        })
-                        .onCancel(new CancelListener() { // 결제 취소시 호출
-                            @Override
-                            public void onCancel(@Nullable String message) {
-
-                                Log.d("cancel", message);
-                            }
-                        })
-                        .onClose(
-                                new CloseListener() { //결제창이 닫힐때 실행되는 부분
-                                    @Override
-                                    public void onClose(String message) {
-                                        Log.d("close", "close");
+                            .setName("결제상품명") // 결제할 상품명
+                            .setOrderId("1234") // 결제 고유번호 (expire_month)
+                            .setPrice(100) // 결제할 금액
+                            .addItem("마우스", 1, "ITEM_CODE_MOUSE", 100) // 주문정보에 담길 상품정보, 통계를 위해 사용
+                            .addItem("키보드", 1, "ITEM_CODE_KEYBOARD", 200, "패션", "여성상의", "블라우스") // 주문정보에 담길 상품정보, 통계를 위해 사용
+                            .onConfirm(new ConfirmListener() { // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
+                                @Override
+                                public void onConfirm(@Nullable String message) {
+                                    Log.d("confirm", "컴펌 실행");
+                                    if (0 < stuck)
+                                        Bootpay.confirm(message); // 재고가 있을 경우.
+                                    else {
+                                        Log.d("confirm", message);
+                                        Bootpay.removePaymentWindow(); // 재고가 없어 중간에 결제창을 닫고 싶을 경우
                                     }
-                                })
-                        .request();
+                                }
+                            })
+                            .onDone(new DoneListener() { // 결제완료시 호출, 아이템 지급 등 데이터 동기화 로직을 수행합니다
+                                @Override
+                                public void onDone(@Nullable String message) {
+                                    Log.d("done", message);
+                                    finish();
+                                }
+                            })
+                            .onReady(new ReadyListener() { // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
+                                @Override
+                                public void onReady(@Nullable String message) {
+                                    Log.d("ready", message);
+                                }
+                            })
+                            .onCancel(new CancelListener() { // 결제 취소시 호출
+                                @Override
+                                public void onCancel(@Nullable String message) {
+
+                                    Log.d("cancel", message);
+                                }
+                            })
+                            .onClose(
+                                    new CloseListener() { //결제창이 닫힐때 실행되는 부분
+                                        @Override
+                                        public void onClose(String message) {
+                                            Log.d("close", "close");
+                                        }
+                                    })
+                            .request();
+                } else if (payC.equals("방문결제")) {
+                    finish();
+                }
             }
         });
     }

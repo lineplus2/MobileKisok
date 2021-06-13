@@ -36,6 +36,7 @@ public class App extends Application {
 
     public static HashMap<String, Object> orderData;
     public static DocumentReference ord;
+    public static String orderEmail;
 
 
     public static Location storeLocation = new Location("store");

@@ -12,9 +12,16 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+
+import static com.example.kw_mk.App.db;
 import static com.example.kw_mk.App.myLocation;
+import static com.example.kw_mk.App.orderData;
 import static com.example.kw_mk.App.payMenuListItem2;
 import static com.example.kw_mk.App.storeLocation;
 
@@ -24,7 +31,7 @@ public class GpsTracker extends Service implements LocationListener {
     Location location;
     double latitude;
     double longitude;
-    int alarm = 0;
+    static int alarm = 0;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
     private static final long MIN_TIME_BW_UPDATES = 1000;
@@ -33,7 +40,7 @@ public class GpsTracker extends Service implements LocationListener {
 
     public GpsTracker(Context context) {
         this.mContext = context;
-        myLocation = getLocation();
+        getLocation();
         alarm = 0;
     }
 
@@ -47,13 +54,20 @@ public class GpsTracker extends Service implements LocationListener {
         distance = start.distanceTo(End);
         dis = (int) distance; // 거리계산 값
         if (dis < 500 && alarm == 0) {
-            alarm = 1;
+            alarm++;
             meter = Double.toString(distance);
             Log.d("디스탠스 ::: ", "다와감");
             // 알람주기
-
-
-            payMenuListItem2.clear();
+            db.collection("Store_Info").document(App.orderEmail).collection("Reserve").add(orderData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentReference> task) {
+                    DocumentReference doc = task.getResult();
+                    for (int i = 0; i < payMenuListItem2.size(); i++) {
+                        doc.collection("주문목록").document(payMenuListItem2.get(i).payName).set(payMenuListItem2.get(i));
+                    }
+                    payMenuListItem2.clear();
+                }
+            });
             stopUsingGPS();
         }
         Log.d("디스탠스 ::: ", "" + dis);

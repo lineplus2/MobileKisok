@@ -167,7 +167,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
                     docref.set(store);
 
                     App.orderData = store;
-                    App.ord = db.collection("Store_Info").document(email).collection("Reserve").document();
+                    App.orderEmail = email;
                     payMenuListItem.clear();
                 } else {
                     Toast.makeText(ConsumerPayActivity.this, "주문목록이 없습니다.", Toast.LENGTH_SHORT).show();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,6 +69,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
     String email;
     StringBuilder menu = new StringBuilder("");
     String longitude, latitude;
+    TimePicker time;
 
     int sum = 0;
 
@@ -83,6 +86,8 @@ public class ConsumerPayActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("Email");
         needs = findViewById(R.id.needs);
         rGroup = findViewById(R.id.r_group);
+        time = findViewById(R.id.timepicker);
+
 
         longitude = getIntent().getStringExtra("longitude");
         latitude = getIntent().getStringExtra("latitude");
@@ -122,15 +127,24 @@ public class ConsumerPayActivity extends AppCompatActivity {
                         break;
                 }
 
+                int hour = 0, minute = 0;
+                if (Build.VERSION.SDK_INT >= 23) {
+                    hour = time.getHour();
+                    minute = time.getMinute();
+                }
+                StringBuilder timebuilder = new StringBuilder("");
+                timebuilder.append(hour + " : " + minute);
+
 
                 // 가게로 주문정보 넣기
-                final DocumentReference docref = db.collection("Store_Info").document(email).collection("RealTimeOrder").document();
+                final DocumentReference docref = db.collection("Store_Info").document(email).collection("Reserve").document();
                 store.put("요청사항", needs.getText().toString());
                 store.put("결제금액", totalAmount.getText().toString());
                 store.put("주문자이메일", App.LoginUserEmail);
                 store.put("주문시간", FieldValue.serverTimestamp());
                 store.put("주문자이름", App.LoginUserName);
                 store.put("가게이메일", email);
+                store.put("예상시간", timebuilder.toString());
 
                 db.collection("Store_Info").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override

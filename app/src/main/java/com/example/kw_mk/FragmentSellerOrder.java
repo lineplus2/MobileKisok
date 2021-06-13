@@ -46,7 +46,7 @@ public class FragmentSellerOrder extends Fragment {
 
     DocumentReference orderStoref;
 
-    public static int btnSet = 0;
+    public static int btnSet = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,19 +63,19 @@ public class FragmentSellerOrder extends Fragment {
         btn_2 = rootView.findViewById(R.id.order_btn2);
 
         orderStoref = db.collection("Store_Info").document(App.LoginUserEmail);
-        order_ListSet();
+
 
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnSet = 0;
+                btnSet = 1;
                 order_ListSet();
             }
         });
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnSet = 1;
+                btnSet = 0;
                 reserve_ListSet();
             }
         });
@@ -91,6 +91,7 @@ public class FragmentSellerOrder extends Fragment {
                     switch (dc.getType()) {
                         case ADDED:
                             named = dc.getDocument().get("주문자이름").toString();
+                            alertShow(named);
                             break;
                         case MODIFIED:
                             break;
@@ -98,19 +99,17 @@ public class FragmentSellerOrder extends Fragment {
                             break;
                     }
                 }
-                if (btnSet == 0) {
+                if (btnSet == 1) {
                     order_ListSet();
                 }
-
-
             }
         });
 
         db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                String namedd = "";
 
+                String namedd = "";
                 for (DocumentChange dc : value.getDocumentChanges()) {
                     switch (dc.getType()) {
                         case ADDED:
@@ -122,9 +121,8 @@ public class FragmentSellerOrder extends Fragment {
                             break;
                     }
                 }
-                alertShow(namedd);
 
-                if (btnSet == 1) {
+                if (btnSet == 0) {
                     reserve_ListSet();
                 }
             }
@@ -182,6 +180,7 @@ public class FragmentSellerOrder extends Fragment {
                                                        final ArrayList<orderItem> itemList = new ArrayList<>();
                                                        String name = document.get("주문자이름").toString();
                                                        String id = document.getId();
+                                                       String time = document.get("예상시간").toString();
                                                        DocumentReference co = orderStoref.collection("Reserve").document(id);
                                                        co.collection("주문목록").get()
                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -198,7 +197,7 @@ public class FragmentSellerOrder extends Fragment {
                                                                        }
                                                                    }
                                                                });
-                                                       reserveList.add(new orderListItem(name, id, itemList));
+                                                       reserveList.add(new orderListItem(name, id, itemList, time));
                                                        reserveListAdapter.notifyDataSetChanged();
                                                    }
                                                }
@@ -224,6 +223,7 @@ public class FragmentSellerOrder extends Fragment {
                                                        final ArrayList<orderItem> itemList = new ArrayList<>();
                                                        String name = document.get("주문자이름").toString();
                                                        String id = document.getId();
+                                                       String time = document.get("예상시간").toString();
                                                        DocumentReference co = orderStoref.collection("RealTimeOrder").document(id);
                                                        co.collection("주문목록").get()
                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -240,7 +240,7 @@ public class FragmentSellerOrder extends Fragment {
                                                                        }
                                                                    }
                                                                });
-                                                       orderList.add(new orderListItem(name, id, itemList));
+                                                       orderList.add(new orderListItem(name, id, itemList, time));
                                                        orderListAdapter.notifyDataSetChanged();
                                                    }
                                                }
@@ -258,11 +258,13 @@ class orderListItem {
     String orderByName;
     String id;
     ArrayList<orderItem> item;
+    String time;
 
-    orderListItem(String name, String id, ArrayList<orderItem> item) {
+    orderListItem(String name, String id, ArrayList<orderItem> item, String time) {
         this.orderByName = name;
         this.id = id;
         this.item = item;
+        this.time = time;
     }
 
     public void setOrderByName(String orderByName) {
@@ -283,7 +285,7 @@ class orderListItem {
 }
 
 class orderListViewHolder extends RecyclerView.ViewHolder {
-    TextView orderName;
+    TextView orderName, time;
     RecyclerView orderItemList;
     Button btn;
 
@@ -294,6 +296,7 @@ class orderListViewHolder extends RecyclerView.ViewHolder {
         orderName = itemView.findViewById(R.id.orderByName);
         orderItemList = itemView.findViewById(R.id.orderByMenu);
         btn = itemView.findViewById(R.id.orderCompliteBtn);
+        time = itemView.findViewById(R.id.orderTime);
 
     }
 }
@@ -331,7 +334,7 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FragmentSellerOrder.btnSet == 0) {
+                if (FragmentSellerOrder.btnSet == 1) {
                     db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId()).collection("주문목록")
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -359,7 +362,7 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
                                 public void onFailure(@NonNull Exception e) {
                                 }
                             });
-                } else if (FragmentSellerOrder.btnSet == 1) {
+                } else if (FragmentSellerOrder.btnSet == 0) {
                     db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve").document(orderListItem.get(position).getId()).collection("주문목록")
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -406,6 +409,7 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
         }, 1000);
 
         holder.orderName.setText(orderListItem.get(position).orderByName);
+        holder.time.setText(orderListItem.get(position).time);
     }
 
 

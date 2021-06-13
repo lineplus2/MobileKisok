@@ -61,7 +61,5 @@ dependencies {
 
     implementation 'com.github.bootpay:client_android_java:3.2.47'
 
-
     implementation 'com.airbnb.android:lottie:3.7.0'
-
 }

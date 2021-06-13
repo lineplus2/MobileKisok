@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import static com.example.kw_mk.App.imageOptions;
 import static com.example.kw_mk.App.payMenuListItem;
+import static com.example.kw_mk.App.payMenuListItem2;
 import static com.example.kw_mk.App.storageRef;
 
 public class ShoppingCartActivity extends AppCompatActivity {
@@ -61,6 +62,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 amount = mount.getText().toString();
                 payMenuListItem.add(new payMenuList(menuName.getText().toString(), menuPrice.getText().toString(), amount));
+                payMenuListItem2.add(new payMenuList(menuName.getText().toString(), menuPrice.getText().toString(), amount));
                 finish();
             }
         });

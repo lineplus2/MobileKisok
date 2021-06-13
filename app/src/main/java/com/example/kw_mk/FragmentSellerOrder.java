@@ -1,6 +1,8 @@
 package com.example.kw_mk;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -20,7 +22,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -39,6 +46,12 @@ public class FragmentSellerOrder extends Fragment {
 
     DocumentReference orderStoref;
 
+    public static int btnSet = 0;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -55,21 +68,105 @@ public class FragmentSellerOrder extends Fragment {
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnSet = 0;
                 order_ListSet();
             }
         });
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnSet = 1;
                 reserve_ListSet();
-                Toast.makeText(getContext(), "예약버튼", Toast.LENGTH_SHORT).show();
             }
         });
 
         orderMenu.setHasFixedSize(true);
 
+        db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                String named = "";
+
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    switch (dc.getType()) {
+                        case ADDED:
+                            named = dc.getDocument().get("주문자이름").toString();
+                            break;
+                        case MODIFIED:
+                            break;
+                        case REMOVED:
+                            break;
+                    }
+                }
+                if (btnSet == 0) {
+                    order_ListSet();
+                }
+
+
+            }
+        });
+
+        db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                String namedd = "";
+
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    switch (dc.getType()) {
+                        case ADDED:
+                            namedd = dc.getDocument().get("주문자이름").toString();
+                            break;
+                        case MODIFIED:
+                            break;
+                        case REMOVED:
+                            break;
+                    }
+                }
+                alertShow(namedd);
+
+                if (btnSet == 1) {
+                    reserve_ListSet();
+                }
+            }
+        });
+
 
         return rootView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Query query = db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder");
+        ListenerRegistration registration = query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+            }
+        });
+
+        Query query1 = db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve");
+        ListenerRegistration registration1 = query1.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+            }
+        });
+
+        registration.remove();
+        registration1.remove();
+
+
+    }
+
+    void alertShow(String name) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("AlertDialog");
+        builder.setMessage(name + "이 근처에 왔습니다.");
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 
 
@@ -113,7 +210,6 @@ public class FragmentSellerOrder extends Fragment {
         reserveListAdapter = new orderListAdapter(reserveList, getContext());
         orderMenu.setAdapter(reserveListAdapter);
     }
-
 
     void order_ListSet() {
 
@@ -235,21 +331,63 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId())
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                orderListItem.remove(position);
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                            }
-                        });
+                if (FragmentSellerOrder.btnSet == 0) {
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId()).collection("주문목록")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (final QueryDocumentSnapshot document : task.getResult()) {
+                                            document.getReference().delete();
+                                        }
+                                    }
 
+                                }
+                            });
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    orderListItem.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
+                } else if (FragmentSellerOrder.btnSet == 1) {
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve").document(orderListItem.get(position).getId()).collection("주문목록")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (final QueryDocumentSnapshot document : task.getResult()) {
+                                            document.getReference().delete();
+                                        }
+                                    }
+                                }
+                            });
+
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve").document(orderListItem.get(position).getId())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    orderListItem.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
+                }
 
             }
         });
@@ -263,7 +401,6 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ItemAdapter.notifyDataSetChanged();
                 notifyDataSetChanged();
             }
         }, 1000);

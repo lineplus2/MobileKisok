@@ -130,6 +130,7 @@ public class ConsumerPayActivity extends AppCompatActivity {
                 store.put("주문자이메일", App.LoginUserEmail);
                 store.put("주문시간", FieldValue.serverTimestamp());
                 store.put("주문자이름", App.LoginUserName);
+                store.put("가게이메일", email);
 
                 db.collection("Store_Info").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -164,6 +165,9 @@ public class ConsumerPayActivity extends AppCompatActivity {
                 if (payMenuListItem.size() != 0) {
                     store.put("결제방법", payC);
                     docref.set(store);
+
+                    App.orderData = store;
+                    App.orderEmail = email;
                     payMenuListItem.clear();
                 } else {
                     Toast.makeText(ConsumerPayActivity.this, "주문목록이 없습니다.", Toast.LENGTH_SHORT).show();

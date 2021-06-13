@@ -8,11 +8,13 @@ import android.net.Uri;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class App extends Application {
@@ -32,6 +34,10 @@ public class App extends Application {
     public static FirebaseStorage storage = FirebaseStorage.getInstance();
     public static StorageReference storageRef = storage.getReference();
 
+    public static HashMap<String, Object> orderData;
+    public static DocumentReference ord;
+    public static String orderEmail;
+
 
     public static Location storeLocation = new Location("store");
     public static Location userLocation = new Location("user");
@@ -50,6 +56,7 @@ public class App extends Application {
     }
 
     public static ArrayList<payMenuList> payMenuListItem = new ArrayList<>();
+    public static ArrayList<payMenuList> payMenuListItem2 = new ArrayList<>();
 
     public static GpsTracker gpsTracker;
 

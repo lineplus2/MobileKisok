@@ -18,6 +18,8 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import static com.example.kw_mk.App.db;
 import static com.example.kw_mk.App.myLocation;
@@ -32,6 +34,7 @@ public class GpsTracker extends Service implements LocationListener {
     double latitude;
     double longitude;
     static int alarm = 0;
+    public static int dis = 0;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
     private static final long MIN_TIME_BW_UPDATES = 1000;
@@ -48,7 +51,6 @@ public class GpsTracker extends Service implements LocationListener {
     // 거리 측정
     void distacne(Location start, Location End) {
         String meter;
-        int dis;
         double distance;
 
         distance = start.distanceTo(End);
@@ -58,6 +60,30 @@ public class GpsTracker extends Service implements LocationListener {
             meter = Double.toString(distance);
             Log.d("디스탠스 ::: ", "다와감");
             // 알람주기
+            db.collection("Store_Info").document(App.orderEmail).collection("RealTimeOrder")
+                    .whereEqualTo("주문자이메일", App.LoginUserEmail)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot doc : task.getResult()) {
+                                    doc.getReference().collection("주문목록")
+                                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (final QueryDocumentSnapshot document : task.getResult()) {
+                                                    document.getReference().delete();
+                                                }
+                                            }
+                                        }
+                                    });
+                                    doc.getReference().delete();
+                                }
+                            }
+                        }
+                    });
             db.collection("Store_Info").document(App.orderEmail).collection("Reserve").add(orderData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {

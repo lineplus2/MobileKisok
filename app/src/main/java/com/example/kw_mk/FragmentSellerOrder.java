@@ -39,6 +39,8 @@ public class FragmentSellerOrder extends Fragment {
 
     DocumentReference orderStoref;
 
+    public static int btnSet = 0;
+
 
     @Nullable
     @Override
@@ -55,14 +57,15 @@ public class FragmentSellerOrder extends Fragment {
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnSet = 0;
                 order_ListSet();
             }
         });
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnSet = 1;
                 reserve_ListSet();
-                Toast.makeText(getContext(), "예약버튼", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -235,34 +238,63 @@ class orderListAdapter extends RecyclerView.Adapter<orderListViewHolder> {
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId()).collection("주문목록")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (final QueryDocumentSnapshot document : task.getResult()) {
-                                document.getReference().delete();
-                            }
-                        }
+                if (FragmentSellerOrder.btnSet == 0) {
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId()).collection("주문목록")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (final QueryDocumentSnapshot document : task.getResult()) {
+                                            document.getReference().delete();
+                                        }
+                                    }
 
-                    }
-                });
-                db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId())
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                orderListItem.remove(position);
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                            }
-                        });
+                                }
+                            });
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("RealTimeOrder").document(orderListItem.get(position).getId())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    orderListItem.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
+                } else if (FragmentSellerOrder.btnSet == 1) {
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve").document(orderListItem.get(position).getId()).collection("주문목록")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (final QueryDocumentSnapshot document : task.getResult()) {
+                                            document.getReference().delete();
+                                        }
+                                    }
+                                }
+                            });
 
+                    db.collection("Store_Info").document(App.LoginUserEmail).collection("Reserve").document(orderListItem.get(position).getId())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    orderListItem.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
+                }
 
             }
         });

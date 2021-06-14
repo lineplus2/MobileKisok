@@ -59,7 +59,7 @@ public class GpsTracker extends Service implements LocationListener {
             alarm++;
             meter = Double.toString(distance);
             // 일정거리 근처
-            db.collection("Store_Info").document(App.orderEmail).collection("RealTimeOrder")
+            db.collection("Store_Info").document(App.orderEmail).collection("Reserve")
                     .whereEqualTo("주문자이메일", App.LoginUserEmail)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -83,7 +83,7 @@ public class GpsTracker extends Service implements LocationListener {
                             }
                         }
                     });
-            db.collection("Store_Info").document(App.orderEmail).collection("Reserve").add(orderData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            db.collection("Store_Info").document(App.orderEmail).collection("RealTimeOrder").add(orderData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {
                     DocumentReference doc = task.getResult();
